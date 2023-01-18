@@ -1,0 +1,833 @@
+{% extends 'manage/index.html' %}
+{% block manage_content %}
+<div style="" class="main-content">
+    <div class="display-flex justify-content-space-between" style="margin-top: 20px; margin-bottom: 10px">
+      <h2 class="title" style="color: #112A46;font-weight: 500; font-size: 1.5rem;">Tarifs</h2>
+    </div>
+     <section class="tile" style="margin-top: 10px;">
+        <div class="box" style="  width: -webkit-fill-available; width: 100%;">
+          <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <span><i class="fas fa-file-invoice"></i></span>
+            <div class="control has-icons-left has-icons-right">
+             
+            </div>
+          </div>
+          <div class="table-container" style="overflow-x: scroll;position: relative;">
+          	 <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label" style="text-align: left;"><small>Tarifs de {{tarif.data_client.titre}} </small>{{tarif.data_client.nom.title()}}</label>
+                </div>
+                
+                </div>
+            <hr/>
+                <div class="columns">
+                    <div class="column">
+                            <div class="is-normal">
+
+                                </div>
+                    
+                    </div>
+                </div>
+
+                <div style="overflow-x:auto;">
+                        <table>
+                          <tr>
+                            <th>EDL PRIX STD</th>
+                            <th>EDL APPT PRIX F1</th>
+                            <th>EDL APPT PRIX F2</th>
+                            <th>EDL APPT PRIX F3</th>
+                            <th>EDL APPT PRIX F4</th>
+                            <th>EDL APPT PRIX F5</th>
+                            <th>EDL APPT PRIX F6</th>
+                          </tr>
+                          <tr>
+                            <td>{% if (tarif.edl_prix_std != None) %} 
+                                    {{tarif.edl_prix_std}} 
+                                   {% else %}
+                                     0
+                                   {% endif %}
+                                   €  </td>
+                            <td>{% if (tarif.edl_appt_prix_f1 != None) %} 
+                                    {{tarif.edl_appt_prix_f1}}
+                              {% else %}
+                                  0
+                              {% endif %} 
+                              € </td>
+                            <td> {% if (tarif.edl_appt_prix_f2 != None) %}
+                                    {{tarif.edl_appt_prix_f2}}
+                              {% else %}
+                                  0
+                              {% endif %} 
+                              €  </td>
+                            <td> {% if (tarif.edl_appt_prix_f3 != None) %}
+                                    {{tarif.edl_appt_prix_f3}} 
+                              {% else %}
+                                  0
+                              {% endif %}
+                              €   </td>
+                            <td> {% if (tarif.edl_appt_prix_f4 != None) %}
+                                    {{tarif.edl_appt_prix_f4}} 
+                              {% else %}
+                                  0
+                              {% endif %}
+                              €</td>
+                            <td>{% if (tarif.edl_appt_prix_f5 != None) %}
+                                    {{tarif.edl_appt_prix_f5}} 
+                              {% else %}
+                                  0
+                              {% endif %}
+                              €</td>
+                            <td>{% if (tarif.edl_appt_prix_f6 != None) %}
+                                    {{tarif.edl_appt_prix_f6}} 
+                              {% else %}
+                                  0
+                              {% endif %}
+                              € </td>
+
+                          </tr>
+                         
+                        </table>
+                      </div>
+                    <hr><hr>
+                      <div style="overflow-x:auto;">
+                        <table>
+                            <tr>
+                                
+                            <th>CHIF APPT PRIX F1</th>
+                            <th>CHIF APPT PRIX F2</th>
+                            <th>CHIF APPT PRIX F3</th>
+                            <th>CHIF APPT PRIX F4</th>
+                            <th>CHIF APPT prix F5</th>
+                            <th>EDL PAV VILLA PRIX F4</th>
+                            <th>EDL PAV VILLA PRIX F8</th>
+                            </tr>
+
+                            <tr>
+                                    <td> {% if (tarif.chif_appt_prix_f1 != None) %}
+                                            {{tarif.chif_appt_prix_f1}} 
+                                      {% else %}
+                                          0
+                                      {% endif %}
+                                      €          </td>
+                                    <td> {% if (tarif.chif_appt_prix_f2 != None) %}
+                                            {{tarif.chif_appt_prix_f2}} 
+                                      {% else %}
+                                          0
+                                      {% endif %}
+                                      €  </td>
+                                    <td> {% if (tarif.chif_appt_prix_f3 != None) %}
+                                            {{tarif.chif_appt_prix_f3}}
+                                      {% else %}
+                                          0
+                                      {% endif %}
+                                      €   </td>
+                                    <td>{% if (tarif.chif_appt_prix_f4 != None) %}
+                                            {{tarif.chif_appt_prix_f4}} 
+                                      {% else %}
+                                          0
+                                      {% endif %}
+                                      €    </td>
+                                    <td>{% if (tarif.chif_appt_prix_f5 != None) %}
+                                            {{tarif.chif_appt_prix_f5}} 
+                                      {% else %}
+                                          0
+                                      {% endif %}
+                                      €  </td>
+                                      <td> {% if (tarif.edl_pav_villa_prix_t4 != None) %}
+                                            {{tarif.edl_pav_villa_prix_t4}} {% else %}
+                                              0
+                                          {% endif%}€  </td>
+        
+                                      <td>   {% if (tarif.edl_pav_villa_prix_t8 != None) %}
+                                            {{tarif.edl_pav_villa_prix_t8}} 
+                                          {% else %}
+                                              0
+                                          {% endif%}€    </td>
+                            </tr>
+                        </table>
+                      </div>
+                      <hr><hr>
+                      
+                      <label class="label">
+                            <b><h1>CATEGORIE II</h1></b>
+                         </label>
+                      <div style="overflow-x:auto;">
+                            <table>
+                               <tr>
+                                 <th>EDL PAV VILLA PRIX T1</th>
+                                 <th>EDL PAV VILLA PRIX T2</th>
+                                 <th>EDL PAV VILLA PRIX T3</th>
+                                 <th>EDL PAV VILLA PRIX T4</th>
+                                 <th>EDL PAV VILLA PRIX T5</th>
+                                 <th>EDL PAV VILLA PRIX T6</th>
+                                 <th>EDL PAV VILLA PRIX T7</th>
+                                
+                                 
+                                
+                               </tr>
+                               
+                              
+                               <tr>
+                                 <td> {% if (tarif.edl_pav_villa_prix_t1 != None) %}
+                                        {{tarif.edl_pav_villa_prix_t1}} 
+                                    {% else %}
+                                        0
+                                    {% endif%}€ </td>
+                                 <td>{% if (tarif.edl_pav_villa_prix_t2 != None) %}
+                                        {{tarif.edl_pav_villa_prix_t2}} 
+                                  {% else %}
+                                      0
+                                  {% endif%}€ </td>
+                                 <td>{% if (tarif.edl_pav_villa_prix_t3 != None) %}
+                                        {{tarif.edl_pav_villa_prix_t3}} 
+                                  {% else %}
+                                      0
+                                  {% endif%}€    </td>
+                                 <td>67</td>
+                                 <td> {% if (tarif.edl_pav_villa_prix_t5 != None) %}
+                                        {{tarif.edl_pav_villa_prix_t5}} 
+                                    {% else %}
+                                        0
+                                    {% endif%}€</td>
+                                 <td>   {% if (tarif.edl_pav_villa_prix_t6 != None) %}
+                          		{{tarif.edl_pav_villa_prix_t6}} 
+                                {% else %}
+                                    0
+                                {% endif%}€</td>
+                                 <td> {% if (tarif.edl_pav_villa_prix_t7 != None) %}
+                                        {{tarif.edl_pav_villa_prix_t7}} 
+                                  {% else %}
+                                      0
+                                  {% endif%}€</td>
+                               </tr>
+                             </table>
+                           </div>
+                           
+                           <hr><hr>
+   
+                            <div style="overflow-x:auto;">
+                            <table>
+                                <tr>
+                                 <th>CHIF PAV VILLA PRIX T1</th>
+                                <th>CHIF PAV VILLA PRIX T2</th>
+                                 <th>CHIF PAV VILLA PRIX T3</th>
+                                 <th>CHIF PAV VILLA PRIX T4</th>
+                                 <th>CHIF PAV VILLA PRIX T5</th>
+                                 <th>CHIF PAV VILLA PRIX T6</th>
+                                 <th>CHIF PAV VILLA PRIX T7</th>
+                                 <th>CHIF PAV VILLA PRIX T8</th>
+                                 <th>CHIF APPT PRIX STU</th>
+                                </tr>
+
+                                <tr>
+                                        <td>{% if (tarif.chif_pav_villa_prix_t1 != None) %} 
+                                                {{tarif.chif_pav_villa_prix_t1}} 
+                                            {% else %}
+                                                0
+                                            {% endif %}€</td>
+                                        <td>{% if (tarif.chif_pav_villa_prix_t2 != None) %} 
+                                                {{tarif.chif_pav_villa_prix_t2}} 
+                                          {% else %}
+                                              0
+                                          {% endif %}€</td>
+                                        <td> {% if (tarif.chif_pav_villa_prix_t3 != None) %} 
+                                                {{tarif.chif_pav_villa_prix_t3}} 
+                                          {% else %}
+                                              0
+                                          {% endif %}€ </td>
+                                        <td>{% if (tarif.chif_pav_villa_prix_t4 != None) %}
+                                                {{tarif.chif_pav_villa_prix_t4}}
+                                          {% else %}
+                                              0
+                                          {% endif %} €</td>
+                                        <td> {% if (tarif.chif_pav_villa_prix_t5 != None) %}
+                                                {{tarif.chif_pav_villa_prix_t5}} 
+                                            {% else %}
+                                                0
+                                            {% endif %}€ </td>
+                                        <td>  {% if (tarif.chif_pav_villa_prix_t6 != None) %}
+                                                {{tarif.chif_pav_villa_prix_t6}} 
+                                          {% else %}
+                                              0
+                                          {% endif %}€</td>
+                                        <td>{% if (tarif.chif_pav_villa_prix_t7 != None) %}
+                                                {{tarif.chif_pav_villa_prix_t7}} 
+                                          {% else %}
+                                              0
+                                          {% endif %}€</td>
+
+                                          <td>{% if (tarif.chif_pav_villa_prix_t8 != None) %}
+                                                {{tarif.chif_pav_villa_prix_t8}} 
+                                          {% else %}
+                                              0
+                                          {% endif %} € </td>
+
+                                          <td>
+                                                {% if (tarif.chif_appt_prix_stu != None) %}
+                                                {{tarif.chif_appt_prix_stu}} 
+                                            {% else %}
+                                                    0
+                                            {% endif%}€
+                                          </td>
+                                </tr>
+                            </table>
+                           </div>
+
+           <!--	<div class="columns">
+               <div class="column">
+                    <div class="field is-vertical">
+                        <div class="is-normal">
+                            <label class="label"><small>EDL PRIX STD</small>
+                        </label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field">
+                              {% if (tarif.edl_prix_std != None) %} 
+                               {{tarif.edl_prix_std}} 
+                              {% else %}
+                                0
+                              {% endif %}
+                              €                                                   
+                            </div>
+                      </div>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="field is-vertical">
+                        <div class="is-normal">
+                            <label class="label"><small>EDL APPT PRIX F1</small>
+                        </label>
+                        </div>
+                        <div class="field-body">
+                          	<div class="field">
+                                {% if (tarif.edl_appt_prix_f1 != None) %} 
+                          		    {{tarif.edl_appt_prix_f1}}
+                                {% else %}
+                                    0
+                                {% endif %} 
+                                €                                 
+                            </div>
+                      </div>
+                    </div>
+                </div>  
+
+                <div class="column">
+                    <div class="field is-vertical">
+                        <div class="is-normal">
+                            <label class="label"><small>EDL APPT PRIX F2</small>
+                        </label>
+                        </div>
+                        <div class="field-body">
+                          	<div class="field">
+                                {% if (tarif.edl_appt_prix_f2 != None) %}
+                          		    {{tarif.edl_appt_prix_f2}}
+                                {% else %}
+                                    0
+                                {% endif %} 
+                                €                                 
+                            </div>
+                      </div>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="field is-vertical">
+                        <div class="is-normal">
+                            <label class="label"><small>EDL APPT PRIX F3</small>
+                        </label>
+                        </div>
+                        <div class="field-body">
+                          	<div class="field">
+                                {% if (tarif.edl_appt_prix_f3 != None) %}
+                          		    {{tarif.edl_appt_prix_f3}} 
+                                {% else %}
+                                    0
+                                {% endif %}
+                                €                                 
+                            </div>
+                      </div>
+                    </div>
+                </div>                                
+            </div>
+            <hr />
+
+
+            <div class="columns">             
+                <div class="column">
+                    <div class="field is-vertical">
+                        <div class="is-normal">
+                            <label class="label"><small>EDL APPT PRIX F4</small>
+                        </label>
+                        </div>
+                        <div class="field-body">
+                          	<div class="field">
+                                {% if (tarif.edl_appt_prix_f4 != None) %}
+                          		    {{tarif.edl_appt_prix_f4}} 
+                                {% else %}
+                                    0
+                                {% endif %}
+                                €                                 
+                            </div>
+                      </div>
+                    </div>
+                </div>      
+                <div class="column">
+                    <div class="field is-vertical">
+                        <div class="is-normal">
+                            <label class="label"><small>EDL APPT PRIX F5</small>
+                        </label>
+                        </div>
+                        <div class="field-body">
+                          	<div class="field">
+                                {% if (tarif.edl_appt_prix_f5 != None) %}
+                          		    {{tarif.edl_appt_prix_f5}} 
+                                {% else %}
+                                    0
+                                {% endif %}
+                                €                                 
+                            </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="field is-vertical">
+                        <div class="is-normal">
+                            <label class="label"><small>EDL APPT PRIX F6</small>
+                        </label>
+                        </div>
+                        <div class="field-body">
+                          	<div class="field">
+                                {% if (tarif.edl_appt_prix_f6 != None) %}
+                          		    {{tarif.edl_appt_prix_f6}} 
+                                {% else %}
+                                    0
+                                {% endif %}
+                                €                                 
+                            </div>
+                      </div>
+                    </div>
+                </div>                                             
+            </div>
+            <hr />
+
+            <div class="columns">
+                <div class="column">
+                    <div class="field is-vertical">
+                        <div class="is-normal">
+                            <label class="label"><small>CHIF APPT PRIX F1</small>
+                        </label>
+                        </div>
+                        <div class="field-body">
+                          	<div class="field">
+                                {% if (tarif.chif_appt_prix_f1 != None) %}
+                          		    {{tarif.chif_appt_prix_f1}} 
+                                {% else %}
+                                    0
+                                {% endif %}
+                                €                                 
+                            </div>
+                      </div>
+                    </div>
+                </div>      
+                <div class="column">
+                    <div class="field is-vertical">
+                        <div class="is-normal">
+                            <label class="label"><small>CHIF APPT PRIX F2</small>
+                        </label>
+                        </div>
+                        <div class="field-body">
+                          	<div class="field">
+                                {% if (tarif.chif_appt_prix_f2 != None) %}
+                          		    {{tarif.chif_appt_prix_f2}} 
+                                {% else %}
+                                    0
+                                {% endif %}
+                                €                                 
+                            </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="field is-vertical">
+                        <div class="is-normal">
+                            <label class="label"><small>CHIF APPT PRIX F3</small>
+                        </label>
+                        </div>
+                        <div class="field-body">
+                          	<div class="field">
+                                {% if (tarif.chif_appt_prix_f3 != None) %}
+                          		    {{tarif.chif_appt_prix_f3}}
+                                {% else %}
+                                    0
+                                {% endif %}
+                                €                                 
+                            </div>
+                      </div>
+                    </div>
+                </div>   
+                <div class="column">
+                    <div class="field is-vertical">
+                        <div class="is-normal">
+                            <label class="label"><small>CHIF APPT PRIX F4</small>
+                        </label>
+                        </div>
+                        <div class="field-body">
+                          	<div class="field">
+                                {% if (tarif.chif_appt_prix_f4 != None) %}
+                          		    {{tarif.chif_appt_prix_f4}} 
+                                {% else %}
+                                    0
+                                {% endif %}
+                                €                                 
+                            </div>
+                      </div>
+                    </div>
+                </div>    
+                <div class="column">
+                    <div class="field is-vertical">
+                        <div class="is-normal">
+                            <label class="label"><small>CHIF APPT prix F5</small>
+                        </label>
+                        </div>
+                        <div class="field-body">
+                          	<div class="field">
+                                {% if (tarif.chif_appt_prix_f5 != None) %}
+                          		    {{tarif.chif_appt_prix_f5}} 
+                                {% else %}
+                                    0
+                                {% endif %}
+                                €                                 
+                            </div>
+                      </div>
+                    </div>
+                </div>                                
+            </div>
+            <hr />
+
+            <div class="columns">
+                <div class="column">
+                    <div class="field is-vertical">
+                        <div class="is-normal">
+                            <label class="label"><small>EDL PAV VILLA PRIX T1</small>
+                        </label>
+                        </div>
+                        <div class="field-body">
+                          	<div class="field">
+                                {% if (tarif.edl_pav_villa_prix_t1 != None) %}
+                                    {{tarif.edl_pav_villa_prix_t1}} 
+                                {% else %}
+                                    0
+                                {% endif%}€                                                   
+                            </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="field is-vertical">
+                        <div class="is-normal">
+                            <label class="label"><small>EDL PAV VILLA PRIX T2</small>
+                        </label>
+                        </div>
+                        <div class="field-body">
+                          	<div class="field">
+                                {% if (tarif.edl_pav_villa_prix_t2 != None) %}
+                          		    {{tarif.edl_pav_villa_prix_t2}} 
+                                {% else %}
+                                    0
+                                {% endif%}€                                 
+                            </div>
+                      </div>
+                    </div>
+                </div>      
+                <div class="column">
+                    <div class="field is-vertical">
+                        <div class="is-normal">
+                            <label class="label"><small>EDL PAV VILLA PRIX T3</small>
+                        </label>
+                        </div>
+                        <div class="field-body">
+                          	<div class="field">
+                                {% if (tarif.edl_pav_villa_prix_t3 != None) %}
+                          		    {{tarif.edl_pav_villa_prix_t3}} 
+                                {% else %}
+                                    0
+                                {% endif%}€                                 
+                            </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="field is-vertical">
+                        <div class="is-normal">
+                            <label class="label"><small>EDL PAV VILLA PRIX F4</small>
+                        </label>
+                        </div>
+                        <div class="field-body">
+                          	<div class="field">
+                                {% if (tarif.edl_pav_villa_prix_t4 != None) %}
+                          		{{tarif.edl_pav_villa_prix_t4}} {% else %}
+                                    0
+                                {% endif%}€                                 
+                            </div>
+                      </div>
+                    </div>
+                </div>                                
+            </div>
+
+               <div class="columns">
+                <div class="column">
+                    <div class="field is-vertical">
+                        <div class="is-normal">
+                            <label class="label"><small>EDL PAV VILLA PRIX T5</small>
+                        </label>
+                        </div>
+                        <div class="field-body">
+                          	<div class="field">
+                                {% if (tarif.edl_pav_villa_prix_t5 != None) %}
+                                    {{tarif.edl_pav_villa_prix_t5}} 
+                                {% else %}
+                                    0
+                                {% endif%}€                                                   
+                            </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="field is-vertical">
+                        <div class="is-normal">
+                            <label class="label"><small>EDL PAV VILLA PRIX T6</small>
+                        </label>
+                        </div>
+                        <div class="field-body">
+                            	<div class="field">
+                                {% if (tarif.edl_pav_villa_prix_t6 != None) %}
+                          		{{tarif.edl_pav_villa_prix_t6}} 
+                                {% else %}
+                                    0
+                                {% endif%}€                                 
+                            </div>
+                      </div>
+                    </div>
+                </div>      
+                <div class="column">
+                    <div class="field is-vertical">
+                        <div class="is-normal">
+                            <label class="label"><small>EDL PAV VILLA PRIX T7</small>
+                        </label>
+                        </div>
+                        <div class="field-body">
+                          	<div class="field">
+                                {% if (tarif.edl_pav_villa_prix_t7 != None) %}
+                          		    {{tarif.edl_pav_villa_prix_t7}} 
+                                {% else %}
+                                    0
+                                {% endif%}€                                 
+                            </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="field is-vertical">
+                        <div class="is-normal">
+                            <label class="label"><small>EDL PAV VILLA PRIX F8</small>
+                        </label>
+                        </div>
+                        <div class="field-body">
+                          	<div class="field">
+                                {% if (tarif.edl_pav_villa_prix_t8 != None) %}
+                          		{{tarif.edl_pav_villa_prix_t8}} 
+                                {% else %}
+                                    0
+                                {% endif%}€                                 
+                            </div>
+                      </div>
+                    </div>
+                </div>                                
+            </div>
+            <hr />
+
+             <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label" style="text-align: left;"><small>CHIF APPT PRIX STU</small></label>
+                </div>
+                <div class="field-body is-normal">
+                  	<div class="field">
+                      	<p>
+                            {% if (tarif.chif_appt_prix_stu != None) %}
+                                {{tarif.chif_appt_prix_stu}} 
+                            {% else %}
+                                    0
+                            {% endif%}€
+                        </p>
+                    </div>
+                  </div>
+                </div>
+            <hr/>
+            <div class="columns">
+                <div class="column">
+                    <div class="field is-vertical">
+                        <div class="is-normal">
+                            <label class="label"><small>CHIF PAV VILLA PRIX T1</small>
+                        </label>
+                        </div>
+                        <div class="field-body">
+                          	<div class="field">
+                                {% if (tarif.chif_pav_villa_prix_t1 != None) %} 
+                                    {{tarif.chif_pav_villa_prix_t1}} 
+                                {% else %}
+                                    0
+                                {% endif %}€                                                   
+                            </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="field is-vertical">
+                        <div class="is-normal">
+                            <label class="label"><small>CHIF PAV VILLA PRIX T2</small>
+                        </label>
+                        </div>
+                        <div class="field-body">
+                          	<div class="field">                                
+                                {% if (tarif.chif_pav_villa_prix_t2 != None) %} 
+                          		    {{tarif.chif_pav_villa_prix_t2}} 
+                                {% else %}
+                                    0
+                                {% endif %}€                                 
+                            </div>
+                      </div>
+                    </div>
+                </div>      
+                <div class="column">
+                    <div class="field is-vertical">
+                        <div class="is-normal">
+                            <label class="label"><small>CHIF PAV VILLA PRIX T3</small>
+                        </label>
+                        </div>
+                        <div class="field-body">
+                          	<div class="field">
+                                {% if (tarif.chif_pav_villa_prix_t3 != None) %} 
+                          		    {{tarif.chif_pav_villa_prix_t3}} 
+                                {% else %}
+                                    0
+                                {% endif %}€                                 
+                            </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="field is-vertical">
+                        <div class="is-normal">
+                            <label class="label"><small>CHIF PAV VILLA PRIX T4</small>
+                        </label>
+                        </div>
+                        <div class="field-body">
+                          	<div class="field">
+                                {% if (tarif.chif_pav_villa_prix_t4 != None) %}
+                          		    {{tarif.chif_pav_villa_prix_t4}}
+                                {% else %}
+                                    0
+                                {% endif %} €                                 
+                            </div>
+                      </div>
+                    </div>
+                </div>                                
+            </div>
+            
+               <div class="columns">
+                <div class="column">
+                    <div class="field is-vertical">
+                        <div class="is-normal">
+                            <label class="label"><small>CHIF PAV VILLA PRIX T5</small>
+                        </label>
+                        </div>
+                        <div class="field-body">
+                          	<div class="field">
+                                {% if (tarif.chif_pav_villa_prix_t5 != None) %}
+                                    {{tarif.chif_pav_villa_prix_t5}} 
+                                {% else %}
+                                    0
+                                {% endif %}€                                                   
+                            </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="field is-vertical">
+                        <div class="is-normal">
+                            <label class="label"><small>CHIF PAV VILLA PRIX T6</small>
+                        </label>
+                        </div>
+                        <div class="field-body">
+                          	<div class="field">
+                                {% if (tarif.chif_pav_villa_prix_t6 != None) %}
+                          		    {{tarif.chif_pav_villa_prix_t6}} 
+                                {% else %}
+                                    0
+                                {% endif %}€                                 
+                            </div>
+                      </div>
+                    </div>
+                </div>      
+                <div class="column">
+                    <div class="field is-vertical">
+                        <div class="is-normal">
+                            <label class="label"><small>CHIF PAV VILLA PRIX T7</small>
+                        </label>
+                        </div>
+                        <div class="field-body">
+                          	<div class="field">
+                                {% if (tarif.chif_pav_villa_prix_t7 != None) %}
+                          		    {{tarif.chif_pav_villa_prix_t7}} 
+                                {% else %}
+                                    0
+                                {% endif %}€                                 
+                            </div>
+                      </div>
+                    </div>
+                </div> -->
+                <!-- <div class="column">
+                    <div class="field is-vertical">
+                        <div class="is-normal">
+                            <label class="label"><small>CHIF PAV VILLA PRIX T8</small>
+                        </label>
+                        </div>
+                        <div class="field-body">
+                          	<div class="field">
+                                {% if (tarif.chif_pav_villa_prix_t8 != None) %}
+                          		    {{tarif.chif_pav_villa_prix_t8}} 
+                                {% else %}
+                                    0
+                                {% endif %} €                                 
+                            </div>
+                      </div>
+                    </div>
+                </div>  -->                               
+            </div>
+            <hr />
+          </div>
+      </div>
+  </section>
+ 	   
+	<section class="">
+
+		<article class="card">
+		
+		<div class="card-body">
+			<div class="row"> 
+				
+				<div class="col-md-4">
+					
+					<strong>commentaire_libre:</strong> {% if tarif.commentaire_libre == None %} aucun commentaire {% else %}{{tarif.commentaire_libre}} {% endif %} <br>
+					
+			 		</p>
+				</div> 
+			</div> <!-- row.// -->
+		</div> <!-- card-body .// -->
+		</article>
+	
+		 <!-- order-group.// --> 
+	</section>
+</div>
+{%endblock%}

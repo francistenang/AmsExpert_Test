@@ -1,0 +1,247 @@
+{% extends 'manage/index.html' %}
+{% block manage_content %}
+<div style="" class="main-content">
+    
+    <div class="display-flex justify-content-space-between" style="margin-top: 20px; margin-bottom: 10px"> 
+		{% if legend == "client" %}
+      		<h2 class="title" style="color: #112A46;font-weight: 500; font-size: 1.5rem;">Client</h2>
+		{% else %}
+		<h2 class="title" style="color: #112A46;font-weight: 500; font-size: 1.5rem;">Prospect</h2>
+		{%endif%}
+    </div>
+	<section class="tile" style="margin-top: 10px;">
+    <div class="box" style="  width: -webkit-fill-available; width: 100%;">
+    	{% if legend == "client" %}
+		<div class="columns">
+		  	<div class="column">
+		  		<a href="{{url_for('users.suivi_client_', id=client.id)}}" style="color: #fff; background: #073B3A;" title="modifier" class="button is-small is-fullwidth">Voir Suivi</a>
+		  	</div>
+		  	<div class="column">
+		  		<a href="{{url_for('users.ajouter_suivic', id=client.id)}}" style="color: #fff; background: #0B6E4F;" title="modifier" class="button is-small is-fullwidth">Créer un Suivi</a>
+		  	</div>
+		  	<div class="column">
+				<a href="{{url_for('users.negotiateur', id=client.id)}}" style="color: #fff; background: #023047;" title="modifier" class="button is-small is-fullwidth">Voir ses Négociateurs</a>
+			</div>
+		  	<div class="column">
+		  		<a href="{{url_for('users.ajouter_negotiateur', id=client.id)}}" style="color: #fff; background: #DDB771;" title="modifier" class="button is-small is-fullwidth">Créer un Négociateur</a>
+		  	</div>
+		</div>
+		<div class="columns">
+		  	<div class="column">
+		  		<a href="{{url_for('users.client_mission', id=client.id)}}" style="background: #6B705C; color: #fff;" title="modifier" class="button is-outlined-black is-small is-fullwidth">Voir ses Missions</a>
+		  	</div>
+		  	<div class="column">
+		  		<a href="{{url_for('users.facturation', id=client.id)}}" title="" style="background: #795a64; color: #fff;" class="button is-outlined-black is-small is-fullwidth">Voir son historique de facturation</a>
+		  	</div>
+			  <div class="column">
+				<a href="{{url_for('users.tarifs', id=client.id)}}" title="" style="background: #03071E; color: #fff;" class="button is-outlined-black is-small is-fullwidth">Voir ses Tarifs</a>
+			</div>
+			<div class="column">
+		  		<a href="{{url_for('users.ajouter_tarif', id=client.id)}}" style="color: #fff; background: #219EBC;" title="modifier" class="button is-small is-fullwidth">Ajouter un Tarif</a>
+		  	</div>
+		</div>
+	{% endif %}
+
+	{% if legend == "prospect" %}
+		<div class="columns">
+			<div class="column">
+		  		<a href="{{url_for('users.suivi_prospect_', id=client.id)}}" title="modifier" style="color: #fff; background: #219EBC;" class="button is-outlined-black is-small is-fullwidth">Voir Suivi</a>
+		  	</div>
+		  	<div class="column">
+		  		<a href="{{url_for('users.ajouter_suivip', id=client.id)}}" title="modifier" style="color: #fff; background: #023047;" class="button is-outlined-black is-small is-fullwidth">Créer Suivi</a>
+		  	</div>
+		</div>
+	{% endif %}	
+	  <div class="container">
+		<div class="main-body">		
+			  <div class="columns">
+				<div class="column is-one-quarter mb-3">
+				  <div class="card">
+					<div class="card-body">
+					  <div class="is-flex is-flex-direction-column align-items-center has-text-centered">
+						<i class="fa fa-user x5-px"></i>						
+						<div class="mt-3">
+						  <p class="text-secondary mb-1">{{client.nom}}</p>
+						  <small class=''>{{history.etat_client}}</small>
+						  {#<p class="text-muted font-size-sm">{{history.cp}}, {{history.ville}}, {{history.pays}}</p>#}
+						  {% if legend == "prospect" %} 
+						  <a class='button is-primary is-small' href="{{url_for('users.edit_prospect', id=client.id)}}" id='edit-preferences' style='margin: 5px 0'>
+							Modifier
+						  </a>
+						  {% endif %}
+						  {% if legend == "client" %} 
+						  <a class='button is-primary is-small' href="{{url_for('users.edit_client', id=client.id)}}" id='edit-preferences' style='margin: 5px 0'>
+							Modifier
+						  </a>
+						  {% endif %}
+						</div>
+					  </div>
+					</div>
+				  </div>
+				</div>
+				<div class="column is-three-quarter">
+				  <div class="card mb-3">
+					<div class="card-body">
+					  <div class="columns">
+						<div class="column is-one-quarter">
+						  <h6 class="mb-0">Type</h6>
+						</div>
+						<div class="column is-three-quarter text-secondary">
+							{{client.TYPE}}
+						</div>
+					  </div>
+					  <hr>
+					  <div class="columns">
+						<div class="column is-one-quarter">
+						  <h6 class="mb-0">Email</h6>
+						</div>
+						<div class="column is-three-quarter text-secondary">
+						  {{client.email}}
+						</div>
+					  </div>
+					  <hr>
+					  <div class="columns">
+						<div class="column is-one-quarter">
+						<h6 class="mb-0">L'enseigne</h6>
+						</div>
+						<div class="column is-three-quarter text-secondary">
+							{{client.enseigne}}
+						</div>
+					  </div>
+					  <hr>
+					  <div class="columns">
+						<div class="column is-one-quarter">
+						<h6 class="mb-0">Reference</h6>
+						</div>
+						<div class="column is-three-quarter text-secondary">
+							{{client.reference}}
+						</div>
+					  </div>
+					  <hr>
+					  <div class="columns">
+						<div class="column is-one-quarter">
+						<h6 class="mb-0">Siret</h6>
+						</div>
+						<div class="column is-three-quarter text-secondary">
+							{{client.siret}}
+						</div>
+					  </div>
+					  <hr>
+					  <div class="columns">
+						<div class="column is-one-quarter">
+						<h6 class="mb-0">Anomalie</h6>
+						</div>
+						<div class="column is-three-quarter text-secondary">
+							{{client.reason}}
+						</div>
+					  </div>
+					  <hr>
+					  <div class="columns">
+						<div class="column is-one-quarter">
+						  <h6 class="mb-0">Société</h6>
+						</div>
+						<div class="column is-three-quarter text-secondary">
+							{{client.societe}}
+						</div>
+					  </div>
+					  <hr>
+					  <div class="columns">
+						<div class="column is-one-quarter">
+						  <h6 class="mb-0">Téléphone portable</h6>
+						</div>
+						<div class="column is-three-quarter">
+							{{client.numero}}
+						</div>
+					  </div>
+					  {% if legend == "client" %}
+						{% if tarif != None %}
+							<hr>
+							<div class="columns">
+								<div class="column is-one-quarter">
+								<h6 class="mb-0">Identifiant du Tarif</h6>
+								</div>
+								<div class="column is-three-quarter">
+									{{tarif.id}}
+								</div>
+							</div>
+							<hr>
+							<div class="columns">
+								<div class="column is-one-quarter">
+								<h6 class="mb-0">AS</h6>
+								</div>
+								<div class="column is-three-quarter">
+									{{tarif.referent__data.nom}}
+								</div>
+							</div>
+					  	{% endif %}
+					  {% endif %}
+					  <hr>
+					  {% if(history.adresse1 != '') %}
+						<div class="columns">
+							<div class="column is-one-quarter">
+							<h6 class="mb-0">Address 1</h6>
+							</div>
+							<div class="column is-three-quarter text-secondary">
+								{{history.adresse1}} {{history.cp}}, {{history.ville}}, {{history.pays}}
+							</div>
+						</div>
+					  {% endif %}
+					  <hr>
+					  {% if(history.adresse2 != '') %}
+						<div class="columns">
+							<div class="column is-one-quarter">
+							<h6 class="mb-0">Address 2</h6>
+							</div>
+							<div class="column is-three-quarter text-secondary">
+								{{history.adresse2}}
+							</div>
+						</div>
+					  <hr>
+					  {% endif %}
+					  <div class="columns">
+						<div class="column is-one-quarter">
+						  <h6 class="mb-0">Date Creation</h6>
+						</div>
+						<div class="column is-three-quarter">
+							{% if (client.date_creation == None) %} {% else %} {{client.date_creation.strftime('%d/%m/%Y')}} {% endif %}
+						</div>
+					  </div>
+					  <hr> {#
+					  <div class="columns">
+						<div class="column is-one-quarter">
+						  <h6 class="mb-0">Login Extranet</h6>
+						</div>
+						<div class="column is-three-quarter">
+							{{history.login_extranet}}
+						</div>
+					  </div>
+					  <hr>
+					  <div class="columns">
+						<div class="column is-one-quarter">
+						  <h6 class="mb-0">MDP Extranet</h6>
+						</div>
+						<div class="column is-three-quarter">
+							{{history.mpd_extranet}}
+						</div>
+					  </div>
+					  <hr> #}
+					  <div class="columns">
+						<div class="column is-one-quarter">
+						  <h6 class="mb-0">Date Historique</h6>
+						</div>
+						<div class="column is-three-quarter">
+							{% if (history.date == None) %} {% else %} {{history.date.strftime('%d/%m/%Y')}} {% endif %}
+						</div>
+					  </div>
+					</div>
+				  </div>	
+				</div>
+			  </div>
+	
+			</div>
+		</div>
+			
+		</div>
+	</section>
+</div>
+{%endblock%}

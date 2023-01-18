@@ -1,0 +1,141 @@
+{% extends 'manage/index.html' %}
+{% block manage_content %}
+<div class="main-content">
+    
+    
+    <div class="display-flex justify-content-space-between" style="margin-top: 20px;">
+      <h2 class="title" style="color: #112A46;font-weight: 500; font-size: 1.25rem;">Factures Générées Expert</h2>
+    </div>
+    <span>Facture(s) générée(s): {{gene}}</span> <br>
+    <span>Facture(s) Non générée(s): {{ngene}}</span>
+    <div class="tile box" style="width: fit-content; margin: 0 auto;
+    justify-content: space-evenly;
+    min-width: 900px;">
+      
+      <!-- / date -->
+      <form method="GET" action="{{url_for('users.allex')}}">
+
+        <div class="columns"> 
+          <div class="column">
+              <div class="field">
+                <div class="select is-small">
+                  <select name="reg" >
+                    <option selected disabled>---Etat Facture(S)---</option>
+                    <option value="r">Facture générée(s)</option>
+                    <option value="nr">Facture Non générée(s)</option>
+                  </select>
+                </div>
+              </div>
+          </div>
+          <div class="column">
+              <div class="field">
+                    <div class="select is-small">
+                            <select name="env" >
+                              <option selected disabled>---Etat d'envoie---</option>
+                              <option value="r">Facture Envoyee</option>
+                              <option value="nr">Facture Non Envoyee</option>
+                            </select>
+                          </div>
+              
+              </div>
+          </div>
+         
+          <div class="column">
+            <div class="buttons are-small">
+                <button class="button is-success">Filtrer</button>
+            </div>
+          </div>
+        </div>
+      </form>
+  </div>
+
+    <section class="tile" style="margin-top: 10px;">
+        <div class="box" style="  width: -webkit-fill-available; max-width: -moz-available;width: 100%;">
+          <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <div class="display-flex">
+                <span><i class="fa fa-users"></i></span>                
+            </div>           
+          </div>
+          <div class="table-container" style="position: relative;">
+            {% with messages = get_flashed_messages(with_categories=true)%}
+                {% if messages %}
+                    {%for category,message in messages%}
+                    <div class="alert alert-{{category}} is-small">
+                        {{message}}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <table class="table is-striped" id="table_id" style="overflow-x: scroll;min-width: 800px;">       
+                <thead class="">
+                    <tr>
+                        <th scope="col">ID FACTURE</th>
+                        <th scope="col">ID Mission</th>
+                        <th scope="col">Expert</th>
+                        <th scope="col">Prix Mission € HT</th> 
+                        <th scope="col">Date d'arrêt compte Mensuel</th>
+                        <th scope="col">Date Génération</th> 
+                        <th scope="col">TOTAL FACT</th>
+                        <th scope="col">TOTAL RLV</th>
+                        <th scope="col">Date envoie </br> Facture au CDC</th>
+                        <th scope="col">Commission AC </br> mission réaliser</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                    <tbody>
+                        {%for mission in facture %}
+                            <tr>
+                                <td scope="row">{{mission.id}}</td>
+                                <td>{{mission.mission}}</td>
+                                <td>{% if mission.intervenant != '0' %} {{mission.intervenant}} {%endif%}</td>
+                                <td>{{mission.prix_mission}}</td>
+                                <td>{{mission.date_cmpte_mensuel.strftime('%d/%m/%Y')}}</td>
+                                <td>{% if mission.date_generation != None %} {{mission.date_generation.strftime('%d/%m/%Y')}} {% endif %}</td>
+                                <td>{{mission.total}}</td>
+                                <td>{{mission.releve}}</td>
+                                <td>{% if mission.date_envoie_Facture != None %}{{mission.date_envoie_Facture.strftime('%d/%m/%Y')}}{% endif %}</td>
+                                <td>{% if mission.commission_ac != None %}{{mission.commission_ac}}{% endif %}</td>
+                                <td> <a href="{{url_for('users.choosedg', id=mission.id)}}" title="mettre date_generation" class="button is-outlined-black is-small is-fullwidth"><i class="fa fa-pen" style="text-align: center"></i></a> </td>
+                                <td style="">
+                                    <a href="{{url_for('users.factme', id=mission.id)}}" title="voir tout les details" class="button is-small is-primary is-fullwidth" style="text-align: center"><i class="fa fa-eye"></i></a>
+                                </td>   
+                            </tr>    
+                        {%endfor%}
+
+                    </tbody>
+                </table>
+	            </div>
+            <!-- Pagination Links-->
+            
+            <!-- / fin de la pagination -->
+	        </div>
+        </section>
+	    </div>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var table = $('#table_id').DataTable({
+                    //'scrollX':true,
+                    language: {
+                        url: 'https://cdn.datatables.net/plug-ins/1.11.2/i18n/fr_fr.json'
+                    }
+                });
+            
+                $('#table_id tbody').on( 'click', 'tr', function () {
+                    if ( $(this).hasClass('selected') ) {
+                        $(this).removeClass('selected');
+                    }
+                    else {
+                        table.$('tr.selected').removeClass('selected');
+                        $(this).addClass('selected');
+                    }
+                } );
+            
+                $('#button').click( function () {
+                    table.row('.selected').remove().draw( false );
+                } );
+            } );
+        </script>
+	
+{% endblock %}

@@ -1,0 +1,250 @@
+{% extends 'manage/index.html' %}
+{% block manage_content %}
+ <div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Facturation</h1>
+        <h3 class="text-gray-800"><i class="far fa-arrow-alt-circle-left" onclick="history.back(-1)"></i></h3>
+    </div>
+    <!-- Content Row -->
+
+    <div class="row">
+        <!-- Area Chart -->
+        <div class="col-xl-6 col-lg-6 mx-auto">
+            <div class="card shadow mb-4">
+	        <div class="card-header py-1 justify-content-between align-items-center d-flex">
+	            <h6 class="m-0 font-weight-bold">{{facturation.id}}</h6>
+                <a href="/facturation" class="button is-small is-black">Tous les factures</a>
+	        </div>
+	        <div class="card-body">
+	            <div class="row">
+                    <div class="col-lg-12 mx-auto">
+                        <div class="">
+                            {% with messages = get_flashed_messages(with_categories=true)%}
+                            {% if messages %}
+                            {%for category,message in messages%}
+                            <div class="alert alert-{{category}}">
+                                {{message}}
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                            {% endwith %}
+                            <form class="user" method="POST" action="{{url_for('users.update_facturation', id=facturation.id)}}">
+                                {{ form.hidden_tag() }}
+                                <fieldset class="form-group">
+                                <div class="form-group row">
+                                    <div class="col-sm-12">
+                                        {{form.Pays.label(class="form-control-label")}}
+
+                                    {% if form.Pays.errors %}
+                                        {{ form.Pays(class="input is-small is-invalid",value=facturation.Pays) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.Pays.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                            {{form.Pays(class="input is-small",value=facturation.Pays)}}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                        {{form.ID_Destinataire.label(class="form-control-label")}}
+                                    
+                                        {% if form.ID_Destinataire.errors %}
+                                            {{ form.ID_Destinataire(class="input is-small is-invalid",value=facturation.Destinataire) }}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.ID_Destinataire.errors %}
+                                                    <span>{{ error }}</span>
+                                                {% endfor %}
+                                            </div>
+                                            {% else %}
+                                                {{form.ID_Destinataire(class="input is-small",value=facturation.Destinataire)}}
+                                            {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12">
+                                        {{form.ID_expediteur.label(class="form-control-label")}}
+                                    
+                                        {% if form.ID_expediteur.errors %}
+                                            {{ form.ID_expediteur(class="input is-small is-invalid",value=facturation.expéditeur) }}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.ID_expediteur.errors %}
+                                                    <span>{{ error }}</span>
+                                                {% endfor %}
+                                            </div>
+                                            {% else %}
+                                                {{form.ID_expediteur(class="input is-small",value=facturation.expéditeur)}}
+                                            {% endif %}
+                                    </div>
+                                </div>
+ 
+                                <div class="form-group row">
+                                    <div class="col-sm-12">
+                                        {{form.montant.label(class="form-control-label")}}
+
+                                    {% if form.montant.errors %}
+                                        {{ form.montant(class="input is-small is-invalid",value=facturation.Montant) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.montant.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                            {{form.montant(class="input is-small",value=facturation.Montant)}}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                        {{form.total.label(class="form-control-label")}}
+
+                                        {% if form.total.errors %}
+                                            {{ form.total(class="input is-small is-invalid",value=facturation.Total) }}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.total.errors %}
+                                                    <span>{{ error }}</span>
+                                                {% endfor %}
+                                            </div>
+                                            {% else %}
+                                                {{form.total(class="input is-small",value=facturation.Total)}}
+                                            {% endif %}
+                                    </div>                                   
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12">
+                                        {{form.Type_.label(class="form-control-label")}}
+
+                                        {% if form.Type_.errors %}
+                                            {{ form.Type_(class="input is-small is-invalid",value=facturation.Type) }}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.Type_.errors %}
+                                                    <span>{{ error }}</span>
+                                                {% endfor %}
+                                            </div>
+                                            {% else %}
+                                                {{form.Type_(class="input is-small",value=facturation.Type)}}
+                                            {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12">
+                                        {{form.ID_proprietaire.label(class="form-control-label")}}
+
+                                        {% if form.ID_proprietaire.errors %}
+                                            {{ form.ID_proprietaire(class="input is-small is-invalid",value=facturation.Proprietaire) }}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.ID_proprietaire.errors %}
+                                                    <span>{{ error }}</span>
+                                                {% endfor %}
+                                            </div>
+                                            {% else %}
+                                                {{form.ID_proprietaire(class="input is-small",value=facturation.Proprietaire)}}
+                                            {% endif %}
+                                    </div>
+                                </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12 mb-3 mb-sm-0">
+                                            {{form.ID_locataire.label(class="form-control-label")}}
+    
+                                            {% if form.ID_locataire.errors %}
+                                                {{ form.ID_locataire(class="input is-small is-invalid",value=facturation.Locataire) }}
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.ID_locataire.errors %}
+                                                        <span>{{ error }}</span>
+                                                    {% endfor %}
+                                                </div>
+                                                {% else %}
+                                                    {{form.ID_locataire(class="input is-small",value=facturation.Locataire)}}
+                                                {% endif %}
+                                        </div>
+                                        
+                                       
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12">
+                                            {{form.ville.label(class="form-control-label")}}
+    
+                                            {% if form.ville.errors %}
+                                                {{ form.ville(class="input is-small is-invalid",value=facturation.Ville) }}
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.ville.errors %}
+                                                        <span>{{ error }}</span>
+                                                    {% endfor %}
+                                                </div>
+                                                {% else %}
+                                                    {{form.ville(class="input is-small",value=facturation.Ville)}}
+                                                {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12">
+                                            {{form.surface.label(class="form-control-label")}}
+    
+                                            {% if form.surface.errors %}
+                                                {{ form.surface(class="input is-small is-invalid",value=facturation.Surface) }}
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.surface.errors %}
+                                                        <span>{{ error }}</span>
+                                                    {% endfor %}
+                                                </div>
+                                                {% else %}
+                                                    {{form.surface(class="input is-small",value=facturation.Surface)}}
+                                                {% endif %}
+                                        </div> 
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12 mb-3 mb-sm-0">
+                                            {{form.tarifs.label(class="form-control-label")}}
+    
+                                            {% if form.tarifs.errors %}
+                                                {{ form.tarifs(class="is-small input is-invalid",value=facturation.Tarif) }}
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.tarifs.errors %}
+                                                        <span>{{ error }}</span>
+                                                    {% endfor %}
+                                                </div>
+                                                {% else %}
+                                                    {{form.tarifs(class="input is-small",value=facturation.Tarif)}}
+                                                {% endif %}
+                                        </div>                                        
+                                    </div>  
+                                    <div class="form-group row">
+                                         <div class="col-sm-12">
+                                            {{form.appt_pav.label(class="form-control-label")}}
+    
+                                            {% if form.appt_pav.errors %}
+                                                {{ form.appt_pav(class="is-small input is-invalid",value=facturation.Appt_Pav) }}
+                                                <div class="invalid-feedback">
+                                                    {% for error in form.appt_pav.errors %}
+                                                        <span>{{ error }}</span>
+                                                    {% endfor %}
+                                                </div>
+                                                {% else %}
+                                                    {{form.appt_pav(class="input is-small",value=facturation.Appt_Pav)}}
+                                                {% endif %}
+                                        </div>
+                                    </div>
+    
+                                <div class="form-group">
+                                    <!-- <input type="submit" name="" value="en"> -->
+                                    {{form.submit(class="button is-small is-success is-fullwidth")}}   
+                                </div>
+                            <fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+	        </div>
+	    </div>
+	</div>
+    <!-- Pie Chart --> 
+</div>
+
+    <!-- Content Row -->
+</div>
+    <!-- /.container-fluid -->
+{%endblock%}

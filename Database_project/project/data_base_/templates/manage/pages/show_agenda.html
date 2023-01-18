@@ -1,0 +1,100 @@
+{% extends 'manage/index.html' %}
+{% block manage_content %}
+	<div class="container-fluid">
+		  <!-- Page Heading -->
+		  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+			<h1 class="h3 mb-0 text-gray-800">Agenda</h1>
+			<h3 class="text-gray-800"><i class="far fa-arrow-alt-circle-left" onclick="history.back(-1)"></i></h3>
+		</div>
+ 	    <!-- Content Row -->
+ 	    <div class="row">
+			<main class="col-md-12">
+				<article class="card">
+				<header class="card-header">
+					<strong class="d-inline-block mr-3">Détails de l'agenda </strong>
+				</header>
+				<div class="card-body">
+					<div class="row"> 
+						<div class="col-md-8">
+							<h6 class=""><strong>Date:</strong> <strong><small>{{agenda.Date_}}</small></strong></h6>
+							<p><strong>N° Audit planner: </strong> <small>{{agenda.audit_planner}}</small><br>  </p>
+                            <p><strong>N° du client: </strong> <small>{{agenda.client_}}</small><br>  </p>
+                            <p><strong>N° du référennt de l'agent: </strong> <small>{{agenda.Agent_referent_du_client}}</small><br>  </p>
+							<p><strong>Lieu: </strong> <small>{{agenda.Lieu}}</small><br>  
+							<strong>Validation par agent:</strong> <small>{{agenda.Validation_par_agent}}</small> <br>
+							<strong>Rapport :</strong> <small>{{agenda.Rapport}}</small> <br> 
+							<strong>Status :</strong> <small>{{agenda.Status}}</small> <br>
+						
+					 		</p>
+						</div>
+						<div class="col-md-4">
+							<!-- {% if legend == "client" %}
+								<h6 class="text-muted"><a href="{{url_for('users.suivi_client_', id=client.id)}}" title="modifier" class="button is-outlined-black is-small is-fullwidth">Voir Suivi</a></h6>
+								<h6 class="text-muted"><a href="{{url_for('users.ajouter_suivic', id=client.id)}}" title="modifier" class="button is-outlined-black is-small is-fullwidth">Cree Suivi</a></h6>
+								<h6 class="text-muted"><a href="{{url_for('users.ajouter_negotiateur', id=client.id)}}" title="modifier" class="button is-outlined-black is-small is-fullwidth">Cree Negotiateur</a></h6>
+								<h6 class="text-muted"><a href="{{url_for('users.negotiateur', id=client.id)}}" title="modifier" class="button is-outlined-black is-small is-fullwidth">voir  Negotiateur</a></h6>
+							{% endif %}
+							{% if legend == "prospect" %}
+								<h6 class="text-muted"><a href="{{url_for('users.suivi_prospect_', id=client.id)}}" title="modifier" class="button is-outlined-black is-small is-fullwidth">Voir Suivi</a></h6>
+								<h6 class="text-muted"><a href="{{url_for('users.ajouter_suivip', id=client.id)}}" title="modifier" class="button is-outlined-black is-small is-fullwidth">Cree Suivi</a></h6> 
+							{% endif %} -->
+							
+
+						</div> 
+					</div> <!-- row.// -->
+				</div> <!-- card-body .// -->
+				</article>
+				 <!-- <div class="row"> -->
+        <!-- Area Chart -->
+        <!-- <div class="col-xl-12 col-lg-12 py-2">
+            <div class="card shadow mb-4">
+	        <div class="card-header py-3">
+	            <h6 class="m-0 font-weight-bold d-inline"><i class="fa fa-calendar" style="font-size: 25px;"></i> Agenda du client <small>{{client.NOM}}</small></h6>
+               
+	        </div>
+	        <div class="card-body">
+	            <div class="table-responsive">
+	                <table class="table" id="dataTable" style="width:100%">
+                        <thead class="">
+                        <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">Reference</th>
+                            <th scope="col">Type</th>
+ -->                            <!-- <th scope="col">SOCIETE</th> -->
+                            <!-- <th scope="col">TITRE</th> -->
+                            <!-- <th scope="col">NOM</th> -->
+                          <!--   <th scope="col">EMAIL</th>
+                            <th scope="col">NUMERO</th>
+                            <th scope="col">ADRESSE1</th> -->
+                            <!-- <th scope="col">ADRESSE2</th> -->
+                            <!-- <th scope="col">CP</th> -->
+                            <!-- <th scope="col">VILLE</th> -->
+                            <!-- <th scope="col">Zone_de_région_du_client</th> -->
+                          <!--   <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            	<td>jkdjsfla</td>
+                            	<td>jkdjsfla</td>
+                            	<td>jkdjsfla</td>
+                            	<td>jkdjsfla</td>
+                            	<td>jkdjsfla</td>
+                            	<td>jkdjsfla</td>
+                            	<td>jkdjsfla</td>
+                            	<td>jkdjsfla</td>
+
+                            	<td>jkdjsfla</td>
+                            </tr>
+                        </tbody>
+                    </table>
+	            </div>
+	        </div>
+	    </div>
+	</div> -->
+				 <!-- order-group.// --> 
+			</main>
+		</div>
+	</div>
+    <!-- /.container-fluid -->
+{%endblock%}

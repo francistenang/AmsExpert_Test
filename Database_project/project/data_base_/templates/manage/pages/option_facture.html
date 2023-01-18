@@ -1,0 +1,27 @@
+{% extends 'manage/index.html'%}
+{% block manage_content %}
+<div style="" class="main-content">
+    
+    <div class="display-flex justify-content-space-between" style="margin-top: 20px;">
+      <h2 class="title" style="color: #112A46;font-weight: 500; font-size: 1.5rem;">Facturation Client</h2>
+         
+    </div>
+
+     <section class="tile" style="margin-top: 30px;">
+                <div class="box" style="  width: -webkit-fill-available; width: 100%;">
+                  <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+                    <h2 class="title">Les actions</h2>
+                    <div class="control has-icons-left has-icons-right">
+                        <a href="{{url_for('users.facturationa')}}" style="color: #fff; background: #0B6E4F;" title="modifier" class="button is-small is-fullwidth">Voir Tous les Factures</a>
+                    <a href="{{url_for('users.choosev', Type='month')}}" title="Ajouter une Facture Mensuel" class="button is-primary is-small"><i class="fas fa-plus"></i>Facturation Mensuel General</a> 
+                      <a onclick="window.history.back()" class="button is-danger is-small">Annuler</a>
+                    </div>
+                  </div>
+                  <div class="tile is-ancestor">
+                    <div class="tile is-parent">
+                         
+
+                </div> 
+            </section>
+
+{% endblock %}

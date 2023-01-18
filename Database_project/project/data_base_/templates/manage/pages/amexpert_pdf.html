@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<style type="text/css">
+			::after, ::before {
+				box-sizing: border-box;
+			}
+			body {
+				padding: 0px;
+				margin: 0px;
+				min-height: 100vh;
+    			height: 100vh;
+    			font-family: 'Roboto', sans-serif;
+			}
+			section.pdf_head {
+				/*height: 100px;*/
+				/*background: #000;*/
+				position: relative;
+			}
+
+			.logo {
+				position: absolute;
+    			height: 100px;
+    			left: 2.5rem;
+    			top: 2.5rem;
+			}
+
+			.main_pdf_head {
+				height: inherit;
+				display: flex;
+				flex-direction: column;
+				text-align: center;
+			}
+			.upper_block {
+				background: #000;
+			}
+			.upper_block p {
+				color: #fff;
+				
+			}
+			.middle_block {
+				background: #000;
+			}
+			.middle_block p {
+				color: #fff
+			}
+			.lower_block {
+			    display: flex;
+			    flex-direction: row;
+			    padding: 1rem;
+			    width: 75%;
+			    margin: 0 auto;
+			    justify-content: space-between;
+			}
+
+			.lower_block_main {
+				width: 70%;
+				border: 2px solid #000;
+				border-radius: 5px;
+				padding: 10px;
+				height: -webkit-fill-available;
+			}
+			.note {
+				width:20%;    
+				border: 2px solid #000;
+				border-radius: 5px;
+				padding: 10px;
+			}
+
+			.table_section {
+				max-width: 1225px;
+				margin: 0 auto;
+			}
+
+			table th,
+			table td {
+			  padding: 0.25em 0.5em;
+			  text-align: left;
+			}
+			table th:nth-child(2),
+			table td:nth-child(2) {
+			  text-align: right;
+			}
+			table td {
+			  background-color: #eee;
+			}
+			table th {
+			  background-color: #000;
+			  color: #fff;
+			}
+
+			table {
+				width: 100%;
+				font-size: 12px;
+				font-family: sans-serif !important;
+			}
+		</style>
+	</head>
+	<body>
+
+		<section class="pdf_head">
+			<img src="data:;base64,{{image}}" style="width:auto;" class="logo">
+			<div class="main_pdf_head"> <!-- flex column -->
+				<div class="upper_block"><p>AMEXPERT</p></div> <!-- center -->
+				<div class="middle_block"><p>Relevé des interventions de constat d'état des lieux</p></div> <!-- center -->
+				<div class="lower_block"> <!-- flex row -->
+					<div class="lower_block_main">
+						<p> Arrêter de compte fin : <span style="color: blue">{{new_rel[0].mission__data.date_cmpte_mensuel.strftime('%d. %m. %Y')}}
+						</p>
+						<div>Mr.{{Nom}}</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="table_section">
+			<table>
+				<thead>
+					<th class="header">ID mission</th>
+					<th class="header">Date mission</th>
+					<th class="header">Bailleur</th>
+					<th class="header">AS</th>
+					<th class="header">Locataire</th>
+					<th class="header">ville de mission</th>
+					<th><span>Facture Client</span>-<br><span>Emise</span></th>
+					<th><span>Facture Client</span>-<br><span>acquittée</span></th>
+					<th class="header">Pourcentage</th>
+					<th class="header">Type Releve</th>
+					<th class="header">Montant</th>
+				</thead>
+				<tbody>
+					{%for mission_ in new_rel %}
+						<tr>
+							<td>{{mission_.mission__data.mission}}</td> 
+							<td>{{mission_.mission__data.mission__data.DATE_REALISE_EDL.strftime('%d. %m. %Y')}}</td>
+							<td>{{mission_.mission__data.mission__data.Bailleur__data.nom}}</td>
+							<td>{{mission_.mission__data.intervenant}}</td>
+							<td>{{mission_.mission__data.mission__data.Reference_LOCATAIRE}}</td>
+							<td>{{mission_.mission__data.mission__data.Ville_Bien}}</td>
+							<td>{{mission_.mission__data.mission__data.DATE_FACTURE}}</td>
+							<td>{% if mission_.mission__data.mission__data.DATE_FACT_REGLEE == None %}
+									non acquittée
+								{%else%}
+									en contrôle
+								{%endif%}
+							</td>
+							<td>{{mission_.releve_data.pourcentage}}</td>
+							<td>{{mission_.releve_data.id}}</td>
+							<td>{{mission_.commision}}</td>
+						</tr>
+						{%endfor%}
+				</tbody>
+			</table>
+		</section>
+	</body>
+</html>

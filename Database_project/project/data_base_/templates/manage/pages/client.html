@@ -1,0 +1,166 @@
+{% extends 'manage/index.html' %}
+{% block manage_content %}
+<div class="main-content">
+    
+    
+    <div class="display-flex justify-content-space-between" style="margin-top: 20px;">
+      <h2 class="title" style="color: #112A46;font-weight: 500; font-size: 1.25rem;">Clients</h2>
+      <a href="/ajouter/client" title="Ajouter un client" class="button is-primary is-small"><i class="fas fa-user-plus"></i></a>
+    </div>
+    <span>Client actif(s): {{actc}}</span> <br>
+    <span>Client parti(s): {{patc}}</span> <br>
+    <span>Client Anomalie(s): {{ano}}</span> <br>
+    <span>Professionel(s): {{prospro}}</span> <br>
+    <span>Particulier(s): {{prospart}}</span> <br>
+
+
+    <div class="tile box" style="width: fit-content; margin: 0 auto;
+    justify-content: space-evenly; min-width: 950px;">
+    
+    <section class="tile" style="margin-top: 10px;">
+        <div class="box" style="  width: -webkit-fill-available; max-width: -moz-available;width: 100%;">
+          <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <div class="display-flex">
+                <span><i class="fa fa-users"></i></span>                
+            </div>           
+          </div>
+          <form method="GET" action="{{url_for('users.client')}}">
+                <div class="columns"> 
+                    <div class="column">
+                      <div class="field">
+
+                            <div class="select is-small" style="padding-left: 500px;">
+                                    <select name="ron" >
+                                      <option selected disabled>---Etat Client(S)---</option>
+                                      <option value="r">Actif</option>
+                                      <option value="nr">Inactif</option>
+                                    </select>
+                            </div>
+
+                            
+
+                        </div>
+                        
+                  </div>
+                  <div class="column">
+                    <div class="field">
+                      <div class="select is-small">
+                        <select name="vis" >
+                          <option selected disabled>---Visibilite Client(s)---</option>
+                          <option value="r">Actif</option>
+                          <option value="nr">Supprimer</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="column is-one-quarter" style="padding-right: 500px;">
+                    <div class="are-small">
+                        <button class="button is-small is-success">Filtrer</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+
+          <div class="table-container" style="position: relative;">
+            {% with messages = get_flashed_messages(with_categories=true)%}
+                {% if messages %}
+                    {%for category,message in messages%}
+                    <div class="alert alert-{{category}} is-small">
+                        {{message}}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <table class="table is-striped" id="table_id" style="overflow-x: scroll;min-width: 800px;">       
+                <thead class="">
+                    <tr>
+                        <th scope="col">Titre</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prenom</th>
+                        <!--th scope="col">Email</th-->
+                        <th scope="col">Téléphone</th>
+                        <th scope="col">Societé</th>
+                        <th scope="col">Siret</th>
+                        <th scope="col">Adresse</th>
+                        <th scope="col">Code Postal</th>
+                        <th scope="col">Ville</th>
+                        <th scope="col">Type</th>
+                        <th>Date <br/>creation</th>
+                        <th></th>
+                        <th></th>
+                        <!-- <th></th> -->
+                    </tr>
+                </thead>
+                    <tbody>
+                        {%for client_,history in cli_ent %}
+                            <tr>
+                                <td>{{client_.titre}}</td>
+                                <td> {{client_.nom }}</td>
+                                <td>{{client_.prenom }}</td>
+                                <!--td>{{client_.email }}</td-->
+                                <td>{% if (client_.numero == '0') %} {% else %} {{client_.numero}} {% endif %}</td>
+                                <td>{{client_.societe}}</td>
+                                <td>{% if (client_.siret == 0) %} {% else %} {{client_.siret}} {% endif %}</td>
+                                <td>{{history.adresse1}}</td>
+                                <td>{{history.cp}}</td>
+                                <td>{{history.ville}}</td>
+                                <td>{{client_.TYPE}}</td>
+                                <td>{{history.date.strftime('%d. %m. %Y')}}</td>
+                                <!-- td>{{history.abonnement}}</td--->
+                                <!--td>{{history.cp}}</td>
+                                <td>{{history.ville}}</td>
+                                <td>{{history.pays}}</td>
+                                <td>{{history.adresse1}}</td>
+                                <td>{{history.adresse2}}</td-->
+                                <!-- <td>{{client_.ADRESSE2}}</td> -->
+                                <!-- <td>{{client_.CP}}</td> -->
+                                <!--td>{{client_.VILLE|truncate(5, True)}}|truncate(10, True)</td-->
+                                <!--td>{{history.login_extranet}}</td>
+                                <td>{{history.mdp_extranet}}</td-->
+                                
+                                {#<td>{% if (client_.date_creation == None) %} {% else %} {{client_.date_creation.strftime('%d/%m/%Y')}} {% endif %}</td>#}
+                                <td> <a href="{{url_for('users.edit_client', id=client_.id)}}" title="Enregistrer les modifications" class="cb button is-outlined-black is-small is-fullwidth"><i class="fa fa-pen" style="text-align: center"></i></a> </td>
+                                <td style="">
+                                    <a href="{{url_for('users.show_client', id=client_.id)}}" title="voir tout les details" class="cb button is-small is-primary is-fullwidth" style="text-align: center"><i class="fa fa-eye"></i></a>
+                                    <!-- <a href="/ajoutez/agenda/{{client_.id}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{client_.id}}">créer un agenda</a> -->
+                                </td>   
+                                 <!-- <td> <a href="{{url_for('users.delete_client', id=client_.id)}}" onclick="return confirm('Voulez vous supprimer?')" title="voir tout les details" class="cb is-small is-danger is-fullwidth button"><i class="fa fa-trash"></i></a></td>    -->
+                            </tr>    
+                        {%endfor%}
+                    </tbody>
+                </table>
+	            </div>
+            <!-- Pagination Links-->
+            
+            <!-- / fin de la pagination -->
+	        </div>
+        </section>
+	    </div>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var table = $('#table_id').DataTable({
+                    //'scrollX':true,
+                    language: {
+                        url: 'https://cdn.datatables.net/plug-ins/1.11.2/i18n/fr_fr.json'
+                    }
+                });
+            
+                $('#table_id tbody').on( 'click', 'tr', function () {
+                    if ( $(this).hasClass('selected') ) {
+                        $(this).removeClass('selected');
+                    }
+                    else {
+                        table.$('tr.selected').removeClass('selected');
+                        $(this).addClass('selected');
+                    }
+                } );
+            
+                $('#button').click( function () {
+                    table.row('.selected').remove().draw( false );
+                } );
+            } );
+        </script>
+	
+{% endblock %}

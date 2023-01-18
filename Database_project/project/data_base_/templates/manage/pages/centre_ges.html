@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<style type="text/css">
+			::after, ::before {
+				box-sizing: border-box;
+			}
+			body {
+				padding: 0px;
+				margin: 0px;
+				min-height: 100vh;
+    			height: 100vh;
+    			font-family: 'Roboto', sans-serif;
+			}
+			section.pdf_head {
+				/*height: 100px;*/
+				/*background: #000;*/
+				position: relative;
+			}
+
+			.logo {
+				position: absolute;
+    			height: 100px;
+    			left: 2.5rem;
+    			top: 2.5rem;
+			}
+
+			.main_pdf_head {
+				height: inherit;
+				display: flex;
+				flex-direction: column;
+				text-align: center;
+			}
+			.upper_block {
+				background: #000;
+			}
+			.upper_block p {
+				color: #fff;
+				
+			}
+			.middle_block {
+				background: #000;
+			}
+			.middle_block p {
+				color: #fff
+			}
+			.lower_block {
+			    display: flex;
+			    flex-direction: row;
+			    padding: 1rem;
+			    width: 75%;
+			    margin: 0 auto;
+			    justify-content: space-between;
+			}
+
+			.lower_block_main {
+				width: 70%;
+				border: 2px solid #000;
+				border-radius: 5px;
+				padding: 10px;
+				height: -webkit-fill-available;
+			}
+			.note {
+				width:20%;    
+				border: 2px solid #000;
+				border-radius: 5px;
+				padding: 10px;
+			}
+
+			.table_section {
+				max-width: 1225px;
+				margin: 0 auto;
+			}
+
+			table th,
+			table td {
+			  padding: 0.25em 0.5em;
+			  text-align: left;
+			}
+			table th:nth-child(2),
+			table td:nth-child(2) {
+			  text-align: right;
+			}
+			table td {
+			  background-color: #eee;
+			}
+			table th {
+			  background-color: #000;
+			  color: #fff;
+			}
+
+			table {
+				width: 100%;
+				font-size: 12px;
+				font-family: sans-serif !important;
+			}
+		</style>
+	</head>
+	<body>
+
+		<section class="pdf_head">
+			<img src="data:;base64,{{image}}" style="width:auto;" class="logo">
+			<div class="main_pdf_head"> <!-- flex column -->
+				<div class="upper_block"><p>AMEXPERT</p></div> <!-- center -->
+				<div class="middle_block"><p>Facture Client des missions</p></div> <!-- center -->
+				<div class="lower_block"> <!-- flex row -->
+					<div class="lower_block_main">
+						<p>Nro de Facture: <span style="color: blue">{{nro}}
+						</p>
+						<div>Mr.{{Nom}}</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="table_section">
+			<table>
+				<thead>
+                    <tr>
+                        <th>No Mission</th>
+                        <th>DATE REALISE EDL</th>
+                        <th>Type</th>
+                        <th>Proprietaire</th>
+                        <th>Locataire</th>
+                        <th>ville</th>
+                        <th>Appt-Pav</th>
+                        <th>Type</th>
+                        <th>LOGEMENT MEUBLE</th>
+                        <th>Surface/m<sup>2</sup></th>
+                        <th>Tarif ht/€</th>
+                    </tr>
+				</thead>
+				<tbody>
+                    {%for fac in facture %}
+                    <tr>
+                        <td>{{fac.mission__data_.id}}</td>
+                        <td>{{fac.mission__data_.DATE_REALISE_EDL.strftime('%d. %m. %Y')}}</td>
+                        <td>{{fac.mission__data_.TYPE_EDL}}</td>
+                        <td>{{fac.mission__data_.NOMPROPRIO}}</td>
+                        <td>{{fac.mission__data_.Reference_LOCATAIRE}}</td>
+                        <td>{{fac.mission__data_.Ville_Bien}}</td>
+                        <td>{{fac.mission__data_.TYPE_DE_BIEN}}</td>
+                        <td>{{fac.mission__data_.TYPE_LOGEMENT}}</td>
+                        <td>{{fac.mission__data_.LOGEMENT_MEUBLE}}</td>
+                        <td>{{fac.mission__data_.surface_logement1}}</td>
+                        <td>{{fac.mission__data_.PRIX_HT_EDL}}</td>   
+                    
+                    </tr>    
+                    {%endfor%}
+				</tbody>
+			</table>
+		</section>
+	</body>
+</html>

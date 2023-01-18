@@ -1,0 +1,196 @@
+{% extends 'manage/index.html' %}
+{% block manage_content %}
+<div style="" class="main-content">
+    
+    <div class="display-flex justify-content-space-between" style="margin-top: 20px;">
+      <h2 class="title" style="color: #112A46;font-weight: 500; font-size: 1.25rem;">Experts</h2>
+      <a href="/ajouter/expert" title="Ajouter un expert" class="button is-primary is-small"><i class="fas fa-user-plus"></i></a>
+    </div>
+    <span>Agent actif(s): {{acte}}</span> <br>
+    <span>Agent parti(s): {{pate}}</span> <br>
+    
+    <div class="tile box" style="width: fit-content; margin: 0 auto;
+    justify-content: space-evenly;
+    min-width: 950px;">
+    
+    <section class="tile" style="margin-top: 10px;">
+        <div class="box" style="  width: -webkit-fill-available;max-width: -moz-available;width: 100%;">
+          <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <span><i class="fa fa-users"></i></span>
+            
+          </div>
+          
+          <div class="table-container" style="position: relative;">
+            {% with messages = get_flashed_messages(with_categories=true)%}
+                {% if messages %}
+                    {%for category,message in messages%}
+                    <div class="alert alert-{{category}} p-1">
+                        {{message}}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <form method="GET" action="{{url_for('users.expert')}}">
+                <div class="columns"> 
+                    <div class="column">
+                      <div class="field">
+
+                            <div class="select is-small" style="padding-left: 500px;">
+                                    <select name="ron" >
+                                      <option selected disabled>---Etat Expert(S)---</option>
+                                      <option value="r">Actif</option>
+                                      <option value="nr">Inactif</option>
+                                    </select>
+                                  </div>
+
+                        </div>
+                  </div>
+                  <div class="column">
+                    <div class="field">
+
+                          <div class="select is-small" style="padding-left: 500px;">
+                                  <select name="ron" >
+                                    <option selected disabled>---Visibilite Expert(S)---</option>
+                                    <option value="r">Actif</option>
+                                    <option value="nr">Supprimer</option>
+                                  </select>
+                                </div>
+
+                      </div>
+                </div>
+                  
+                 
+                  <div class="column is-one-quarter" style="padding-right: 500px;">
+                    <div class="are-small">
+                        <button class="button is-small is-success">Filtrer</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+
+              
+
+            <table class="table is-hoverable is-striped" id="table_id" style="overflow-x: scroll;min-width: 800px;">  
+                    <thead>
+                    <tr>
+                        <th scope="col">TITRE</th>
+                        <th scope="col">Nom </th>
+                        <th scope="col">Prenom</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Email</th>
+                        <!-- <th>Email <br/>Perso</th> -->
+                        <th scope="col">Téléphone</th>
+                        <!-- <th scope="col">Trigramme</th> -->
+                        <!-- <th scope="col">Siret</th> -->
+                        <!-- <th scope="col">Genre</th> 
+                        <th scope="col">Actif/Parti</th>
+                        <th>Code TVA</th>
+                        <th>Taux <br/>de TVA</th>
+                        <th>Secteur</th>-->
+                        <!-- <th>Type de <br/> certification</th>
+                        <th>Date de <br/> certification initial</th>
+                        <th>Date de <br/>u recertification</th> -->
+                        <th scope="col">Adresse</th>
+                        <!-- <th scope="col">Adresse2</th> -->
+                        <th scope="col">CP</th>
+                        <th scope="col">Ville</th>
+                       <!-- <th scope="col">Pays</th>
+                        <th scope="col">Login <br/>Backof</th>
+                        <th scope="col">Pwd <br/>Backof</th>
+                        <th>Login <br/>Extranet</th>
+                        <th scope="col">Pwd <br/>extranet</th>
+                        <th>Pwd <br/>Gsuite</th>
+                        <th>Login <br/>Tablette</th>
+                        <th>Pwd <br/>Backof</th>
+                        <th scope="col">Observations <br/>de suivi</th> -->
+                        {#<th>Date <br/> d'entrée</th>#}
+                        <!-- <th>Date de sortie</th> -->
+                        <th></th>
+                        <th></th> 
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {%for expert,history in Expert %}
+                            <tr>
+                                <td>{{expert.genre}}</td>
+                                <td>{{expert.nom}}</td>
+                                <td>{{expert.prenom}}</td>
+                                <td>{{expert.TYPE}}</td>
+                                <td>{{expert.email}}</td>
+                                {#<td>{{expert.email_perso}}</td>#}
+                                <td>{% if expert.numero == None%} {% elif expert.numero == 0 %} {% else %}{{expert.numero}} {% endif %}</td>
+                                {#<td>{{expert.trigramme}}</td>
+                                <td>{{expert.siret}}</td>
+                                <td>{{expert.genre}}</td>
+                                <td>{{history.actif_parti}}</td>
+                                <td>{{expert.code_tva}}</td>
+                                <td>{{expert.taux_tva}}</td>
+                                <td>{{history.secteur}}</td>#}
+                                {#<td>{{history.type_certification}}</td>
+                                <td>{{history.date_certiation_initial}}</td>
+                                <td>{{history.date_renouv_certification}}</td>#}
+                                <td>{{history.adresse1}}</td>
+                               {# <td>{{history.adresse2}}</td>#}
+                                <td>{{history.cp}}</td>
+                                <td>{{history.ville}}</td>
+                                {#<td>{{history.pays}}</td>
+                                <td>{{history.login_backof}}</td>
+                                <td>{{history.pwd_backof}}</td>
+                                <td>{{history.login_extranet}}</td>
+                                <td>{{history.pwd_gsuite}}</td>
+                                <td>{{history.login_google}}</td>
+                                <td>{{history.pwd_google}}</td>
+                                <td>{{history.pwd_extranet}}</td>
+                                <td>{{history.observations_de_suivi}}</td>
+                                <td>{% if (expert.date_entree == None) %} {% else %} {{expert.date_entree.strftime('%d/%m/%Y')}} {% endif %}</td>#}
+                               
+                                <td><a href="{{url_for('users.edit_expert', id=expert.id)}}" class="button is-outlined-black is-small is-fullwidth center"><i class="fa fa-pen"></i></a></td>
+                                <td style="">
+                                    <a href="{{url_for('users.show_expert', id=expert.id)}}" title="voir tout les details" class="button is-small is-primary is-fullwidth" style="text-align: center"><i class="fa fa-eye"></i></a>
+                                    
+                                </td>
+                                <!-- <td><a href="#" class="button center is-primary is-small"><i class="fa fa-eye"></i></a></td> -->
+                                <td> <a href="{{url_for('users.delete_expert', id=expert.id)}}" onclick="return confirm('Voulez vous supprimer?')" title="supprimer" class="center is-small is-danger is-fullwidth button"><i class="fa fa-trash"></i></a></td>   
+                            </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+	            </div>
+                 <!-- Pagination Links-->
+              
+            <!--end of pagination -->
+	        </div>
+	    </div>
+	</div>
+    <!-- Pie Chart --> 
+</div>
+
+    <!-- Content Row -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var table = $('#table_id').DataTable({
+                //'scrollX':true,
+                language: {
+                    url: 'https://cdn.datatables.net/plug-ins/1.11.2/i18n/fr_fr.json'
+                }
+        });
+        
+            $('#table_id tbody').on( 'click', 'tr', function () {
+                if ( $(this).hasClass('selected') ) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    table.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+            } );
+        
+            $('#button').click( function () {
+                table.row('.selected').remove().draw( false );
+            } );
+        } );
+    </script>
+
+</div>
+{% endblock %}

@@ -1,0 +1,1599 @@
+{% extends 'manage/index.html' %}
+{% block manage_content %}
+<div style="" class="main-content">
+    
+    <div class="display-flex justify-content-space-between" style="margin-top: 20px;">
+        <h2 class="title" style="color: #112A46;font-weight: 500; font-size: 1.5rem;">Modifier cette Mission</h2>
+        <a href="{{url_for('users.mission')}}" title="Consultez la liste des missions" class="button is-primary is-small"><i class="fas fa-list-ul"></i></a>
+    </div>
+      <div class="table-container" style="">
+        <div class="card" style="box-shadow: none; padding: 0px; border: 1px solid #d4d4cc;">
+            <header class="card-header" style="border-bottom: 1px solid #d4d4cc; box-shadow:none;">
+                <p class="card-header-title"><span class="icon"><i class="fas fa-user"></i></span></p>
+            </header>
+                        <div class="">
+                            {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                            {%for category,message in messages%}
+                            <div class="alert alert-{{category}}">
+                                {{message}}
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                            {% endwith %}
+                            <form method="POST" class="user"  style="padding: 5px">
+                                {{ form.hidden_tag() }}
+
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.Reference_client.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.Reference_client.errors %}
+                                            {{form.Reference_client(class="input is-invalid", placeholder="Donées numérique",value=mission.Bailleur__data.reference) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.Reference_client.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                                {{form.Reference_client(class="input", placeholder="Donées numérique", value=mission.Bailleur__data.reference)}}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+
+                            
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.Nom.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.Nom.errors %}
+                                            {{form.Nom(class="input is-invalid", value=mission.ID_AS, placeholder="Donées numérique") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.Nom.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                                {{form.Nom(class="input", placeholder="Données numérique", value=mission.ID_AS)}}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.ID_Concessionaire.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.ID_Concessionaire.errors %}
+                                            {{form.ID_Concessionaire(class="input is-invalid", value=mission.ID_AS, placeholder="Donées numérique") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.ID_Concessionaire.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                                {{form.ID_Concessionaire(class="input", placeholder="Données numérique", value=mission.ID_AS)}}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.ABONNEMENT.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.ABONNEMENT.errors %}
+                                            {{form.ABONNEMENT(class="input is-invalid", value=mission.ABONNEMENT,  placeholder="Données Alpha-numérique") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.ABONNEMENT.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.ABONNEMENT == None %}
+                                                {{form.ABONNEMENT(class="input", placeholder="Données Alpha-numérique", value=a)}}
+                                                {% else %}
+                                                {{form.ABONNEMENT(class="input", placeholder="Données Alpha-numérique", value=mission.ABONNEMENT)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.PRIX_HT_EDL.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.PRIX_HT_EDL.errors %}
+                                            {{form.PRIX_HT_EDL(class="input is-invalid", value=mission.PRIX_HT_EDL, placeholder="Données numérique") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.PRIX_HT_EDL.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                                {{form.PRIX_HT_EDL(class="input", placeholder="Données numérique", value=mission.PRIX_HT_EDL)}}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.DATE_REALISE_EDL.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.DATE_REALISE_EDL.errors %}
+                                            {{form.DATE_REALISE_EDL(class="input is-invalid", value=mission.DATE_REALISE_EDL.strftime('%d. %m. %Y')) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.DATE_REALISE_EDL.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                                {{form.DATE_REALISE_EDL(class="input", placeholder="", value=mission.DATE_REALISE_EDL.strftime('%d/%m/%Y'))}}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.ID_INTERV.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.ID_INTERV.errors %}
+                                            {{form.ID_INTERV(class="input is-invalid", value=mission.ID_INTERV, placeholder="Données numérique") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.ID_INTERV.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                                {{form.ID_INTERV(class="input", placeholder="Données numérique", value=mission.ID_INTERV)}}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.Reference_LOCATAIRE.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.Reference_LOCATAIRE.errors %}
+                                            {{form.Reference_LOCATAIRE(class="input is-invalid", placeholder="Données numérique", value=mission.Reference_LOCATAIRE) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.Reference_LOCATAIRE.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.Reference_LOCATAIRE == None %}
+                                                {{form.Reference_LOCATAIRE(class="input", placeholder="Données numérique", value=a)}}
+                                                {% else %}
+                                                {{form.Reference_LOCATAIRE(class="input", placeholder="Données numérique", value=mission.Reference_LOCATAIRE)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.Adresse1_Bien.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.Adresse1_Bien.errors %}
+                                            {{form.Adresse1_Bien(class="input is-invalid", placeholder="Données Alpha-numérique", value=mission.Adresse1_Bien) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.Adresse1_Bien.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                                {{form.Adresse1_Bien(class="input", placeholder="Données Apla-numérique", value=mission.Adresse1_Bien)}}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.Adresse2_Bien.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.Adresse2_Bien.errors %}
+                                            {{form.Adresse2_Bien(class="input is-invalid", placeholder="Données Alpha-numérique", value=mission.Adresse2_Bien) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.Adresse2_Bien.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.Adresse2_Bien == None %}
+                                                {{form.Adresse2_Bien(class="input", placeholder="Données Alpha-numérique", value=a)}}
+                                                {% else %}
+                                                {{form.Adresse2_Bien(class="input", placeholder="Données Alpha-numérique", value=mission.Adresse2_Bien)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.CP_Bien.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.CP_Bien.errors %}
+                                            {{form.CP_Bien(class="input is-invalid", value=mission.CP_Bien, placeholder="00000") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.CP_Bien.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.CP_Bien == None %}
+                                                {{form.CP_Bien(class="input", placeholder="00000", value=0000)}}
+                                                {% else %}
+                                                {{form.CP_Bien(class="input", placeholder="00000", value=mission.CP_Bien)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.Ville_Bien.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.Ville_Bien.errors %}
+                                            {{form.Ville_Bien(class="input is-invalid", value=mission.Ville_Bien, placeholder="Données Alpha-numérique") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.Ville_Bien.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                                {{form.Ville_Bien(class="input", placeholder="Données Alpha-numérique", value=mission.Ville_Bien)}}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.TVA_EDL.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.TVA_EDL.errors %}
+                                            {{form.TVA_EDL(class="input is-invalid", placeholder="Données numérique", value=mission.TVA_EDL) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.TVA_EDL.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.TVA_EDL == None %}
+                                                {{form.TVA_EDL(class="input", placeholder="Données numérique", value=0.00)}}
+                                            {% else %}
+                                                {{form.TVA_EDL(class="input", placeholder="Données numérique", value=mission.TVA_EDL)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.PRIX_TTC_EDL.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.PRIX_TTC_EDL.errors %}
+                                            {{form.PRIX_TTC_EDL(class="input is-invalid",placeholder="Données numérique", value=mission.PRIX_TTC_EDL) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.PRIX_TTC_EDL.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.PRIX_TTC_EDL == None %}
+                                                {{form.PRIX_TTC_EDL(class="input", placeholder="Données numérique",  value=0.00)}}
+                                            {% else %}
+                                                {{form.PRIX_TTC_EDL(class="input", placeholder="Données numérique",  value=mission.PRIX_TTC_EDL)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.CA_HT_AS.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.CA_HT_AS.errors %}
+                                            {{form.CA_HT_AS(class="input is-invalid", value=mission.CA_HT_AS, placeholder="Données numérique") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.CA_HT_AS.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.CA_HT_AS == None %}
+                                                {{form.CA_HT_AS(class="input", placeholder="Données numérique",  value=0.00)}}
+                                                {% else %}
+                                                {{form.CA_HT_AS(class="input", placeholder="Données numérique",  value=mission.CA_HT_AS)}}
+                                                {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.TVA_AS.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.TVA_AS.errors %}
+                                            {{form.TVA_AS(class="input is-invalid", value=mission.TVA_AS,placeholder="Données numérique") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.TVA_AS.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.TVA_AS == None %}
+                                                {{form.TVA_AS(class="input", placeholder="Données numérique",  value=0.00)}}
+                                                {% else %}
+                                                {{form.TVA_AS(class="input", placeholder="Données numérique",  value=mission.TVA_AS)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.CA_TTC_AS.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.CA_TTC_AS.errors %}
+                                            {{form.CA_TTC_AS(class="input is-invalid", value=mission.CA_TTC_AS, placeholder="Données numérique") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.CA_TTC_AS.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.CA_TTC_AS == None %}
+                                                {{form.CA_TTC_AS(class="input", placeholder="Données numérique",  value=0.00)}}
+                                                {% else %}
+                                                {{form.CA_TTC_AS(class="input", placeholder="Données numérique",  value=mission.CA_TTC_AS)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.CA_HT_AC.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.CA_HT_AC.errors %}
+                                            {{form.CA_HT_AC(class="input is-invalid",placeholder="Données numérique",  value=mission.CA_HT_AC) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.CA_HT_AC.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.CA_HT_AC == None %}
+                                                {{form.CA_HT_AC(class="input", placeholder="Données numérique",  value=0.00)}}
+                                                {% else %}
+                                                {{form.CA_HT_AC(class="input", placeholder="Données numérique",  value=mission.CA_HT_AC)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.CA_TTC_AC.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.CA_TTC_AC.errors %}
+                                            {{form.CA_TTC_AC(class="input is-invalid", value=mission.CA_TTC_AC, placeholder="Données numérique") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.CA_TTC_AC.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.CA_TTC_AC == None %}
+                                                {{form.CA_TTC_AC(class="input", placeholder="Données numérique",  value=0.00)}}
+                                                {% else %}
+                                                {{form.CA_TTC_AC(class="input", placeholder="Données numérique",  value=mission.CA_TTC_AC)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.CA_HT_TRUST.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.CA_HT_TRUST.errors %}
+                                            {{form.CA_HT_TRUST(class="input is-invalid",placeholder="Données numérique", value=mission.CA_HT_TRUST) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.CA_HT_TRUST.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.CA_HT_TRUST == None %}
+                                                {{form.CA_HT_TRUST(class="input", placeholder="Données numérique", value=0.00)}}
+                                                {% else %}
+                                                {{form.CA_HT_TRUST(class="input", placeholder="Données numérique", value=mission.CA_HT_TRUST)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.TVA_TRUST.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.TVA_TRUST.errors %}
+                                            {{form.TVA_TRUST(class="input is-invalid",placeholder="Données numérique", value=mission.TVA_TRUST) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.TVA_TRUST.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.TVA_TRUST == None %}
+                                                {{form.TVA_TRUST(class="input", placeholder="Données numérique", value=0.00)}}
+                                                {% else %}
+                                                {{form.TVA_TRUST(class="input", placeholder="Données numérique", value=mission.TVA_TRUST)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.Prix_ht_chiffrage.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.Prix_ht_chiffrage.errors %}
+                                            {{form.Prix_ht_chiffrage(class="input is-invalid", placeholder="Données numérique", value=mission.Prix_ht_chiffrage) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.Prix_ht_chiffrage.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.Prix_ht_chiffrage == None %}
+                                                {{form.Prix_ht_chiffrage(class="input", placeholder="Données numérique", value=0.00)}}
+                                                {% else %}
+                                                {{form.Prix_ht_chiffrage(class="input", placeholder="Données numérique", value=mission.Prix_ht_chiffrage)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                {#<div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.Date_chiffrage_regle.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.Date_chiffrage_regle.errors %}
+                                            {{form.Date_chiffrage_regle(class="input is-invalid", value=mission.Date_chiffrage_regle) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.Date_chiffrage_regle.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            
+                                                {{form.Date_chiffrage_regle(class="input", placeholder="", value=mission.Date_chiffrage_regle)}}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>#}
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.POURCENTAGE_suiveur_chiffrage.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.POURCENTAGE_suiveur_chiffrage.errors %}
+                                            {{form.POURCENTAGE_suiveur_chiffrage(class="input is-invalid", placeholder="Données numérique",  value=mission.POURCENTAGE_suiveur_chiffrage) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.POURCENTAGE_suiveur_chiffrage.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.POURCENTAGE_suiveur_chiffrage == None %}
+                                                {{form.POURCENTAGE_suiveur_chiffrage(class="input", placeholder="Données numérique", value=0.00)}}
+                                                {% else %}
+                                                {{form.POURCENTAGE_suiveur_chiffrage(class="input", placeholder="Données numérique", value=mission.POURCENTAGE_suiveur_chiffrage)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.POURCENTAGE_AS_chiffrage.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.POURCENTAGE_AS_chiffrage.errors %}
+                                            {{form.POURCENTAGE_AS_chiffrage(class="input is-invalid", 
+                                            placeholder="Données numérique", value=mission.POURCENTAGE_AS_chiffrage) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.POURCENTAGE_AS_chiffrage.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.POURCENTAGE_AS_chiffrage == None %}
+                                                {{form.POURCENTAGE_AS_chiffrage(class="input", placeholder="Données numérique", value=0.00)}}
+                                                {% else %}
+                                                {{form.POURCENTAGE_AS_chiffrage(class="input", placeholder="Données numérique", value=mission.POURCENTAGE_AS_chiffrage)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.POURCENTAGE_manager_chiffrage.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.POURCENTAGE_manager_chiffrage.errors %}
+                                            {{form.POURCENTAGE_manager_chiffrage(class="input is-invalid", placeholder="Données numérique", value=mission.POURCENTAGE_manager_chiffrage) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.POURCENTAGE_manager_chiffrage.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if POURCENTAGE_manager_chiffrage == None %}
+                                                {{form.POURCENTAGE_manager_chiffrage(class="input", placeholder="Données numérique", value=0.00)}}
+                                                {% else %}
+                                                {{form.POURCENTAGE_manager_chiffrage(class="input ", placeholder="Données numérique", value=mission.POURCENTAGE_manager_chiffrage) }}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.ID_manager_chiffrage.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.ID_manager_chiffrage.errors %}
+                                            {{form.ID_manager_chiffrage(class="input is-invalid", placeholder="Données numérique", value=mission.ID_manager_chiffrage) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.ID_manager_chiffrage.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                                {{form.ID_manager_chiffrage(class="input", placeholder="Données numérique", value=mission.ID_manager_chiffrage)}}
+                                                
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.POURCENTAGE_agent_chiffrage.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.POURCENTAGE_agent_chiffrage.errors %}
+                                            {{form.POURCENTAGE_agent_chiffrage(class="input is-invalid", placeholder="Données numérique",value=mission.POURCENTAGE_agent_chiffrage) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.POURCENTAGE_agent_chiffrage.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.POURCENTAGE_agent_chiffrage == None %}
+                                                {{form.POURCENTAGE_agent_chiffrage(class="input", placeholder="Données numérique", value=0.00)}}
+                                                {% else %}
+                                                {{form.POURCENTAGE_agent_chiffrage(class="input", placeholder="Données numérique", value=mission.POURCENTAGE_agent_chiffrage)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.ID_agent_chiffrage.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.ID_agent_chiffrage.errors %}
+                                            {{form.ID_agent_chiffrage(class="input is-invalid", placeholder="Données numérique", value=mission.ID_agent_chiffrage) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.ID_agent_chiffrage.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                                {{form.ID_agent_chiffrage(class="input", placeholder="Données numérique", value=mission.ID_agent_chiffrage)}}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.TYPE_EDL.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.TYPE_EDL.errors %}
+                                            {{form.TYPE_EDL(class="input is-invalid", value=mission.TYPE_EDL, placeholder="Données Alpha-numérique") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.TYPE_EDL.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.TYPE_EDL == None %}
+                                                {{form.TYPE_EDL(class="input", placeholder="Données Alpha numérique", value=a)}}
+                                                {% else %}
+                                                {{form.TYPE_EDL(class="input", placeholder="Données Alpha numérique", value=mission.TYPE_EDL)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.TITREPROPRIO.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.TITREPROPRIO.errors %}
+                                            {{form.TITREPROPRIO(class="input is-invalid", value=mission.TITREPROPRIO) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.TITREPROPRIO.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.TITREPROPRIO == None %}
+                                                {{form.TITREPROPRIO(class="input", placeholder="Données numérique", value=a)}}
+                                                {% else %}
+                                                {{form.TITREPROPRIO(class="input", placeholder="Données numérique", value=mission.TITREPROPRIO)}}
+                                                {% endif %}    
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.NOMPROPRIO.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.NOMPROPRIO.errors %}
+                                            {{form.NOMPROPRIO(class="input is-invalid", value=mission.NOMPROPRIO, placeholder="Données Alpha-numérique") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.NOMPROPRIO.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.NOMPROPRIO == None %}
+                                                {{form.NOMPROPRIO(class="input", placeholder="Données Alpha-numérique", value=a)}}
+                                                {% else %}
+                                                {{form.NOMPROPRIO(class="input", placeholder="Données Alpha-numérique", value=mission.NOMPROPRIO)}}
+                                                {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.CODE_AMEXPERT.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.CODE_AMEXPERT.errors %}
+                                            {{form.CODE_AMEXPERT(class="input is-invalid", placeholder="Données Alpha-numérique", value=mission.CODE_AMEXPERT) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.CODE_AMEXPERT.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.CODE_AMEXPERT == None %}
+                                                {{form.CODE_AMEXPERT(class="input", placeholder="Données Alpha-numérique", value=a)}}
+                                                {% else %}
+                                                {{form.CODE_AMEXPERT(class="input", placeholder="Données Alpha-numérique", value=mission.CODE_AMEXPERT)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.surface_logement1.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.surface_logement1.errors %}
+                                            {{form.surface_logement1(class="input is-invalid", placeholder="Données numérique",value=mission.surface_logement1) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.surface_logement1.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.surface_logement1 == None %}
+                                                {{form.surface_logement1(class="input", placeholder="Données Alpha-numérique",value=0.00)}}
+                                                {% else %}
+                                                {{form.surface_logement1(class="input", placeholder="Données Alpha-numérique",value=mission.surface_logement1)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.Ref_commande.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.Ref_commande.errors %}
+                                            {{form.Ref_commande(class="input is-invalid",placeholder="Données numérique", value=mission.Ref_commande) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.Ref_commande.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.Ref_commande == None %}
+                                                {{form.Ref_commande(class="input", placeholder="Données numérique", value=a)}}
+                                                {% else %}
+                                                {{form.Ref_commande(class="input", placeholder="Données numérique", value=mission.Ref_commande)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.POURCENTAGE_COM_AS_DU_CLIENT.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.POURCENTAGE_COM_AS_DU_CLIENT.errors %}
+                                            {{form.POURCENTAGE_COM_AS_DU_CLIENT(class="input is-invalid", placeholder="Données numérique", value=mission.POURCENTAGE_COM_AS_DU_CLIENT) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.POURCENTAGE_COM_AS_DU_CLIENT.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.POURCENTAGE_COM_AS_DU_CLIENT == None %}
+                                                {{form.POURCENTAGE_COM_AS_DU_CLIENT(class="input", placeholder="Données numérique", value=0.00)}}
+                                                {% else %}
+                                                {{form.POURCENTAGE_COM_AS_DU_CLIENT(class="input", placeholder="Données numérique", value=mission.POURCENTAGE_COM_AS_DU_CLIENT)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.ID_Respon_Cell_Dev.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.ID_Respon_Cell_Dev.errors %}
+                                            {{form.ID_Respon_Cell_Dev(class="input is-invalid", placeholder="Données numérique",value=mission.ID_Respon_Cell_Dev) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.ID_Respon_Cell_Dev.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                                {{form.ID_Respon_Cell_Dev(class="input", placeholder="Données numérique", value=mission.ID_Respon_Cell_Dev)}}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.POURCENTAGE_Respon_Cell_Dev.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.POURCENTAGE_Respon_Cell_Dev.errors %}
+                                            {{form.POURCENTAGE_Respon_Cell_Dev(class="input is-invalid", placeholder="Données numérique",value=mission.POURCENTAGE_Respon_Cell_Dev) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.POURCENTAGE_Respon_Cell_Dev.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.POURCENTAGE_Respon_Cell_Dev == None %}
+                                                {{form.POURCENTAGE_Respon_Cell_Dev(class="input", placeholder="Données numérique", value=0.00)}}
+                                                {% else %}
+                                                {{form.POURCENTAGE_Respon_Cell_Dev(class="input", placeholder="Données numérique", value=mission.POURCENTAGE_Respon_Cell_Dev)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.ID_agent_Cell_Dev.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.ID_agent_Cell_Dev.errors %}
+                                            {{form.ID_agent_Cell_Dev(class="input is-invalid", placeholder="Données numérique", value=mission.ID_agent_Cell_Dev) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.ID_agent_Cell_Dev.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                                {{form.ID_agent_Cell_Dev(class="input", placeholder="Données numérique", value=mission.ID_agent_Cell_Dev)}}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.TYPE_LOGEMENT.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.TYPE_LOGEMENT.errors %}
+                                            {{form.TYPE_LOGEMENT(class="input is-invalid", placeholder="Données Alpha-numérique", value=mission.TYPE_LOGEMENT) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.TYPE_LOGEMENT.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.TYPE_LOGEMENT == None %}
+                                                {{form.TYPE_LOGEMENT(class="input", placeholder="Données Alphabetique", value=a)}}
+                                                {% else %}
+                                                {{form.TYPE_LOGEMENT(class="input", placeholder="Données Alphabetique", value=mission.TYPE_LOGEMENT)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.LOGEMENT_MEUBLE.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.LOGEMENT_MEUBLE.errors %}
+                                            {{form.LOGEMENT_MEUBLE(class="input is-invalid", placeholder="Données Alphabetique", value=mission.LOGEMENT_MEUBLE) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.LOGEMENT_MEUBLE.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.LOGEMENT_MEUBLE == None %}
+                                                {{form.LOGEMENT_MEUBLE(class="input", placeholder="Données Alphabetique", value=a)}}
+                                                {% else %}
+                                                {{form.LOGEMENT_MEUBLE(class="input", placeholder="Données Alphabetique", value=mission.LOGEMENT_MEUBLE)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.CODE_FACTURATION.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.CODE_FACTURATION.errors %}
+                                            {{form.CODE_FACTURATION(class="input is-invalid", placeholder="Données Alpha-numérique",value=mission.CODE_FACTURATION) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.CODE_FACTURATION.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.CODE_FACTURATION == None %}
+                                                {{form.CODE_FACTURATION(class="input", placeholder="Données Alpha-numérique", value=a)}}
+                                            {% else %}
+                                                {{form.CODE_FACTURATION(class="input", placeholder="Données Alpha-numérique", value=mission.CODE_FACTURATION)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.TYPE_DE_BIEN.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.TYPE_DE_BIEN.errors %}
+                                            {{form.TYPE_DE_BIEN(class="input is-invalid", placeholder="Données Alpha-numérique", value=mission.TYPE_DE_BIEN) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.TYPE_DE_BIEN.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.CODE_FACTURATION == None %}
+                                                {{form.TYPE_DE_BIEN(class="input", placeholder="Données Alpha-numérique",value=a)}}
+                                                {% else %}
+                                                {{form.TYPE_DE_BIEN(class="input", placeholder="Données Alpha-numérique",value=mission.TYPE_DE_BIEN)}}
+
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.POURCENTAGE_Agent_Cell_Dev.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.POURCENTAGE_Agent_Cell_Dev.errors %}
+                                            {{form.POURCENTAGE_Agent_Cell_Dev(class="input is-invalid",  placeholder="Données numérique", value=mission.POURCENTAGE_Agent_Cell_Dev) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.POURCENTAGE_Agent_Cell_Dev.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.POURCENTAGE_Agent_Cell_Dev == None %}
+                                                {{form.POURCENTAGE_Agent_Cell_Dev(class="input", placeholder="Données numérique", value=0.00)}}
+                                                {% else %}
+                                                {{form.POURCENTAGE_Agent_Cell_Dev(class="input", placeholder="Données numérique", value=mission.POURCENTAGE_Agent_Cell_Dev)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.ID_Agent_CellTech.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.ID_Agent_CellTech.errors %}
+                                            {{form.ID_Agent_CellTech(class="input is-invalid", placeholder="Données numérique",value=mission.ID_Agent_CellTech) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.ID_Agent_CellTech.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                                {{form.ID_Agent_CellTech(class="input", placeholder="Données numérique", value=mission.ID_Agent_CellTech)}}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.POURCENTAGE_Agent_Cell_Tech.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.POURCENTAGE_Agent_Cell_Tech.errors %}
+                                            {{form.POURCENTAGE_Agent_Cell_Tech(class="input is-invalid", placeholder="Données numérique",value=mission.POURCENTAGE_Agent_Cell_Tech) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.POURCENTAGE_Agent_Cell_Tech.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.POURCENTAGE_Agent_Cell_Tech == None %}
+                                                {{form.POURCENTAGE_Agent_Cell_Tech(class="input", placeholder="Données numérique", value=0.00)}}
+                                                {% else %}
+                                                {{form.POURCENTAGE_Agent_Cell_Tech(class="input", placeholder="Données numérique", value=mission.POURCENTAGE_Agent_Cell_Tech)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.ID_Respon_Cell_Tech.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.ID_Respon_Cell_Tech.errors %}
+                                            {{form.ID_Respon_Cell_Tech(class="input is-invalid", placeholder="Données numérique",value=mission.ID_Respon_Cell_Tech) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.ID_Respon_Cell_Tech.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                                {{form.ID_Respon_Cell_Tech(class="input", placeholder="Données numérique", value=mission.ID_Respon_Cell_Tech)}}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.POURCENTAGE_Respon_Cell_Tech.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.POURCENTAGE_Respon_Cell_Tech.errors %}
+                                            {{form.POURCENTAGE_Respon_Cell_Tech(class="input is-invalid", placeholder="Données numérique",value=mission.POURCENTAGE_Respon_Cell_Tech) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.POURCENTAGE_Respon_Cell_Tech.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.POURCENTAGE_Respon_Cell_Tech== None %}
+                                                {{form.POURCENTAGE_Respon_Cell_Tech(class="input", placeholder="Données numérique", value=0.00)}}
+                                                {% else %}
+                                                {{form.POURCENTAGE_Respon_Cell_Tech(class="input", placeholder="Données numérique", value=mission.POURCENTAGE_Respon_Cell_Tech)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.ID_Suiveur_Cell_Tech.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.ID_Suiveur_Cell_Tech.errors %}
+                                            {{form.ID_Suiveur_Cell_Tech(class="input is-invalid", placeholder="Données numérique", value=mission.ID_Suiveur_Cell_Tech) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.ID_Suiveur_Cell_Tech.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                                {{form.ID_Suiveur_Cell_Tech(class="input", placeholder="Données numérique", value=mission.ID_Suiveur_Cell_Tech)}}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.POURCENTAGE_Suiveur_Cell_Tech.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.POURCENTAGE_Suiveur_Cell_Tech.errors %}
+                                            {{form.POURCENTAGE_Suiveur_Cell_Tech(class="input is-invalid", placeholder="Données numérique", value=mission.POURCENTAGE_Suiveur_Cell_Tech) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.POURCENTAGE_Suiveur_Cell_Tech.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.POURCENTAGE_Suiveur_Cell_Tech == None %}
+                                                {{form.POURCENTAGE_Suiveur_Cell_Tech(class="input", placeholder="Données numérique", value=0.00)}}
+                                                {% else %}
+                                                {{form.POURCENTAGE_Suiveur_Cell_Tech(class="input", placeholder="Données numérique", value=mission.POURCENTAGE_Suiveur_Cell_Tech)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.ID_Respon_Cell_Planif.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.ID_Respon_Cell_Planif.errors %}
+                                            {{form.ID_Respon_Cell_Planif(class="input is-invalid", placeholder="Données numérique", value=mission.ID_Respon_Cell_Planif) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.ID_Respon_Cell_Planif.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                                {{form.ID_Respon_Cell_Planif(class="input", placeholder="Données numérique", placeholder="", value=mission.ID_Respon_Cell_Planif)}}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.POURCENTAGE_Respon_Cell_Planif.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.POURCENTAGE_Respon_Cell_Planif.errors %}
+                                            {{form.POURCENTAGE_Respon_Cell_Planif(class="input is-invalid", placeholder="Données numérique", value=mission.POURCENTAGE_Respon_Cell_Planif) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.POURCENTAGE_Respon_Cell_Planif.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.POURCENTAGE_Respon_Cell_Planif == None %}
+                                                {{form.POURCENTAGE_Respon_Cell_Planif(class="input", placeholder="Données numérique", value=0.00)}}
+                                                {% else %}
+                                                {{form.POURCENTAGE_Respon_Cell_Planif(class="input", placeholder="Données numérique", value=mission.POURCENTAGE_Respon_Cell_Planif)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.ID_Suiveur_Cell_Planif.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.ID_Suiveur_Cell_Planif.errors %}
+                                            {{form.ID_Suiveur_Cell_Planif(class="input is-invalid", placeholder="Données numérique",value=mission.ID_Suiveur_Cell_Planif) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.ID_Suiveur_Cell_Planif.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                                {{form.ID_Suiveur_Cell_Planif(class="input", placeholder="Données numérique",value=mission.ID_Suiveur_Cell_Planif)}}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.POURCENTAGE_Suiveur_Cell_Planif.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.POURCENTAGE_Suiveur_Cell_Planif.errors %}
+                                            {{form.POURCENTAGE_Suiveur_Cell_Planif(class="input is-invalid", placeholder="Données numérique", value=mission.POURCENTAGE_Suiveur_Cell_Planif) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.POURCENTAGE_Suiveur_Cell_Planif.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.POURCENTAGE_Suiveur_Cell_Planif == None %}
+                                                {{form.POURCENTAGE_Suiveur_Cell_Planif(class="input", placeholder="Données numérique", value=0.00)}}
+                                                {% else %}
+                                                {{form.POURCENTAGE_Suiveur_Cell_Planif(class="input", placeholder="Données numérique", value=mission.POURCENTAGE_Suiveur_Cell_Planif)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.ID_Agent_saisie_Cell_Planif.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.ID_Agent_saisie_Cell_Planif.errors %}
+                                            {{form.ID_Agent_saisie_Cell_Planif(class="input is-invalid", placeholder="Données numérique", value=mission.ID_Agent_saisie_Cell_Planif) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.ID_Agent_saisie_Cell_Planif.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                                {{form.ID_Agent_saisie_Cell_Planif(class="input", placeholder="Données numérique", value=mission.ID_Agent_saisie_Cell_Planif)}}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.POURCENTAGE_Agent_saisie_CEll_planif.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.POURCENTAGE_Agent_saisie_CEll_planif.errors %}
+                                            {{form.POURCENTAGE_Agent_saisie_CEll_planif(class="input is-invalid", placeholder="Données numérique", value=mission.POURCENTAGE_Agent_saisie_CEll_planif) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.POURCENTAGE_Agent_saisie_CEll_planif.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.POURCENTAGE_Agent_saisie_CEll_planif == None %}
+                                                {{form.POURCENTAGE_Agent_saisie_CEll_planif(class="input", placeholder="Données numérique", value=0.00)}}
+                                                {% else %}
+                                                {{form.POURCENTAGE_Agent_saisie_CEll_planif(class="input", placeholder="Données numérique", value=mission.POURCENTAGE_Agent_saisie_CEll_planif)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.DATE_FACTURE.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.DATE_FACTURE.errors %}
+                                           {% if mission.Date_FACTURE == None %}
+                                                {{form.DATE_FACTURE(class="input is-invalid", value=mission.DATE_FACTURE) }}
+                                           {% else %}
+                                                {{form.DATE_FACTURE(class="input is-invalid", value=mission.DATE_FACTURE) }}
+                                            {% endif %}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.DATE_FACTURE.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.Date_FACTURE == 'None' %}
+                                                {{form.DATE_FACTURE(class="input", value=mission.DATE_FACTURE) }}
+                                            {% else %}
+                                                {{form.DATE_FACTURE(class="input", placeholder="", value=mission.DATE_FACTURE) }}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.COMMENTAIRE_FACTURE.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.COMMENTAIRE_FACTURE.errors %}
+                                            {{form.COMMENTAIRE_FACTURE(class="input is-invalid", placeholder="Données Alpha-numérique",value=mission.COMMENTAIRE_FACTURE) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.COMMENTAIRE_FACTURE.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.ABONNEMENT == None %}
+                                                {{form.COMMENTAIRE_FACTURE(class="input", placeholder="Données Alpha-numérique", value=a)}}
+                                                {% else %}
+                                                {{form.COMMENTAIRE_FACTURE(class="input", placeholder="Données Alpha-numérique", value=mission.COMMENTAIRE_FACTURE)}}
+                                            {% endif %}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.DATE_FACT_REGLEE.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.DATE_FACT_REGLEE.errors %}
+                                            {% if mission.DATE_FACT_REGLEE == None %}
+                                                {{form.DATE_FACT_REGLEE(class="input is-invalid", value=mission.DATE_FACT_REGLEE) }}
+                                            {% else %}
+                                                {{form.DATE_FACT_REGLEE(class="input is-invalid", value=mission.DATE_FACT_REGLEE.strftime('%d/%m/%Y')) }}
+                                            {% endif %}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.DATE_FACT_REGLEE.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                            {% if mission.DATE_FACT_REGLEE == None %}
+                                                {{form.DATE_FACT_REGLEE(class="input is-invalid") }}
+                                            {% else %}
+                                                {{form.DATE_FACT_REGLEE(class="input is-invalid", placeholder="", value=mission.DATE_FACT_REGLEE.strftime('%d/%m/%Y')) }}
+                                            {%endif%}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Veuillez remplir champ</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+
+                                
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal"></div>
+                                    <div class="field-body">
+                                      <div class="field">
+                                        <div class="control">
+                                          {{form.modifier(class="button is-primary is-small")}}   
+                                        </div>
+                                      </div>
+                                    </div>
+
+
+                                         <div class="field-body">
+                                          <div class="field">
+                                            <div class="control">
+                                                <a onclick="window.history.back()" class="button is-danger is-small">       
+                                                Annuler
+                                                </a>
+                                             
+                                            </div>
+                                          </div>
+                                        </div>
+                                </div>
+
+
+                            
+                            </form>
+                        </div>
+                    </div>
+                </div>
+	        </div>
+	    </div>
+	</div>
+    <!-- Pie Chart --> 
+</div>
+
+    <!-- Content Row -->
+</div>
+    <!-- /.container-fluid -->
+{%endblock%}

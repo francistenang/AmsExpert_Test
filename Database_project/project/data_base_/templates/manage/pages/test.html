@@ -1,0 +1,1235 @@
+{% extends 'manage/index.html' %}
+{% block manage_content %}
+  <div style="" class="main-content">
+    <div class="display-flex justify-content-space-between title-box">
+        {% if legend == "prospect" %}
+            <h2 class="title" style="color: #112A46;font-weight: 500; font-size: 1.5rem;">Ajouter un Prospect</h2>
+        {% endif %}
+         {% if legend == "negociateur" %}
+            <h2 class="title" style="color: #112A46;font-weight: 500; font-size: 1.5rem;">Ajouter un Négociateur</h2>
+        {% endif %}
+        {% if legend == "client" %}
+            <h2 class="title" style="color: #112A46;font-weight: 500; font-size: 1.5rem;">Ajouter un Client</h2>
+        {% endif %}
+        {% if legend == "prospect" %}
+            <a href="{{url_for('users.prospect_')}}" title="Consultez la liste des propects" class="button is-primary is-small"><i class="fas fa-list-ul"></i></a>
+        {% endif %}
+         {% if legend == "client" %}
+            <a href="{{url_for('users.client')}}" title="Consultez la liste des clients" class="button is-primary is-small"><i class="fas fa-list-ul"></i></a>
+        {% endif %}
+    </div>
+      <div class="table-container" style="">
+        <div class="card" style="box-shadow: none; padding: 0px; border: 1px solid #d4d4cc;">
+            <header class="card-header" style="border-bottom: 1px solid #d4d4cc; box-shadow:none; align-items: center;">
+                <p class="card-header-title"><span class="icon"><i class="fas fa-user"></i></span></p>
+                <div class="card-header-title">
+                  <a onclick="window.history.back()" class="button is-danger is-small" style="padding: 10px;position: absolute;right: 10px;">Annuler</a>
+                </div>
+                                       
+            </header>
+
+    <!-- <div class="row"> -->
+        <!-- Area Chart -->
+        <!-- <div class="col-xl-6 col-lg-6 mx-auto"> -->
+            <!-- <div class="card shadow mb-4"> -->
+	       <!--  <div class="card-header py-1 d-flex justify-content-between align-items-center">
+                {% if legend == "client" %}
+                    <h6 class="m-0 font-weight-bold is-gray font-weight-light">Ajouter un client</h6>
+                    <a href="/client" class="button is-black is-small pull-right">Tous les clients</a>
+                {% endif %}
+                {% if legend == "negociateur" %}
+                    <h6 class="m-0 font-weight-bold is-gray font-weight-light">Ajouter un negociateur</h6>
+                    <a href="{{url_for('users.negotiateur', id=ID)}}" class="button is-black is-small pull-right">Tous les negociateurs</a>
+                {% endif %}
+                {% if legend == "prospect" %}
+                    <h6 class="m-0 font-weight-bold is-gray font-weight-light">Ajouter un prospect</h6>
+                    <a href="/prospect" class="button is-black is-small pull-right">Tous les prospect</a>
+                {% endif %}
+	        </div> -->
+	        <!-- <div class="card-body"> -->
+	            <!-- <div class="row"> -->
+                    <!-- <div class="col-lg-11 mx-auto"> -->
+                        <div class="">
+                            {% with messages = get_flashed_messages(with_categories=true)%}
+                            {% if messages %}
+                            {%for category,message in messages%}
+                            <div class="alert alert-{{category}}">
+                                {{message}}
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                            {% endwith %}
+                            <form class="user" method="POST" style="padding: 10px;">
+                                {{ form.hidden_tag() }}
+                                <div class="field is-horizontal">
+                                  <div class="field-label is-normal">
+                                    <label class="label" style="text-align: left;"><small>{{form.edl_prix_std.label(class="form-control-label")}}</small></label></div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.edl_prix_std.errors %}
+                                        {{form.edl_prix_std(class="input is-invalid") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.edl_prix_std.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                                {{form.edl_prix_std(class="input")}}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help"> Requis. Le numero de edl_prix_std est requis</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <hr/>
+                                    <div class="field is-horizontal">
+                                      <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.edl_appt_prix_f1.label(class="form-control-label")}}</small></label></div>
+                                        <div class="field-body">
+                                          <div class="field"><!---->
+                                              <div class="control">
+                                               {% if form.edl_appt_prix_f1.errors %}
+                                            {{form.edl_appt_prix_f1(class="input is-invalid") }}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.edl_appt_prix_f1.errors %}
+                                                    <span>{{ error }}</span>
+                                                {% endfor %}
+                                            </div>
+                                                {% else %}
+                                                    {{form.edl_appt_prix_f1(class="input")}}
+                                                {% endif %}
+                                              </div>
+                                                <p class="help"> Requis. Le edl_appt_prix_f1 est requis</p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    <hr/>
+                                    <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.edl_appt_prix_f2.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.edl_appt_prix_f2.errors %}
+                                              {{form.edl_appt_prix_f2(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.edl_appt_prix_f2.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.edl_appt_prix_f2(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. Le edl_appt_prix_f2 est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.edl_appt_prix_f3.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.edl_appt_prix_f3.errors %}
+                                              {{form.edl_appt_prix_f3(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.edl_appt_prix_f3.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.edl_appt_prix_f3(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. Le edl_appt_prix_f3 est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.edl_appt_prix_f4.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.edl_appt_prix_f4.errors %}
+                                              {{form.edl_appt_prix_f4(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.edl_appt_prix_f4.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.edl_appt_prix_f4(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. Le edl_appt_prix_f4 est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.edl_appt_prix_f5.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.edl_appt_prix_f5.errors %}
+                                              {{form.edl_appt_prix_f5(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.edl_appt_prix_f5.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.edl_appt_prix_f5(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. Le edl_appt_prix_f5 est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.edl_appt_prix_f6.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.edl_appt_prix_f6.errors %}
+                                              {{form.edl_appt_prix_f6(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.edl_appt_prix_f6.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.edl_appt_prix_f6(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. Le edl_appt_prix_f6 est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                    <div class="field is-horizontal">
+                                      <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.edl_pav_villa_prix_t1.label(class="form-control-label")}}</small></label></div>
+                                        <div class="field-body">
+                                          <div class="field"><!---->
+                                              <div class="control">
+                                               {% if form.edl_pav_villa_prix_t1.errors %}
+                                            {{form.edl_pav_villa_prix_t1(class="input is-invalid") }}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.edl_pav_villa_prix_t1.errors %}
+                                                    <span>{{ error }}</span>
+                                                {% endfor %}
+                                            </div>
+                                                {% else %}
+                                                    {{form.edl_pav_villa_prix_t1(class="input")}}
+                                                {% endif %}
+                                              </div>
+                                                <p class="help"> Requis. Le edl_pav_villa_prix_t1 est requis</p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    <hr/>
+                                    <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.edl_pav_villa_prix_t2.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.edl_pav_villa_prix_t2.errors %}
+                                              {{form.edl_pav_villa_prix_t2(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.edl_pav_villa_prix_t2.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.edl_pav_villa_prix_t2(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. Le edl_pav_villa_prix_t2 est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.edl_pav_villa_prix_t3.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.edl_pav_villa_prix_t3.errors %}
+                                              {{form.edl_pav_villa_prix_t3(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.edl_pav_villa_prix_t3.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.edl_pav_villa_prix_t3(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. Le edl_pav_villa_prix_t3 est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.edl_pav_villa_prix_t4.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.edl_pav_villa_prix_t4.errors %}
+                                              {{form.edl_pav_villa_prix_t4(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.edl_pav_villa_prix_t4.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.edl_pav_villa_prix_t4(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. Le edl_pav_villa_prix_t4 est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.edl_pav_villa_prix_t5.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.edl_pav_villa_prix_t5.errors %}
+                                              {{form.edl_pav_villa_prix_t5(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.edl_pav_villa_prix_t5.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.edl_pav_villa_prix_t5(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. Le edl_pav_villa_prix_t5 est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.edl_pav_villa_prix_t6.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.edl_pav_villa_prix_t6.errors %}
+                                              {{form.edl_pav_villa_prix_t6(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.edl_pav_villa_prix_t6.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.edl_pav_villa_prix_t6(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. Le edl_pav_villa_prix_t6 est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.edl_pav_villa_prix_t7.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.edl_pav_villa_prix_t7.errors %}
+                                              {{form.edl_pav_villa_prix_t7(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.edl_pav_villa_prix_t7.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.edl_pav_villa_prix_t7(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. Le edl_pav_villa_prix_t7 est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.edl_pav_villa_prix_t8.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.edl_pav_villa_prix_t8.errors %}
+                                              {{form.edl_pav_villa_prix_t8(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.edl_pav_villa_prix_t8.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.edl_pav_villa_prix_t8(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. Le edl_pav_villa_prix_t8 est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                    <div class="field is-horizontal">
+                                      <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.chif_appt_prix_stu.label(class="form-control-label")}}</small></label></div>
+                                        <div class="field-body">
+                                          <div class="field"><!---->
+                                              <div class="control">
+                                               {% if form.chif_appt_prix_stu.errors %}
+                                                {{form.chif_appt_prix_stu(class="input is-invalid") }}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.chif_appt_prix_stu.errors %}
+                                                    <span>{{ error }}</span>
+                                                {% endfor %}
+                                            </div>
+                                                {% else %}
+                                                    {{form.chif_appt_prix_stu(class="input")}}
+                                                {% endif %}
+                                              </div>
+                                                <p class="help"> Requis. Le chif_appt_prix_stu est requis</p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    <hr/>
+                                    <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.chif_appt_prix_f1.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.chif_appt_prix_f1.errors %}
+                                                  {{form.chif_appt_prix_f1(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.chif_appt_prix_f1.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.chif_appt_prix_f1(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. Le chif_appt_prix_f1 est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.chif_appt_prix_f2.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.chif_appt_prix_f2.errors %}
+                                                  {{form.chif_appt_prix_f2(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.chif_appt_prix_f2.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.chif_appt_prix_f2(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. Le chif_appt_prix_f2 est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.chif_appt_prix_f3.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.chif_appt_prix_f3.errors %}
+                                                  {{form.chif_appt_prix_f3(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.chif_appt_prix_f3.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.chif_appt_prix_f3(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. Le chif_appt_prix_f3 est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.chif_appt_prix_f4.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.chif_appt_prix_f4.errors %}
+                                                  {{form.chif_appt_prix_f4(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.chif_appt_prix_f4.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.chif_appt_prix_f4(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. Le chif_appt_prix_f4 est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.chif_appt_prix_f5.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.chif_appt_prix_f5.errors %}
+                                                  {{form.chif_appt_prix_f5(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.chif_appt_prix_f5.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.chif_appt_prix_f5(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. Le chif_appt_prix_f5 est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{#{{form.chif_appt_prix_f6.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.chif_appt_prix_f6.errors %}
+                                                  {{form.chif_appt_prix_f6(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.chif_appt_prix_f6.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.chif_appt_prix_f6(class="input")}}
+                                                  {% endif %}#}
+                                                </div>
+                                                  <p class="help"> Requis. Le chif_appt_prix_f6 est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                    <div class="field is-horizontal">
+                                      <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.chif_pav_villa_prix_t1.label(class="form-control-label")}}</small></label></div>
+                                        <div class="field-body">
+                                          <div class="field">
+                                              <div class="control">
+                                               {% if form.chif_pav_villa_prix_t1.errors %}
+                                                {{form.chif_pav_villa_prix_t1(class="input is-invalid") }}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.chif_pav_villa_prix_t1.errors %}
+                                                    <span>{{ error }}</span>
+                                                {% endfor %}
+                                            </div>
+                                                {% else %}
+                                                    {{form.chif_pav_villa_prix_t1(class="input")}}
+                                                {% endif %}
+                                              </div>
+                                                <p class="help"> Requis. Le chif_pav_villa_prix_t1 est requis</p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    <hr/>
+                                    <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.chif_pav_villa_prix_t2.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field">
+                                                <div class="control">
+                                                 {% if form.chif_pav_villa_prix_t2.errors %}
+                                                  {{form.chif_pav_villa_prix_t2(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.chif_pav_villa_prix_t2.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.chif_pav_villa_prix_t2(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. Le chif_pav_villa_prix_t2 est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.chif_pav_villa_prix_t3.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field">
+                                                <div class="control">
+                                                 {% if form.chif_pav_villa_prix_t3.errors %}
+                                                  {{form.chif_pav_villa_prix_t3(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.chif_pav_villa_prix_t3.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.chif_pav_villa_prix_t3(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. Le chif_pav_villa_prix_t3 est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.chif_pav_villa_prix_t4.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field">
+                                                <div class="control">
+                                                 {% if form.chif_pav_villa_prix_t4.errors %}
+                                                  {{form.chif_pav_villa_prix_t4(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.chif_pav_villa_prix_t4.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.chif_pav_villa_prix_t4(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. Le chif_pav_villa_prix_t4 est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.chif_pav_villa_prix_t5.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field">
+                                                <div class="control">
+                                                 {% if form.chif_pav_villa_prix_t5.errors %}
+                                                  {{form.chif_pav_villa_prix_t5(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.chif_pav_villa_prix_t5.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.chif_pav_villa_prix_t5(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. Le chif_pav_villa_prix_t5 est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.chif_pav_villa_prix_t6.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field">
+                                                <div class="control">
+                                                 {% if form.chif_pav_villa_prix_t6.errors %}
+                                                  {{form.chif_pav_villa_prix_t6(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.chif_pav_villa_prix_t6.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.chif_pav_villa_prix_t6(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. Le chif_pav_villa_prix_t6 est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.chif_pav_villa_prix_t7.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field">
+                                                <div class="control">
+                                                 {% if form.chif_pav_villa_prix_t7.errors %}
+                                                  {{form.chif_pav_villa_prix_t7(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.chif_pav_villa_prix_t7.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.chif_pav_villa_prix_t7(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. Le chif_pav_villa_prix_t7 est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.chif_pav_villa_prix_t8.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field">
+                                                <div class="control">
+                                                 {% if form.chif_pav_villa_prix_t8.errors %}
+                                                  {{form.chif_pav_villa_prix_t8(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.chif_pav_villa_prix_t8.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.chif_pav_villa_prix_t8(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. Le chif_pav_villa_prix_t8 est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                    <div class="field is-horizontal">
+                                      <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.prix_autre.label(class="form-control-label")}}</small></label></div>
+                                        <div class="field-body">
+                                          <div class="field">
+                                              <div class="control">
+                                               {% if form.prix_autre.errors %}
+                                                {{form.prix_autre(class="input is-invalid") }}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.prix_autre.errors %}
+                                                    <span>{{ error }}</span>
+                                                {% endfor %}
+                                            </div>
+                                                {% else %}
+                                                    {{form.prix_autre(class="input")}}
+                                                {% endif %}
+                                              </div>
+                                                
+                                            </div>
+                                          </div>
+                                        </div>
+                                    <hr/>
+                    
+                
+                                    
+                                    <div class="field is-horizontal">
+                                      <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.code_tva.label(class="form-control-label")}}</small></label></div>
+                                        <div class="field-body">
+                                          <div class="field"><!---->
+                                              <div class="control">
+                                               {% if form.code_tva.errors %}
+                                                {{form.code_tva(class="input is-invalid") }}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.code_tva.errors %}
+                                                    <span>{{ error }}</span>
+                                                {% endfor %}
+                                            </div>
+                                                {% else %}
+                                                    {{form.code_tva(class="input")}}
+                                                {% endif %}
+                                              </div>
+                                                
+                                            </div>
+                                          </div>
+                                        </div>
+                                    <hr/>
+                                    <div class="field is-horizontal">
+                                      <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.taux_meuble.label(class="form-control-label")}}</small></label></div>
+                                        <div class="field-body">
+                                          <div class="field"><!---->
+                                              <div class="control">
+                                               {% if form.taux_meuble.errors %}
+                                                {{form.taux_meuble(class="input is-invalid") }}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.taux_meuble.errors %}
+                                                    <span>{{ error }}</span>
+                                                {% endfor %}
+                                            </div>
+                                                {% else %}
+                                                    {{form.taux_meuble(class="input")}}
+                                                {% endif %}
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    <hr/>
+                                    <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.referent_as_client.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.referent_as_client.errors %}
+                                                  {{form.referent_as_client(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.referent_as_client.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.referent_as_client(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. referent_as_client est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.com_as_sur_ca_client.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.com_as_sur_ca_client.errors %}
+                                                  {{form.com_as_sur_ca_client(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.com_as_sur_ca_client.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.com_as_sur_ca_client(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. com_as_sur_ca_client est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.cell_dev_ref_responsable.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.cell_dev_ref_responsable.errors %}
+                                                  {{form.cell_dev_ref_responsable(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.cell_dev_ref_responsable.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.cell_dev_ref_responsable(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. cell_dev_ref_responsable est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.com_cell_dev_ref_responsable.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.com_cell_dev_ref_responsable.errors %}
+                                                  {{form.com_cell_dev_ref_responsable(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.com_cell_dev_ref_responsable.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.com_cell_dev_ref_responsable(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. com_cell_dev_ref_responsable est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.cell_dev_ref_agent.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.cell_dev_ref_agent.errors %}
+                                                  {{form.cell_dev_ref_agent(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.cell_dev_ref_agent.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.cell_dev_ref_agent(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. cell_dev_ref_agent est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.com_cell_dev_ref_agent.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.com_cell_dev_ref_agent.errors %}
+                                                  {{form.com_cell_dev_ref_agent(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.com_cell_dev_ref_agent.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.com_cell_dev_ref_agent(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. com_cell_dev_ref_agent est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.cell_tech_ref_agent.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.cell_tech_ref_agent.errors %}
+                                                  {{form.cell_tech_ref_agent(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.cell_tech_ref_agent.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.cell_tech_ref_agent(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. cell_tech_ref_agent est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.com_cell_tech_Ref_agent.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.com_cell_tech_Ref_agent.errors %}
+                                                  {{form.com_cell_tech_Ref_agent(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.com_cell_tech_Ref_agent.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.com_cell_tech_Ref_agent(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. com_cell_tech_Ref_agent est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.cell_tech_ref_responsable.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.cell_tech_ref_responsable.errors %}
+                                                  {{form.cell_tech_ref_responsable(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.cell_tech_ref_responsable.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.cell_tech_ref_responsable(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. cell_tech_ref_responsable est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.com_cell_tech_ref_responsable.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.com_cell_tech_ref_responsable.errors %}
+                                                  {{form.com_cell_tech_ref_responsable(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.com_cell_tech_ref_responsable.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.com_cell_tech_ref_responsable(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. com_cell_tech_ref_responsable est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.cell_tech_ref_suiveur.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.cell_tech_ref_suiveur.errors %}
+                                                  {{form.cell_tech_ref_suiveur(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.cell_tech_ref_suiveur.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.cell_tech_ref_suiveur(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. cell_tech_ref_suiveur est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.com_cell_tech_ref_suiveur.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.com_cell_tech_ref_suiveur.errors %}
+                                                  {{form.com_cell_tech_ref_suiveur(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.com_cell_tech_ref_suiveur.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.com_cell_tech_ref_suiveur(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. com_cell_tech_ref_suiveur est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.cell_planif_ref_responsable.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.cell_planif_ref_responsable.errors %}
+                                                  {{form.cell_planif_ref_responsable(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.cell_planif_ref_responsable.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.cell_planif_ref_responsable(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. cell_planif_ref_responsable est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.com_cell_planif_ref_responsable.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.com_cell_planif_ref_responsable.errors %}
+                                                  {{form.com_cell_planif_ref_responsable(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.com_cell_planif_ref_responsable.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.com_cell_planif_ref_responsable(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. com_cell_planif_ref_responsable est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.cell_planif_ref_suiveur.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.cell_planif_ref_suiveur.errors %}
+                                                  {{form.cell_planif_ref_suiveur(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.cell_planif_ref_suiveur.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.cell_planif_ref_suiveur(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. cell_planif_ref_suiveur est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.com_cell_planif_ref_suiveur.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.com_cell_planif_ref_suiveur.errors %}
+                                                  {{form.com_cell_planif_ref_suiveur(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.com_cell_planif_ref_suiveur.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.com_cell_planif_ref_suiveur(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. com_cell_planif_ref_suiveur est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.cell_planif_ref_agent_saisie.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.cell_planif_ref_agent_saisie.errors %}
+                                                  {{form.cell_planif_ref_agent_saisie(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.cell_planif_ref_agent_saisie.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.cell_planif_ref_agent_saisie(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. cell_planif_ref_agent_saisie est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.com_cell_planif_ref_agent_saisie.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.com_cell_planif_ref_agent_saisie.errors %}
+                                                  {{form.com_cell_planif_ref_agent_saisie(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.com_cell_planif_ref_agent_saisie.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.com_cell_planif_ref_agent_saisie(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. com_cell_planif_ref_agent_saisie est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                      <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                          <label class="label" style="text-align: left;"><small>{{form.commentaire_libre.label(class="form-control-label")}}</small></label></div>
+                                          <div class="field-body">
+                                            <div class="field"><!---->
+                                                <div class="control">
+                                                 {% if form.commentaire_libre.errors %}
+                                                  {{form.commentaire_libre(class="input is-invalid") }}
+                                              <div class="invalid-feedback">
+                                                  {% for error in form.commentaire_libre.errors %}
+                                                      <span>{{ error }}</span>
+                                                  {% endfor %}
+                                              </div>
+                                                  {% else %}
+                                                      {{form.commentaire_libre(class="input")}}
+                                                  {% endif %}
+                                                </div>
+                                                  <p class="help"> Requis. commentaire_libre est requis</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      <hr/>
+                                   <div class="field is-horizontal">
+                                    <div class="field-label is-normal"></div>
+                                        <div class="field-body">
+                                          <div class="field">
+                                            <div class="control">
+                                              <button type="submit" class="button is-primary is-small"> Submit </button>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                       
+                                     </div>
+                            </form>
+                        </div>
+                    <!-- </div> -->
+                <!-- </div> -->
+	        <!-- </div> -->
+	    <!-- </div> -->
+	<!-- </div> -->
+    <!-- Pie Chart --> 
+<!-- </div> -->
+
+    <!-- Content Row -->
+</div>
+    <!-- /.container-fluid -->
+{%endblock%}

@@ -1,0 +1,64 @@
+<section class="side-bar tablet-side-bar" id="sideMenu">
+    <div class="side-bar-head">
+        <div class="img-logo" style="padding: 4px">
+            <img src="{{url_for('static', filename='images/logo/logo.png')}}" style="height: 100%; width: 25%;margin-left: 50%; transform: translate(-50%);">
+        </div>
+    </div>
+    <div class="nav-link-section">
+        <nav class="side-menu-nav">
+            <ul class="side-menu">
+                <li class="{% if highlight == 'dashboard' %} active {% endif %}">
+                    <a href="/"><span class="menu_icon"><i class="fas fa-tachometer-alt"></i></span> <span class="menu_text">Tableau de bord</span></a>
+                </li>
+
+                {% if current_user.TYPE == "Admin" %}
+                <li class="{% if highlight == 'prospect' %} active {% endif %}">
+                    <a href="/prospect"><span class="menu_icon"><i class="fas fa-calendar"></i></span> <span class="menu_text">Prospect</span></a>
+                </li>
+                <li class="{% if highlight == 'client' %} active {% endif %} has-submenu" style="position: relative">
+                    <a href="/client"><span class="menu_icon"><i class="fas fa-user-tag"></i></span> <span class="menu_text">Client</span>
+                <ul class="sub-menu">
+                    <li> <a href="{{url_for('users.facturationa')}}" style="color: #000">Factures client générées</a></li>
+                <li> <a href="{{url_for('users.choosev', Type='month')}}" style="color: #000">Facturation client mensuel</a></li>
+                <li> <a href="{{url_for('users.chooseindc')}}" style="color: #000">creer Facture Manuel </a></li>
+            </ul>
+            </a>
+            </li>
+            <li class="{% if highlight == 'expert' %} active {% endif %} has-submenu" style="position: relative;">
+                <a href="/expert"><span class="menu_icon"><i class="fas fa-users"></i></span> <span class="menu_text">Expert</span>
+                <ul class="sub-menu">
+                    <li> <a href="{{url_for('users.agent_cons')}}" style="color: #000">Factures Agent de secteurs</a></li>
+            <li> <a href="{{url_for('users.intervenant')}}" style="color: #000">Factures Agent de constat</a></li>
+            <li> <a href="{{url_for('users.allex')}}" style="color: #000">Factures Expert générées</a></li>
+            <li> <a href="{{url_for('users.chooseef')}}" style="color: #000">Facturation Experts mensuel</a></li>
+            </ul>
+            </a>
+            </li>
+            {% endif %}
+            <li class="{% if highlight == 'mission' %} active {% endif %} has-submenu" style="position: relative;">
+                <a href="/mission"><span class="menu_icon"><i class="fas fa-bullseye"></i></span> <span class="menu_text">Mission</span>
+                    {% if current_user.TYPE == "Admin" %}
+                <ul class="sub-menu">
+                  <li> <a href="{{url_for('users.exportm')}}" style="color: #000">Exports Mission</a></li>
+            </ul> {% endif %}
+            </a>
+            </li>
+            {% if current_user.TYPE == "Admin" %}
+            <li class="{% if highlight == 'tarif_base' %} active {% endif %}">
+                <a href="/tarifs"><span class="menu_icon"><i class="fas fa-money-check"></i></span> <span class="menu_text">Tarifs</span></a>
+            </li>
+            {% endif %} {% if current_user.TYPE != "Admin" %}
+            <li class="{% if highlight == 'mes_factures' %} active {% endif %}">
+                <a href="{{url_for('users.mes_factures',id=current_user.id)}}"><span class="menu_icon"><i class="fas fa-file-invoice"></i></span> <span class="menu_text">Mes Factures</span></a>
+            </li>
+            {% endif %}
+            <!--               
+              <li class="{% if highlight == 'facturation' %} active {% endif %}">
+                <a href="{{url_for('users.menufactures')}}"><span class="menu_icon"><i class="fas fa-wallet"></i></span> <span class="menu_text">Facturation</span></a>
+            </li> -->
+            </ul>
+
+            <p style="position: absolute;bottom: 5px;left: 50%;transform: translate(-50%);">Version: <strong style="color: #fff;">1.0.5</strong></p>
+        </nav>
+    </div>
+</section>

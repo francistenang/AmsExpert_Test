@@ -1,0 +1,252 @@
+{% extends "base.html" %}
+{% block content %}
+{% if legend == "login" %}
+<div class="auth card">
+    <img src="{{url_for('static', filename='images/logo/logo.png')}}" style="height: 90px;
+    position: absolute;left: 50%;transform: translate(-50%); top:5px; z-index: 888;">
+    <div class="row outer-box" style="width: fit-content;">
+        <!-- <div class="col-md-2"></div> -->
+        <div class="login-box">
+            <div class="content-section">
+                {% with messages = get_flashed_messages(with_categories=true)%}
+                {% if messages %}
+                {%for category,message in messages%}
+                <div class="alert alert-{{category}}">
+                    {{message}}
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+                    <fieldset class="form-group">
+                        <legend class="mb-4"><span style="z-index: 999"></span></legend>
+                        <div class="form-group mt-2">
+                            {{form.username.label(class="form-control-label")}}
+
+                            {% if form.username.errors %}
+                            {{form.username(class="form-control is-invalid is-small") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.username.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{form.username(class="input is-small")}}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group mt-2 mb-2">
+                            {{form.password.label(class="form-control-label")}}
+
+                            {% if form.password.errors %}
+                            {{ form.password(class="form-control is-invalid is-small") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{form.password(class="input is-small")}}
+                            {% endif %}
+                        </div>
+                        <div class="form-group"
+                            style="transform: scale(0.86); webkit-transform: scale(0.86); transform-origin: 0 0; webkit-transform-origin: 0 0;">
+                            {{form.recaptcha}}
+                        </div>
+                        {% if form.recaptcha.errors %}
+                        <div class="form-group">
+                            {% for error in form.recaptcha.errors %}
+                            <span style="color: red;">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        <div class="form-check mt-2">
+                            {{form.remember(class="form-check-input")}}
+                            {{form.remember.label(class="form-check-label")}}
+                        </div>
+                        <!-- <div class="form-group">
+                            <small class="text-muted ml-2">
+                                    <a href="" class="motDePassOublie">Mot de passe oublié?</a>
+                            </small>   
+                    </div> -->
+                        <div class="form-group mt-3">
+                            {{form.submit(class="button is-success is-fullwidth is-small")}}
+                        </div>
+
+
+                    </fieldset>
+
+                </form>
+            </div>
+            <div class="">
+                <small class="text-muted bold">
+                    <p class="text-center mb-2">Mot de passe oublié ?<a class="ml-2 text-underlined"
+                            href="{{ url_for('users.forgot_password')}}">Récupérer</a></p>
+                </small>
+            </div>
+        </div>
+        <!-- <div class="col-md-6">           -->
+        <!-- </div> -->
+    </div>
+</div>
+
+
+{% elif legend == "sign_up" %}
+<div class="auth">
+    <img src="{{url_for('static', filename='images/logo/logo.png')}}" style="height: 100px;
+    position: absolute;left: 50%;transform: translate(-50%); top:10px; z-index: 888;">
+    <div class="row outer-register">
+        <div class="col-md-12">
+            <div class="content-section register-box">
+                {% with messages = get_flashed_messages(with_categories=true)%}
+                {% if messages %}
+                {%for category,message in messages%}
+                <div class="alert alert-{{category}}">
+                    {{message}}
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+                    <fieldset class="form-group">
+                        <legend class="mb4">Créer un compte</legend>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{form.username.label(class="form-control-label")}}
+
+                                    {% if form.username.errors %}
+                                    {{form.username(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.username.errors %}
+                                        <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                    {% else %}
+                                    {{form.username(class="form-control form-control-lg")}}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{form.Numero.label(class="form-control-label")}}
+
+                                    {% if form.Numero.errors %}
+                                    {{form.Numero(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.Numero.errors %}
+                                        <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                    {% else %}
+                                    {{form.Numero(class="form-control form-control-lg")}}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{form.email.label(class="form-control-label")}}
+
+                                    {% if form.email.errors %}
+                                    {{ form.email(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.email.errors %}
+                                        <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                    {% else %}
+                                    {{form.email(class="form-control form-control-lg")}}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{form.Titre.label(class="form-control-label")}}
+
+                                    {% if form.Titre.errors %}
+                                    {{ form.Titre(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.Titre.errors %}
+                                        <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                    {% else %}
+                                    {{form.Titre(class="form-control form-control-lg")}}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            {{form.Type_Expert.label(class="form-control-label")}}
+
+                            {% if form.Type_Expert.errors %}
+                            {{ form.Type_Expert(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.Type_Expert.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{form.Type_Expert(class="form-control form-control-lg")}}
+                            {% endif %}
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{form.password.label(class="form-control-label")}}
+
+                                    {% if form.password.errors %}
+                                    {{ form.password(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.password.errors %}
+                                        <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                    {% else %}
+                                    {{form.password(class="form-control form-control-lg")}}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{form.confirm_password.label(class="form-control-label")}}
+
+                                    {% if form.confirm_password.errors %}
+                                    {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.confirm_password.errors %}
+                                        <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                    {% else %}
+                                    {{form.confirm_password(class="form-control form-control-lg")}}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="form-group">
+                        {{form.submit(class="btn btn-submit")}}
+                    </div>
+                </form>
+
+            </div>
+            <div class="pt-3">
+                <small class="text-muted">
+                    <p class="text-center bold">J'ai deja un compte?<a class="ml-2 bold text-underlined"
+                            href="{{ url_for('users.login')}}">Connexion</a></p>
+                </small>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endif  %}
+
+{% endblock  content %}

@@ -1,0 +1,102 @@
+{% extends 'manage/index.html' %}
+{% block manage_content %}
+ <div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Chiffrage</h1>
+        <h3 class="text-gray-800"><i class="far fa-arrow-alt-circle-left" onclick="history.back(-1)"></i></h3>
+    </div>
+    <!-- Content Row -->
+
+    <div class="row">
+        <!-- Area Chart -->
+        <div class="col-xl-6 col-lg-6 mx-auto">
+            <div class="card shadow mb-4">
+	        <div class="card-header py-1 justify-content-between d-flex align-items-center">
+	            <h6 class="m-0 font-weight-bold">Ajouter un Chiffrage</h6>
+                 <a href="/chiffrage" title="ajouter un client" class="button is-black is-small pull-right"><span class="is-warning">tous les chiffrage</span></a>
+	        </div>
+	        <div class="card-body">
+	            <div class="row">
+                    <div class="col-lg-12 mx-auto">
+                        <div class="">
+                            {% with messages = get_flashed_messages(with_categories=true)%}
+                            {% if messages %}
+                            {%for category,message in messages%}
+                            <div class="alert alert-{{category}}">
+                                {{message}}
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                            {% endwith %}
+                            <form class="user" method="POST">
+                                {{ form.hidden_tag() }}
+                                <fieldset class="form-group">
+                                <div class="form-group">
+                                   
+                                        {{form.Mission.label(class="form-control-label")}}
+                    
+                                        {% if form.Mission.errors %}
+                                        {{form.Mission(class="input is-small is-fullwidth is-invalid") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.Mission.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{form.Mission(class="input is-small")}}
+                                    {% endif %}
+                                    
+                                </div>
+                                <div class="form-group">
+                                    
+                                        {{form.Type_expert.label(class="form-control-label")}}
+
+                                    {% if form.Type_expert.errors %}
+                                        {{ form.Type_expert(class="input is-small is-invalid") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.Type_expert.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                            {{form.Type_expert(class="input is-small")}}
+                                        {% endif %}
+                                    
+                                </div>
+                                <div class="form-group">
+                                   
+                                        {{form.Pourcentage_gain.label(class="form-control-label")}}
+
+                                    {% if form.Pourcentage_gain.errors %}
+                                        {{ form.Pourcentage_gain(class="input is-small is-invalid") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.Pourcentage_gain.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                            {{form.Pourcentage_gain(class="input is-small")}}
+                                        {% endif %}
+                                    
+                                </div>
+                                
+                                <div class="form-group">
+                                    {{form.submit(class="button is-small is-fullwidth is-success")}}   
+                                </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+	        </div>
+	    </div>
+	</div>
+    <!-- Pie Chart --> 
+</div>
+
+    <!-- Content Row -->
+</div>
+    <!-- /.container-fluid -->
+{%endblock%}

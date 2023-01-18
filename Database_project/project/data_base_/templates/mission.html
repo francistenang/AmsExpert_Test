@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="wrapper" style="margin-top: calc(0px + 76px);width: 1094px;
+    margin-left: auto;
+    margin-right: auto; ">
+    <div class="row container mx-auto">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <p class="bold" style="margin-top: 12px;font-size: large;text-transform: lowercase; color: #fff; font-family: 'Roboto', sans-serif;">
+                    {{legend}}
+                </p>
+              </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="jumbotron-fluid">
+      {% if legend == "mission" %} 
+        {% if current_user.is_authenticated %}  
+            <h>mission</h>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Reference_BAILLEUR</th>  
+                    <th scope="col">SOCIETE_BAILLEUR</th>  	
+                    <th scope="col">TITRE_BAILLEUR</th>	   
+                    <th scope="col">NOM_BAILLEUR</th>	  
+                    <th scope="col">ADRESSE1_BAILLEUR</th>    
+                    <th scope="col">ADRESSE2_BAILLEUR</th>	   
+                    <th scope="col">CP_BAILLEUR</th>	    
+                    <th scope="col">VILLE_BAILLEUR</th>   
+                    <th scope="col">NRO_FACTURE</th>	 
+                    <th scope="col">ABONNEMENT</th>	  
+                    <th scope="col">TITRE_CONCESS</th>   
+                    <th scope="col">NOM_CONCESS</th>	  
+                    <th scope="col">DATE_REALISE_EDL</th>  	
+                    <th scope="col">PRIX_HT_EDL</th>	  
+                    <th scope="col">TVA_EDL</th>	  
+                    <th scope="col">PRIX_TTC_EDL</th>	  
+                    <th scope="col">TITRE_INTERV</th>	   
+                    <th scope="col">NOM_INTERV</th>	  
+                    <th scope="col">REF_LOCATAIRE</th>	   
+                    <th scope="col">TITRE_LOCATAIRE</th> 	
+                    <th scope="col">NOM_LOCATAIRE</th> 
+                    <th scope="col">ADRESSE1_BIEN</th>  	
+                    <th scope="col">ADRESSE2_BIEN</th>   	
+                    <th scope="col">CP_BIEN</th>	  
+                    <th scope="col">VILLE_BIEN</th> 
+                    <th scope="col">CA_HT_AS</th>  	
+                    <th scope="col">TVA_AS</th>	  
+                    <th scope="col">CA_TTC_AS</th>  	
+                    <th scope="col">CA_HT_AC</th>  	
+                    <th scope="col">CA_TTC_AC</th>	  
+                    <th scope="col">CA_HT_TRUST</th>	  
+                    <th scope="col">TVA_TRUST</th>	  
+                    <th scope="col">Date_chiffrage_regle</th>  
+                    <th scope="col">Prix_ht_chiffrage</th>	  
+                    <th scope="col">POURCENTAGE_suiveur_chiffrage</th>	  
+                    <th scope="col">POURCENTAGE_AS_chiffrage</th>  	
+                    <th scope="col">POURCENTAGE_manager_chiffrage</th>   	
+                    <th scope="col">Nom_manager_chiffrage</th>  	
+                    <th scope="col">POURCENTAGE_agent_chiffrage</th>  	
+                    <th scope="col">Nom_agent_chiffrage</th>   	
+                    <th scope="col">TYPE_EDL</th>  	
+                    <th scope="col">DATE_FACTURE</th>  	
+                    <th scope="col">TITRE_PROPRIO</th>  	
+                    <th scope="col">NOMPROPRIO</th>  	
+                    <th scope="col">DATE_FACT_REGLEE</th>  	
+                    <th scope="col">DATE_COM_REGLEE_AS</th>  	
+                    <th scope="col">MONTANT_COM_REGLEE_AS</th>   	
+                    <th scope="col">DATE_COM_REGLEE_AC</th>  	
+                    <th scope="col">MONTANT_COM_REGLEE_AC</th>  	
+                    <th scope="col">TYPE_LOGEMENT</th>  	
+                    <th scope="col">NBRE_EDL_ABOONEMENT</th>  	
+                    <th scope="col">MAIL_CONTACT_ENVOI_FACT</th>  	
+                    <th scope="col">DATE_saisie_enregistrement</th>  
+                    <th scope="col">CODE_AMEXPERT</th>  	
+                    <th scope="col">COMMENTAIRE_FACTURE</th>  	
+                    <th scope="col">TYPE_PAIEMENT</th>  	
+                    <th scope="col">N_REMISE_DE_CHEQUE</th>  	
+                    <th scope="col">SAISIE_TRAITE_PAR</th>  	
+                    <th scope="col">infos_et_TRAITEMENT</th>  	
+                    <th scope="col">LOGEMENT_MEUBLE</th>  	
+                    <th scope="col">CODE_FACTURATION</th>  	
+                    <th scope="col">TYPE_DE_BIEN</th>  	
+                    <th scope="col">surface_logement1</th>  	
+                    <th scope="col">ETAGE</th>  	
+                    <th scope="col">POINTAGE</th>  	
+                    <th scope="col">DATE_POINTAGE</th>  	
+                    <th scope="col">DEVEL</th>  	
+                    <th scope="col">DATE_EXTRACTION_COMPTABLE</th>  	
+                    <th scope="col">POURCENTAGE_COM_AS_DU_CLIENT</th>  	
+                    <th scope="col">Nom_Respon_Cell_Dev</th>	
+                    <th scope="col">POURCENTAGE_Respon_Cell_Dev</th>  	
+                    <th scope="col">Nom_agent_Cell_Dev</th> 	
+                    <th scope="col">POURCENTAGE_Agent_Cell_Dev</th>  	
+                    <th scope="col">Nom_Agent_CellTech</th> 	
+                    <th scope="col">POURCENTAGE_Agent_Cell_Tech</th>  	
+                    <th scope="col">Nom_Respon_Cell_Tech</th>  	
+                    <th scope="col">POURCENTAGE_Respon_Cell_Tech</th>  	
+                    <th scope="col">Nom_Suiveur_Cell_Tech</th>   
+                    <th scope="col">POURCENTAGE_Suiveur_Cell_Tech</th>	  
+                    <th scope="col">Nom_Respon_Cell_Planif</th> 
+                    <th scope="col">POURCENTAGE_Respon_Cell_Planif</th>   	
+                    <th scope="col">Nom_Suiveur_Cell_Planif</th>  
+                    <th scope="col">POURCENTAGE_Suiveur_Cell_Planif</th>	  
+                    <th scope="col">Nom_Agent_saisie_Cell_Planif</th>  	
+                    <th scope="col">POURCENTAGE_Agent_saisie_CEll_planif</th> 
+                      
+                </tr>
+                </thead>
+                <tbody>
+                    {%for mission_ in Mission.items %}
+                        <tr>
+                            <th scope="row">{{mission_.id}}</th>
+                            <td>{{mission_.Bailleur__data.reference}}</td>  
+                            <td>{{mission_.SOCIETE_BAILLEUR }}</td>  	
+                            <td>{{mission_.TITRE_BAILLEUR}}</td> 	   
+                            <td>{{mission_.NOM_BAILLEUR}}</td> 	  
+                            <td>{{mission_.ADRESSE1_BAILLEUR}}</td>     
+                            <td>{{mission_.ADRESSE2_BAILLEUR}}</td> 	   
+                            <td>{{mission_.CP_BAILLEUR}}</td> 	    
+                            <td>{{mission_.VILLE_BAILLEUR}}</td>    
+                            <td>{{mission_.NRO_FACTURE}}</td> 	 
+                            <td>{{mission_.ABONNEMENT}}</td> 	  
+                            <td>{{mission_.TITRE_CONCESS }}</td>   
+                            <td>{{mission_.NOM_CONCESS}}</td> 	  
+                            <td>{{mission_.DATE_REALISE_EDL }}</td>  	
+                            <td>{{mission_.PRIX_HT_EDL}}</td> 	  
+                            <td>{{mission_.TVA_EDL}}</td> 
+                            <td>{{mission_.PRIX_TTC_EDL}}</td> 	  
+                            <td>{{mission_.TITRE_INTERV}}</td> 	   
+                            <td>{{mission_.NOM_INTERV}}</td> 	  
+                            <td>{{mission_.REF_LOCATAIRE}}</td> 
+                            <td>{{mission_.TITRE_LOCATAIRE}}</td>  	
+                            <td>{{mission_.NOM_LOCATAIRE}}</td>  
+                            <td>{{mission_.ADRESSE1_BIEN}}</td>   	
+                            <td>{{mission_.ADRESSE2_BIEN}}</td>    	
+                            <td>{{mission_.CP_BIEN}}</td> 	  
+                            <td>{{mission_.VILLE_BIEN}}</td>  
+                            <td>{{mission_.CA_HT_AS}}</td>   	
+                            <td>{{mission_.TVA_AS}}</td> 	  
+                            <td>{{mission_.CA_TTC_AS}}</td>   	
+                            <td>{{mission_.CA_HT_AC }}</td>  	
+                            <td>{{mission_.CA_TTC_AC	}}</td>   
+                            <td>{{mission_.CA_HT_TRUST}}</td> 	  
+                            <td>{{mission_.TVA_TRUST}}</td> 	  
+                            <td>{{mission_.Date_chiffrage_regle}}</td>   
+                            <td>{{mission_.Prix_ht_chiffrage}}</td> 	  
+                            <td>{{mission_.POURCENTAGE_suiveur_chiffrage}}</td> 	  
+                            <td>{{mission_.POURCENTAGE_AS_chiffrage}}</td>   	
+                            <td>{{mission_.POURCENTAGE_manager_chiffrage}}</td>    	
+                            <td>{{mission_.Nom_manager_chiffrage}}</td>   	
+                            <td>{{mission_.POURCENTAGE_agent_chiffrage}}</td>   	
+                            <td>{{mission_.Nom_agent_chiffrage}}</td>    	
+                            <td>{{mission_.TYPE_EDL}}</td>   	
+                            <td>{{mission_.DATE_FACTURE}}</td>   	
+                            <td>{{mission_.TITRE_PROPRIO}}</td>   	
+                            <td>{{mission_.NOMPROPRIO}}</td>   	
+                            <td>{{mission_.DATE_FACT_REGLEE}}</td>   	
+                            <td>{{mission_.DATE_COM_REGLEE_AS}}</td>   	
+                            <td>{{mission_.MONTANT_COM_REGLEE_AS }}</td>   	
+                            <td>{{mission_.DATE_COM_REGLEE_AC  }}</td> 	
+                            <td>{{mission_.MONTANT_COM_REGLEE_AC}}</td>   	
+                            <td>{{mission_.TYPE_LOGEMENT }}</td>  	
+                            <td>{{mission_.NBRE_EDL_ABOONEMENT}}</td>   	
+                            <td>{{mission_.MAIL_CONTACT_ENVOI_FACT}}</td>   	
+                            <td>{{mission_.DATE_saisie_enregistrement}}</td>   
+                            <td>{{mission_.CODE_AMEXPERT}}</td>   	
+                            <td>{{mission_.COMMENTAIRE_FACTURE}}</td>   	
+                            <td>{{mission_.TYPE_PAIEMENT}}</td>   	
+                            <td>{{mission_.N_REMISE_DE_CHEQUE}}</td>   	
+                            <td>{{mission_.SAISIE_TRAITE_PAR}}</td>   	
+                            <td>{{mission_.infos_et_TRAITEMENT}}</td>   	
+                            <td>{{mission_.LOGEMENT_MEUBLE }}</td>  	
+                            <td>{{mission_.CODE_FACTURATION}}</td>   	
+                            <td>{{mission_.TYPE_DE_BIEN }}</td>  	
+                            <td>{{mission_.surface_logement1}}</td>   	
+                            <td>{{mission_.ETAGE}}</td>   	
+                            <td>{{mission_.POINTAGE}}</td>   	
+                            <td>{{mission_.DATE_POINTAGE}}</td>   	
+                            <td>{{mission_.DEVEL}}</td>   	
+                            <td>{{mission_.DATE_EXTRACTION_COMPTABLE}}</td>   	
+                            <td>{{mission_.POURCENTAGE_COM_AS_DU_CLIENT}}</td>   	
+                            <td>{{mission_.Nom_Respon_Cell_Dev}}</td> 	
+                            <td>{{mission_.POURCENTAGE_Respon_Cell_Dev}}</td>   	
+                            <td>{{mission_.Nom_agent_Cell_Dev}}</td>  	
+                            <td>{{mission_.POURCENTAGE_Agent_Cell_Dev}}</td>   	
+                            <td>{{mission_.Nom_Agent_CellTech}}</td>  	
+                            <td>{{mission_.POURCENTAGE_Agent_Cell_Tech}}</td>  	
+                            <td>{{mission_.Nom_Respon_Cell_Tech}}</td>   	
+                            <td>{{mission_.POURCENTAGE_Respon_Cell_Tech}}</td>   	
+                            <td>{{mission_.Nom_Suiveur_Cell_Tech}}</td>    
+                            <td>{{mission_.POURCENTAGE_Suiveur_Cell_Tech}}</td> 	  
+                            <td>{{mission_.Nom_Respon_Cell_Planif}}</td>  
+                            <td>{{mission_.POURCENTAGE_Respon_Cell_Planif}}</td>    	
+                            <td>{{mission_.Nom_Suiveur_Cell_Planif}}</td>   
+                            <td>{{mission_.POURCENTAGE_Suiveur_Cell_Planif}}</td> 	  
+                            <td>{{mission_.Nom_Agent_saisie_Cell_Planif}}</td>   	
+                            <td>{{mission_.POURCENTAGE_Agent_saisie_CEll_planif}}</td> 
+                            <td><button type="button" class="btn btn-primary">Modifier</button></td>
+                            <td><a href="{{ url_for('users.delete',id=mission_.id,type1='mission' )}}">
+                                <button type="button" class="btn btn-danger">Supprimer  </button></a></td>
+                        </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        {% endif %}
+        {% endif %}
+    </div>
+
+</div>
+
+{% endblock  content %}

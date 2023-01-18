@@ -1,0 +1,32 @@
+version: '3.6'
+
+services:
+  api:
+    build: .
+    depends_on:
+      - db
+    environment:
+      STAGE: test
+      SQLALCHEMY_DATABASE_URI: postgresql+psycopg2://postgres:1234@localhost/amexpert
+    networks:
+      - default
+    ports:
+      - 5000:5000
+    volumes:
+      - ./:/var/www/amexpert/Database_project/project
+      - ./migrations:/var/www/amexpert/Database_project/project/migrations
+    restart: always
+
+  db:
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: amexpert
+    image: postgres:latest
+    networks:
+      - default
+    ports:
+      - 5433:5433
+    restart: always
+    volumes:
+      - ./postgres-data:/etc/postgresql/12/main/  

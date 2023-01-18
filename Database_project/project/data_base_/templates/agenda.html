@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="wrapper" style="margin-top: calc(0px + 76px);width: 1094px;
+    margin-left: auto;
+    margin-right: auto; ">
+    <div class="row container mx-auto">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <p class="bold" style="margin-top: 12px;font-size: large;text-transform: lowercase; color: #fff; font-family: 'Roboto', sans-serif;">
+                    {{legend}}
+                </p>
+              </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="jumbotron-fluid">
+        {% if legend == "agenda" %} 
+        {% if current_user.is_authenticated %} 
+            <form>
+                <div class="row">
+                    <div class="form-group col-md-9">
+                      <input id="exampleFormControlInput5" type="email" placeholder="que recherchez-vous ?" class="form-control form-control-underlined">
+                    </div>
+                    <div class="form-group col-md-3">
+                      <button type="submit" class="btn btn-black btn-block btn-sm shadow-sm">recherchez</button>
+                    </div>
+                </div>
+            </form>
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col" title="Details_du_rendezvous">dd-rdv</th>
+                        <th scope="col" title="client">c</th>
+                        <th scope="col" title="audit_planner">ap</th>
+                        <th scope="col" title="Agent_referent_du_client">ardc</th> 
+                        <th scope="col" title="Validation_par_agent">vpa</th> 
+                        <th scope="col" title="Lieu">l</th> 
+                        <th scope="col" title="Date_">d</th>  
+                        <th scope="col">Heure</th>  
+                        <th scope="col" title="Suivi_du_rendezvous">sd-rdv</th>  
+                        <th scope="col" title="Confirmation_du_rendezvous">cd-rdv</th>  
+                    </tr>
+                </thead>
+                <tbody>
+                {%for agenda_ in Agenda.items %}
+                    <tr>
+                        <th scope="row">{{agenda_.id}}</th>
+                        <td>{{agenda_.Details_du_rendezvous}}</td>
+                        <td>{{agenda_.Agent_referent_du_client}} </td>
+                        <td>{{agenda_.Validation_par_agent}}</td>
+                        <td>{{agenda_.Lieu}}</td>
+                        <td>{{agenda_.Date_}}</td>
+                        <td>{{agenda_.Heure}}</td>  
+                        <td>{{agenda_.Suivi_du_rendezvous}} </td> 
+                        <td>{{agenda_.Confirmation_du_rendezvous}}</td> 
+                        <td><button type="button" class="btn btn-primary">Modifier</button></td>
+                        <td><button type="button" class="btn btn-danger">Supprimer</button></td>
+                    </tr>
+                {%endfor%}
+                </tbody>
+            </table>
+        {% endif %}
+    {% endif  %}
+    </div>
+</div>
+
+{% endblock  content %}

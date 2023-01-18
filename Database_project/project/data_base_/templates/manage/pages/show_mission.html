@@ -1,0 +1,230 @@
+{% extends 'manage/index.html' %}
+{% block manage_content %}
+	<div style="" class="main-content">
+	    
+	    <div class="display-flex justify-content-space-between" style="margin-top: 20px; margin-bottom: 10px">
+	      <h2 class="title" style="color: #112A46;font-weight: 500; font-size: 1.5rem;">Mission N° {{mission.id}} 
+			{% if mission.Anomalie == True %}
+				Avec Anomalie 
+			{% endif %}
+		   </h2>
+		
+	    </div>
+	    <div class="tile is-ancestor is-vertical">
+	    	<div class="tile is-horizontal is-parent">
+	    		<div class="tile is-child box">
+	    			<h1 class="title is-5">Informations du client</h1>
+	    			<hr/>
+	    			<ul>
+	    				<li><strong>Nom du client:</strong> {{mission.Bailleur__data.nom}}</li>
+	    				<li><strong>Societe:</strong> {{mission.Bailleur__data.societe}}</li>
+	    				<li><strong>N° du concessionnaire:</strong> {{mission.ID_AS}}</li>
+	    				<li><strong>Nom :</strong> {{mission.AS__data.nom}}</li>
+	    				<li><strong>Reference Locataire:</strong> {{mission.Reference_LOCATAIRE}}</li>
+						<li><strong>ID Interv:</strong> {{mission.ID_INTERV}}</li>
+	    				<li><strong>Intervenant</strong> {{mission.INTERV__data.nom}}</li>
+	    			</ul>
+	    		</div>
+	    		<div class="tile is-child box">
+	    			<h1 class="title is-5">Date</h1>
+	    			<hr/>
+	    			<ul>
+	    				<li><strong>Date de la realisation EDL:</strong> 
+	    					{% if mission.DATE_REALISE_EDL == None %}
+	    						{{mission.DATE_REALISE_EDL.strftime('%d/%m/%Y') }}
+	    					{% else %}
+	    						{{mission.DATE_REALISE_EDL.strftime('%d/%m/%Y') }}
+	    					{% endif %}
+	    				</li>
+	    				<li><strong>Date de la creation de la Facture:</strong>
+	    					{% if mission.DATE_FACTURE == None %}
+	    						aucune date
+	    					{% else %}
+	    						{{mission.DATE_FACTURE.strftime('%d/%m/%Y') }}
+	    					{% endif %}	    				
+	    				</li>
+	    				<li><strong>Date de paiement de la Facture:</strong> 
+	    					{% if mission.DATE_FACT_REGLEE == None %}
+	    						aucune date
+	    					{% else %}
+	    						{{mission.DATE_FACT_REGLEE.strftime('%d/%m/%Y') }}
+	    					{% endif %}	 
+	    				<li><strong>Date chiffrage regle :</strong>
+	    					{% if mission.Date_chiffrage_regle == None %}
+	    						aucune date
+	    					{% else %}
+	    						{{mission.Date_chiffrage_regle.strftime('%d/%m/%Y')}} <!--.strftime('%d. %m. %Y')-->
+	    					{% endif %}
+	    				</li>
+	    			</ul>
+	    		</div>
+	    	</div>
+	    	<div class="tile is-parent is-horizontal">
+	    		<div class="tile is-child box">
+	    			<h1 class="title is-5">Prix</h1>
+	    			<hr/>
+	    			<ul>
+	    				<li>
+	    					<strong>Prix HT EDL:</strong>
+	    					{% if mission.PRIX_HT_EDL == None %}
+	    						aucun prix
+	    					{% else %}
+	    						{{mission.PRIX_HT_EDL }}€
+	    					{% endif %}
+	    				</li>
+	    				<li><strong>Code Facturation:</strong> {{mission.CODE_FACTURATION }}</li>
+	    				<li><strong>Type Logement:</strong> {{mission.TYPE_LOGEMENT }}</li>
+	    				<li><strong>Surface Logement:</strong> {{mission.surface_logement1}}m<sup>2</sup></li>
+	    				<li><strong>No Facture:</strong> {{mission.NRO_FACTURE}}</li>
+						<li><strong>Coherance:</strong> 
+							{% if mission.coherent == True %}
+								Coherant
+							{% else %}
+	    						Incoherant
+	    					{% endif %}
+						</li>
+						<li><strong>Anomalie:</strong>
+							{% if mission.Anomalie == True %}
+								{{mission.reason}}
+							{% else %}
+	    						Aucune anomalie
+	    					{% endif %}
+						</li>
+	    			</ul>
+	    		</div>
+	    		<div class="tile is-child box">
+	    			<h1 class="title is-5">POURCENTAGE/100%</h1>
+	    			<hr/>
+	    			<ul>
+	    				<li><strong>POURCENTAGE COM AS DU CLIENT:</strong> {{mission.POURCENTAGE_COM_AS_DU_CLIENT}}</li>
+	    				<li><strong>POURCENTAGE AS chiffrage:</strong>   {{mission.POURCENTAGE_AS_chiffrage}}</li>
+	    				<li><strong>POURCENTAGE_suiveur_chiffrage:</strong> {{mission.POURCENTAGE_suiveur_chiffrage }}</li>
+	    			</ul>
+	    		</div>
+	    	</div>
+	    	<div class="tile is-parent is-horizontal">
+	    		<div class="tile is-child box">
+	    			<h1 class="title is-5">Autres</h1>
+	    			<hr/>
+	    			<ul>
+	    				<li><strong>TVA  AS:</strong>	    				
+	    					{% if mission.TVA_AS == None %}
+	    						aucun prix
+	    					{% else %}
+	    						{{mission.TVA_AS }}€
+	    					{% endif %}
+	    				</li>
+	    				<li><strong>CA HT AS:</strong> 
+	    					{% if mission.CA_HT_AS == None %}
+	    						aucun prix
+	    					{% else %}
+	    						{{mission.CA_HT_AS }}€
+	    					{% endif %}
+	    				</li>
+	    					
+	    				<li><strong>CA TTC AS:</strong> 	    				
+	    					{% if mission.CA_TTC_AS == None %}
+	    						aucun prix
+	    					{% else %}
+	    						{{mission.CA_TTC_AS }}€
+	    					{% endif %}
+	    				</li>
+	    					
+	    				<li><strong>CA HT AC:</strong> 	    				
+	    					{% if mission.CA_HT_AC == None %}
+	    						aucun prix
+	    					{% else %}
+	    						{{mission.CA_HT_AC }}€
+	    					{% endif %}
+	    				</li>
+	    					
+	    				<li><strong>CA HT TRUST:</strong> 	    				
+	    					{% if mission.CA_HT_TRUST == None %}
+	    						aucun prix
+	    					{% else %}
+	    						{{mission.CA_HT_TRUST }}€
+	    					{% endif %}
+	    				</li>
+	    					
+	    				<li><strong>TVA TRUST:</strong> 
+	    					{% if mission.TVA_TRUST == None %}
+	    						aucun prix
+	    					{% else %}
+	    						{{mission.TVA_TRUST }}€
+	    					{% endif %}
+	    				</li>
+	    			</ul>
+	    		</div>
+	    		<div class="tile is-child box">
+	    			<table class="table is-striped">
+								<thead>
+									<tr>
+										<th>Type d'expert</th>
+										<th>N° de l'expert</th>
+										<th>Pourcentage/100%</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>ID Respon Cell Dev</td>
+										<td><strong>{{mission.ID_agent_Cell_Dev}}</strong></td>
+										<td><strong>{{mission.POURCENTAGE_Agent_Cell_Dev}}</strong></td>
+									</tr>
+									<tr>
+										<td>ID agent Cell Dev</td>
+										<td>{{mission.ID_agent_Cell_Dev}}</td>
+										<td>{{mission.POURCENTAGE_Agent_Cell_Dev}}</td>
+									</tr>
+									<tr>
+										<td>ID Agent CellTech</td>
+										<td>{{mission.ID_Agent_CellTech}}</td>
+										<td>{{mission.POURCENTAGE_Agent_Cell_Tech}}</td>
+									</tr>
+									<tr>
+										<td>ID Respon Cell Tech</td>
+										<td>{{mission.ID_Respon_Cell_Tech}}</td>
+										<td>{{mission.POURCENTAGE_Respon_Cell_Tech}}</td>
+									</tr>
+									<tr>
+										<td>ID Suiveur Cell Tech</td>
+										<td>{{mission.ID_Suiveur_Cell_Tech}}</td>
+										<td>{{mission.POURCENTAGE_Respon_Cell_Planif}}</td>
+									</tr>
+									<tr>
+										<td>ID Respon Cell Planif</td>
+										<td>{{mission.ID_Respon_Cell_Planif}}</td>
+										<td>{{mission.POURCENTAGE_Respon_Cell_Planif}}</td>
+									</tr>
+									<tr>
+										<td>ID Suiveur Cell Planif</td>
+										<td>{{mission.ID_Suiveur_Cell_Planif }}</td>
+										<td>{{mission.POURCENTAGE_Suiveur_Cell_Planif}}</td>
+									</tr>
+									<tr>
+										<td>ID manager chiffrage</td>
+										<td>{{mission.ID_manager_chiffrage}}</td>
+										<td>{{mission.POURCENTAGE_manager_chiffrage}}</td>
+									</tr>
+									<tr>
+										<td>ID Agent saisie Cell Planif</td>
+										<td>{{mission.ID_Agent_saisie_Cell_Planif }}</td>
+										<td>{{mission.POURCENTAGE_Agent_saisie_CEll_planif}}</td>
+									</tr>
+									
+									<tr>
+										<td>ID agent chiffrage</td>
+										<td>{{mission.ID_agent_chiffrage }}</td>
+										<td>{{mission.POURCENTAGE_agent_chiffrage}}</td>
+									</tr>
+									
+									<tr>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+	    	</div>
+	    </div>
+    </div>
+</div>
+     
+{%endblock%}

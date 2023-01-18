@@ -1,0 +1,1319 @@
+{% extends 'manage/index.html' %}
+{% block manage_content %}
+ <div style="" class="main-content">
+    
+    <div class="display-flex justify-content-space-between" style="margin-top: 20px;">
+        <h2 class="title" style="color: #112A46;font-weight: 500; font-size: 1.5rem;">Ajouter une Mission</h2>
+        <a href="{{url_for('users.mission')}}" title="Consultez la liste des missions" class="button is-primary is-small"><i class="fas fa-list-ul"></i></a>
+    </div>
+      <div class="table-container" style="">
+        <div class="card" style="box-shadow: none; padding: 0px; border: 1px solid #d4d4cc;">
+            <header class="card-header" style="border-bottom: 1px solid #d4d4cc; box-shadow:none;">
+                <p class="card-header-title"><span class="icon"><i class="fas fa-user"></i></span></p>
+            </header>
+
+            <div class="">
+                {% with messages = get_flashed_messages(with_categories=true)%}
+                {% if messages %}
+                {%for category,message in messages%}
+                <div class="alert alert-{{category}}">
+                    {{message}}
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+                <form method="POST" class="user" style="padding: 5px;">
+                    {{ form.hidden_tag() }}
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.Reference_client.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.Reference_client.errors %}
+                                {{form.Reference_client(class="input is-invalid", placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.Reference_client.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.Reference_client(class="input", placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuiller remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.ID_Concessionaire.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.ID_Concessionaire.errors %}
+                                {{form.ID_Concessionaire(class="input is-invalid", placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.ID_Concessionaire.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.ID_Concessionaire(class="input", placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.ABONNEMENT.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.ABONNEMENT.errors %}
+                                {{form.ABONNEMENT(class="input is-invalid", placeholder="Données Alpla-numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.ABONNEMENT.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.ABONNEMENT(class="input", placeholder="Données Alpha-numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.PRIX_HT_EDL.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.PRIX_HT_EDL.errors %}
+                                {{form.PRIX_HT_EDL(class="input is-invalid", placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.PRIX_HT_EDL.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.PRIX_HT_EDL(class="input", placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.DATE_REALISE_EDL.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.DATE_REALISE_EDL.errors %}
+                                {{form.DATE_REALISE_EDL(class="input is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.DATE_REALISE_EDL.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.DATE_REALISE_EDL(class="input")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez choisir une date</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.ID_INTERV.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.ID_INTERV.errors %}
+                                {{form.ID_INTERV(class="input is-invalid", placeholder="Données numériques") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.ID_INTERV.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.ID_INTERV(class="input",  placeholder="Données numériques")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.Reference_LOCATAIRE.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.Reference_LOCATAIRE.errors %}
+                                {{form.Reference_LOCATAIRE(class="input is-invalid", placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.Reference_LOCATAIRE.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.Reference_LOCATAIRE(class="input", placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.Adresse1_Bien.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.Adresse1_Bien.errors %}
+                                {{form.Adresse1_Bien(class="input is-invalid", placeholder="Données Alpha-numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.Adresse1_Bien.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.Adresse1_Bien(class="input", placeholder="Données Alpha-numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.Adresse2_Bien.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.Adresse2_Bien.errors %}
+                                {{form.Adresse2_Bien(class="input is-invalid", placeholder="Données Alpla-numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.Adresse2_Bien.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.Adresse2_Bien(class="input", placeholder="Données Alpla-numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Non requis</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.CP_Bien.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.CP_Bien.errors %}
+                                {{form.CP_Bien(class="input is-invalid", placeholder="00000") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.CP_Bien.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.CP_Bien(class="input", placeholder="00000")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.Ville_Bien.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.Ville_Bien.errors %}
+                                {{form.Ville_Bien(class="input is-invalid", placeholder="Données Alpla-numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.Ville_Bien.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.Ville_Bien(class="input", placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.TVA_EDL.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.TVA_EDL.errors %}
+                                {{form.TVA_EDL(class="input is-invalid", placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.TVA_EDL.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.TVA_EDL(class="input", placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.PRIX_TTC_EDL.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.PRIX_TTC_EDL.errors %}
+                                {{form.PRIX_TTC_EDL(class="input is-invalid", placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.PRIX_TTC_EDL.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.PRIX_TTC_EDL(class="input", placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.CA_HT_AS.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.CA_HT_AS.errors %}
+                                {{form.CA_HT_AS(class="input is-invalid", placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.CA_HT_AS.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.CA_HT_AS(class="input", placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.TVA_AS.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.TVA_AS.errors %}
+                                {{form.TVA_AS(class="input is-invalid", placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.TVA_AS.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.TVA_AS(class="input", placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ.</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.CA_TTC_AS.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.CA_TTC_AS.errors %}
+                                {{form.CA_TTC_AS(class="input is-invalid", placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.CA_TTC_AS.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.CA_TTC_AS(class="input", placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.CA_HT_AC.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.CA_HT_AC.errors %}
+                                {{form.CA_HT_AC(class="input is-invalid", placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.CA_HT_AC.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.CA_HT_AC(class="input", placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.CA_TTC_AC.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.CA_TTC_AC.errors %}
+                                {{form.CA_TTC_AC(class="input is-invalid",placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.CA_TTC_AC.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.CA_TTC_AC(class="input",placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.CA_HT_TRUST.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.CA_HT_TRUST.errors %}
+                                {{form.CA_HT_TRUST(class="input is-invalid",placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.CA_HT_TRUST.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.CA_HT_TRUST(class="input",placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.TVA_TRUST.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.TVA_TRUST.errors %}
+                                {{form.TVA_TRUST(class="input is-invalid",placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.TVA_TRUST.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.TVA_TRUST(class="input",placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.Prix_ht_chiffrage.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.Prix_ht_chiffrage.errors %}
+                                {{form.Prix_ht_chiffrage(class="input is-invalid",placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.Prix_ht_chiffrage.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.Prix_ht_chiffrage(class="input",placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.Date_chiffrage_regle.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.Date_chiffrage_regle.errors %}
+                                {{form.Date_chiffrage_regle(class="input is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.Date_chiffrage_regle.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.Date_chiffrage_regle(class="input")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.POURCENTAGE_suiveur_chiffrage.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.POURCENTAGE_suiveur_chiffrage.errors %}
+                                {{form.POURCENTAGE_suiveur_chiffrage(class="input is-invalid",placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.POURCENTAGE_suiveur_chiffrage.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.POURCENTAGE_suiveur_chiffrage(class="input",placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.POURCENTAGE_AS_chiffrage.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.POURCENTAGE_AS_chiffrage.errors %}
+                                {{form.POURCENTAGE_AS_chiffrage(class="input is-invalid",placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.POURCENTAGE_AS_chiffrage.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.POURCENTAGE_AS_chiffrage(class="input",placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.POURCENTAGE_manager_chiffrage.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.POURCENTAGE_manager_chiffrage.errors %}
+                                {{form.POURCENTAGE_manager_chiffrage(class="input is-invalid",placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.POURCENTAGE_manager_chiffrage.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.POURCENTAGE_manager_chiffrage(class="input",placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.ID_manager_chiffrage.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.ID_manager_chiffrage.errors %}
+                                {{form.ID_manager_chiffrage(class="input is-invalid",placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.ID_manager_chiffrage.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.ID_manager_chiffrage(class="input",placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.POURCENTAGE_agent_chiffrage.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.POURCENTAGE_agent_chiffrage.errors %}
+                                {{form.POURCENTAGE_agent_chiffrage(class="input is-invalid",placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.POURCENTAGE_agent_chiffrage.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.POURCENTAGE_agent_chiffrage(class="input",placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.ID_agent_chiffrage.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.ID_agent_chiffrage.errors %}
+                                {{form.ID_agent_chiffrage(class="input is-invalid",placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.ID_agent_chiffrage.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.ID_agent_chiffrage(class="input",placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.TYPE_EDL.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.TYPE_EDL.errors %}
+                                {{form.TYPE_EDL(class="input is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.TYPE_EDL.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.TYPE_EDL(class="input")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.TITREPROPRIO.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.TITREPROPRIO.errors %}
+                                {{form.TITREPROPRIO(class="input is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.TITREPROPRIO.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.TITREPROPRIO(class="input")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.NOMPROPRIO.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.NOMPROPRIO.errors %}
+                                {{form.NOMPROPRIO(class="input is-invalid",placeholder="Données Alphabetiques") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.NOMPROPRIO.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.NOMPROPRIO(class="input",placeholder="Données Alphabetiques ")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.CODE_AMEXPERT.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.CODE_AMEXPERT.errors %}
+                                {{form.CODE_AMEXPERT(class="input is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.CODE_AMEXPERT.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.CODE_AMEXPERT(class="input", placeholder="Données Alpla-numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.surface_logement1.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.surface_logement1.errors %}
+                                {{form.surface_logement1(class="input is-invalid", placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.surface_logement1.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.surface_logement1(class="input", placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.Ref_commande.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.Ref_commande.errors %}
+                                {{form.Ref_commande(class="input is-invalid", placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.Ref_commande.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.Ref_commande(class="input", placeholder="Données Alpla-numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.POURCENTAGE_COM_AS_DU_CLIENT.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.POURCENTAGE_COM_AS_DU_CLIENT.errors %}
+                                {{form.POURCENTAGE_COM_AS_DU_CLIENT(class="input is-invalid",placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.POURCENTAGE_COM_AS_DU_CLIENT.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.POURCENTAGE_COM_AS_DU_CLIENT(class="input",placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.ID_Respon_Cell_Dev.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.ID_Respon_Cell_Dev.errors %}
+                                {{form.ID_Respon_Cell_Dev(class="input is-invalid",placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.ID_Respon_Cell_Dev.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.ID_Respon_Cell_Dev(class="input",placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.POURCENTAGE_Respon_Cell_Dev.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.POURCENTAGE_Respon_Cell_Dev.errors %}
+                                {{form.POURCENTAGE_Respon_Cell_Dev(class="input is-invalid",placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.POURCENTAGE_Respon_Cell_Dev.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.POURCENTAGE_Respon_Cell_Dev(class="input",placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.ID_agent_Cell_Dev.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.ID_agent_Cell_Dev.errors %}
+                                {{form.ID_agent_Cell_Dev(class="input is-invalid",placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.ID_agent_Cell_Dev.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.ID_agent_Cell_Dev(class="input",placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.TYPE_LOGEMENT.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.TYPE_LOGEMENT.errors %}
+                                {{form.TYPE_LOGEMENT(class="input is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.TYPE_LOGEMENT.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.TYPE_LOGEMENT(class="input")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.LOGEMENT_MEUBLE.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.LOGEMENT_MEUBLE.errors %}
+                                {{form.LOGEMENT_MEUBLE(class="input is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.LOGEMENT_MEUBLE.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.LOGEMENT_MEUBLE(class="input")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.CODE_FACTURATION.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.CODE_FACTURATION.errors %}
+                                {{form.CODE_FACTURATION(class="input is-invalid", placeholder="Données Alpla-numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.CODE_FACTURATION.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.CODE_FACTURATION(class="input", placeholder="Données Alpla-numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.TYPE_DE_BIEN.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.TYPE_DE_BIEN.errors %}
+                                {{form.TYPE_DE_BIEN(class="input is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.TYPE_DE_BIEN.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.TYPE_DE_BIEN(class="input")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.POURCENTAGE_Agent_Cell_Dev.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.POURCENTAGE_Agent_Cell_Dev.errors %}
+                                {{form.POURCENTAGE_Agent_Cell_Dev(class="input is-invalid",placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.POURCENTAGE_Agent_Cell_Dev.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.POURCENTAGE_Agent_Cell_Dev(class="input",placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.ID_Agent_CellTech.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.ID_Agent_CellTech.errors %}
+                                {{form.ID_Agent_CellTech(class="input is-invalid",placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.ID_Agent_CellTech.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.ID_Agent_CellTech(class="input",placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.POURCENTAGE_Agent_Cell_Tech.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.POURCENTAGE_Agent_Cell_Tech.errors %}
+                                {{form.POURCENTAGE_Agent_Cell_Tech(class="input is-invalid",placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.POURCENTAGE_Agent_Cell_Tech.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.POURCENTAGE_Agent_Cell_Tech(class="input",placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.ID_Respon_Cell_Tech.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.ID_Respon_Cell_Tech.errors %}
+                                {{form.ID_Respon_Cell_Tech(class="input is-invalid",placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.ID_Respon_Cell_Tech.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.ID_Respon_Cell_Tech(class="input",placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.POURCENTAGE_Respon_Cell_Tech.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.POURCENTAGE_Respon_Cell_Tech.errors %}
+                                {{form.POURCENTAGE_Respon_Cell_Tech(class="input is-invalid",placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.POURCENTAGE_Respon_Cell_Tech.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.POURCENTAGE_Respon_Cell_Tech(class="input",placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.ID_Suiveur_Cell_Tech.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.ID_Suiveur_Cell_Tech.errors %}
+                                {{form.ID_Suiveur_Cell_Tech(class="input is-invalid",placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.ID_Suiveur_Cell_Tech.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.ID_Suiveur_Cell_Tech(class="input",placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.POURCENTAGE_Suiveur_Cell_Tech.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.POURCENTAGE_Suiveur_Cell_Tech.errors %}
+                                {{form.POURCENTAGE_Suiveur_Cell_Tech(class="input is-invalid",placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.POURCENTAGE_Suiveur_Cell_Tech.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.POURCENTAGE_Suiveur_Cell_Tech(class="input",placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.ID_Respon_Cell_Planif.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.ID_Respon_Cell_Planif.errors %}
+                                {{form.ID_Respon_Cell_Planif(class="input is-invalid",placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.ID_Respon_Cell_Planif.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.ID_Respon_Cell_Planif(class="input",placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.POURCENTAGE_Respon_Cell_Planif.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.POURCENTAGE_Respon_Cell_Planif.errors %}
+                                {{form.POURCENTAGE_Respon_Cell_Planif(class="input is-invalid",placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.POURCENTAGE_Respon_Cell_Planif.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.POURCENTAGE_Respon_Cell_Planif(class="input",placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.ID_Suiveur_Cell_Planif.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.ID_Suiveur_Cell_Planif.errors %}
+                                {{form.ID_Suiveur_Cell_Planif(class="input is-invalid",placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.ID_Suiveur_Cell_Planif.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.ID_Suiveur_Cell_Planif(class="input",placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.POURCENTAGE_Suiveur_Cell_Planif.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.POURCENTAGE_Suiveur_Cell_Planif.errors %}
+                                {{form.POURCENTAGE_Suiveur_Cell_Planif(class="input is-invalid",placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.POURCENTAGE_Suiveur_Cell_Planif.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.POURCENTAGE_Suiveur_Cell_Planif(class="input",placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.ID_Agent_saisie_Cell_Planif.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.ID_Agent_saisie_Cell_Planif.errors %}
+                                {{form.ID_Agent_saisie_Cell_Planif(class="input is-invalid",placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.ID_Agent_saisie_Cell_Planif.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.ID_Agent_saisie_Cell_Planif(class="input",placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>{{form.POURCENTAGE_Agent_saisie_CEll_planif.label(class="form-control-label")}}</small></label>
+                        </div>
+                        <div class="field-body">
+                          <div class="field"><!---->
+                              <div class="control">
+                               {% if form.POURCENTAGE_Agent_saisie_CEll_planif.errors %}
+                                {{form.POURCENTAGE_Agent_saisie_CEll_planif(class="input is-invalid", placeholder="Données numérique") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.POURCENTAGE_Agent_saisie_CEll_planif.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                                {% else %}
+                                    {{form.POURCENTAGE_Agent_saisie_CEll_planif(class="input", placeholder="Données numérique")}}
+                                {% endif %}
+                              </div>
+                                <p class="help">Veuillez remplir ce champ</p>
+                            </div>
+                          </div>
+                        </div>
+                    <hr/>
+                <div class="field is-horizontal">
+                        <div class="field-label is-normal"></div>
+                        <div class="field-body">
+                          <div class="field">
+                            <div class="control">
+                              <button type="submit" class="button is-primary is-small"> Enregistrer </button>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="field-body">
+                          <div class="field">
+                            <div class="control">
+                                <a onclick="window.history.back()" class="button is-danger is-small">       
+                                Annuler
+                                </a>
+                             
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+	   
+{%endblock%}

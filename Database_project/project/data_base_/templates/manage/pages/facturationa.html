@@ -1,0 +1,233 @@
+{% extends 'manage/index.html' %}
+{% block manage_content %}
+<div style="" class="main-content">
+    
+
+    <div class="display-flex justify-content-space-between" style="margin-top: 50px;">
+        <h2 class="title" style="color: #112A46;font-weight: 500; font-size: 1.5rem;">Toutes les Factures Clients</h2>
+        <!-- <a href="/ajouter/mission" class="button is-primary is-small" title="Ajouter une mission"><i class="fa fa-plus"></i></a> -->
+      </div>
+      <span >Facture(s) Réglée(s): {{reglee}}</span> <br>
+      <span>Facture(s) Non Réglée(s):{{not_}}</span> <br>
+      
+
+      <div class="tile box" style="width: fit-content; margin: 0 auto;
+    justify-content: space-evenly;
+    min-width: 950px;">
+      <!-- <form method="GET" action="{{url_for('users.mission')}}">
+        <div class="columns"> 
+            <div class="column">
+              <div class="field">
+                <div class="select is-small">
+                        <select name="ron" >
+                          <option selected disabled>---Departement(S)---</option>
+                          <option value="r">Departement x</option>
+                          <option value="nr">Departement y</option>
+                          <option value="nr">Departement z</option>
+                        </select>
+                </div>
+              </div>
+          </div>
+          
+        </div>
+      </form> -->
+    
+      <!-- / date -->
+      <form method="GET" action="{{url_for('users.facturationa')}}">
+
+            <div class="columns">
+
+                <!--div class="column">
+                        <div class="field">
+                          <div class="select is-small">
+                                  <select name="ron" >
+                                    <option selected disabled>---Generée/Non GeneréeS)---</option>
+                                    <option value="depx">Facture Genérée</option>
+                                    <option value="depy">Facture Non genérée</option>
+                                  </select>
+                          </div>
+                        </div>
+                    </div-->
+
+          <div class="column">
+              <div class="field">
+                <div class="select is-small">
+                  <select name="ron" >
+                    <option selected disabled>--- Reglée/ Non Reglé(S)---</option>
+                    <option value="r">Facture Reglée</option>
+                    <option value="nr">Facture Non reglée </option>
+                  </select>
+                </div>
+              </div>
+          </div>
+
+          <div class="column">
+                <div class="field">
+                  <div class="select is-small">
+                    <select name="ron" >
+                      <option selected disabled>--- TYPES FACTURES---</option>
+                      <option value="r">Facture à la mission</option>
+                      <option value="nr">Facture en relevé </option>
+                    </select>
+                  </div>
+                </div>
+            </div>
+
+            <div class="column">
+              <div class="field">
+                <div class="control is-small">
+                  <input type="date" name="date" placeholder="dd-mm-yyyy" class="input is-small" >
+                </div>
+                <small> <p style="font-size: x-small;"><em>Date de création</em></p> </small>
+              </div>
+          </div>
+
+          <div class="column">
+              <div class="field">
+
+                    <div class="control is-small">
+                            <input class="input is-small"  name="keyword" value="{{search}}" placeholder="Renseigner un Montant" type="text">
+                          </div>
+                          <small> <p style="font-size: x-small;"><em>Montant</em></p> </small>
+              </div>
+          </div>
+          
+          <div class="column">
+            <div class="buttons are-small">
+                <button class="button is-success">Filtrer</button>
+            </div>
+          </div>
+          
+        </div>
+      </form>
+      
+ 
+ 
+    </div>
+
+     <!--  <div class="tile box" style="width: fit-content; margin: 0 auto;
+      justify-content: space-evenly;
+      min-width: 950px;">
+
+</div> -->
+    
+<!-- 
+    <div class="display-flex justify-content-space-between" style="margin-top: 20px;">
+      <h2 class="title" style="color: #112A46;font-weight: 500; font-size: 1.5rem;">Toutes les Factures Clients</h2>
+     
+    </div> -->
+
+
+
+
+    
+
+
+        <section class="tile" style="margin-top: 10px;">
+
+				<div class="box" style="width:-webkit-fill-available;max-width:-moz-available;width: 100%;">
+			<!-- /*style="width:-webkit-fill-available; width: 100%;"*/> -->
+
+					<div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+							<span><i class="fa fa-users"></i></span>
+							</div>
+					
+	 
+			<div class="tile box" style="width: fit-content; margin: 0 auto; justify-content: space-evenly; min-width: 950px;">
+
+				   <!-- <div class="table-container" style="overflow-x: scroll;position: relative;"> -->
+				 <div class="table-container" style="position: relative;">
+					{% with messages = get_flashed_messages(with_categories=true)%}
+					{% if messages %}
+						{%for category,message in messages%}
+						<div class="alert alert-{{category}} p-1">
+							{{message}}
+						</div>sosu
+						{% endfor %}
+					{% endif %}
+				{% endwith %}
+				<table class="table is-hoverable is-striped is-bordered" id="table_id" style="min-width: 800px;"> 
+							<thead class="">
+							<tr>
+								<th scope="col">id</th>
+								<th scope="col">Client</th>
+								<th scope="col">Sté facturée</th>
+                <th scope="col">N° Facture</th>
+                <th scope="col">Type Facture</th>
+								<th scope="col">Montant € HT</th>
+								<th scope="col">Date de creation</th> 
+								<th scope="col">Etat</th>
+								
+								<th scope="col">Visualiser </th> 
+								<!-- <th></th> -->
+								<th scope="col">Facture réglée</th>
+								<!-- <th></th>  -->
+							</tr>
+							</thead>
+							<tbody>
+								{%for facturation in facturations %}
+									<tr>
+										<th scope="row">{{facturation.id}}</th>
+										<td>{{facturation.client__data_.nom}}</td>
+										<td>{{facturation.client__data_.societe}}</td>
+										<td>{{facturation.n_facture}}</td>
+                    <td>{{facturation.n_facture}}</td>
+                    <td>{{facturation.Montant_HT}}</td>
+										<td>{{facturation.Date_de_creation.strftime('%d. %m. %Y')}}</td> 
+										<td>{% if facturation.valide == True %}
+												Réglée
+											{% else %}
+													Non Réglée
+											{% endif %}
+										</td>
+										<td style="">
+											<a href="{{url_for('users.show_fac', id=facturation.id)}}" title="Voir tous les détails" class="button is-small is-primary is-fullwidth" style="text-align: center"><i class="fa fa-eye"></i></a>
+											
+										</td>
+										<!-- <td>
+											<a href="{{url_for('users.delete_facturation', id=facturation.id)}}" onclick="return confirm('Voulez vous supprimer?')" title="Supprimer" class="center button is-danger	is-small is-fullwidth"><i class="fa fa-trash"></i></a> &nbsp;
+										</td>  -->
+										<td> <a href="{{url_for('users.datereg', id=facturation.id)}}" onclick="return confirm('Voulez vous reglez cette facture ?')" title="Régler facture" class="button is-outlined-black is-small is-fullwidth"><i class="fa fa-calendar" style="text-align: center"></i></a> </td>
+									</tr>
+								   
+								{%endfor%}
+							</tbody>
+						</table>
+			   
+				</div>
+				<!-- Pagination Links-->
+		  
+			</div>
+				
+
+
+			</section>
+    </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var table = $('#table_id').DataTable({
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.11.2/i18n/fr_fr.json'
+            }
+        });
+    
+        $('#table_id tbody').on( 'click', 'tr', function () {
+            if ( $(this).hasClass('selected') ) {
+                $(this).removeClass('selected');
+            }
+            else {
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        } );
+    
+        $('#button').click( function () {
+            table.row('.selected').remove().draw( false );
+        } );
+    } );
+</script>
+
+
+
+{% endblock %}

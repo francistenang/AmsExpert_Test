@@ -1,0 +1,91 @@
+{% extends 'manage/index.html' %}
+{% block manage_content %}
+<div class="main-content">
+    
+    
+    <div class="display-flex justify-content-space-between" style="margin-top: 20px;">
+        {% if legend %}
+        <h2 class="title" style="color: #112A46;font-weight: 500; font-size: 1.25rem;">Facture des {{legend}}</h2>
+        {% else %}
+        <h2 class="title" style="color: #112A46;font-weight: 500; font-size: 1.25rem;">Facture N° {{id}} Mission N° {{miss}}</h2>
+        {% endif %}
+    </div>
+
+    <section class="tile" style="margin-top: 10px;">
+        <div class="box" style="  width: -webkit-fill-available; max-width: -moz-available;width: 100%;">
+          <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <div class="display-flex">
+                <span><i class="fa fa-users"></i></span>                
+            </div>           
+          </div>
+          <div class="table-container" style="position: relative;">
+            {% with messages = get_flashed_messages(with_categories=true)%}
+                {% if messages %}
+                    {%for category,message in messages%}
+                    <div class="alert alert-{{category}} is-small">
+                        {{message}}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <table class="table is-striped" id="table_id" style="overflow-x: scroll;min-width: 800px;">       
+                <thead class="">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Type de revelé</th>
+                        <th scope="col">Type de l'expert</th>
+                        <th scope="col">Nom de l'expert</th>
+                        <th scope="col">Commision</th> 
+                        <th scope="col">Etat de Facture</th>
+                    </tr>
+                </thead>
+                    <tbody>
+                        {%for mission in facture %}
+                            <tr>
+                                <td scope="row">{{mission.id}}</td>
+                                <td>{{mission.type_expert}}</td>
+                                <td>{{mission.releve_data.type_ex}}</td>
+                                <td>{% if mission.expert_data.nom != '0' %} {{mission.expert_data.nom}} {% endif %}</td>
+                                <td>{{mission.commision}}</td>
+                                <td>{% if mission.envoye == false %} <span style="color: red;">Non acquitté</span>{% else %} <span style="color: green;">En control</span>{% endif %}</td>  
+                            </tr>    
+                        {%endfor%}
+
+                    </tbody>
+                </table>
+	            </div>
+            <!-- Pagination Links-->
+            
+            <!-- / fin de la pagination -->
+	        </div>
+        </section>
+	    </div>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var table = $('#table_id').DataTable({
+                    //'scrollX':true,
+                    language: {
+                        url: 'https://cdn.datatables.net/plug-ins/1.11.2/i18n/fr_fr.json'
+                    }
+                });
+            
+                $('#table_id tbody').on( 'click', 'tr', function () {
+                    if ( $(this).hasClass('selected') ) {
+                        $(this).removeClass('selected');
+                    }
+                    else {
+                        table.$('tr.selected').removeClass('selected');
+                        $(this).addClass('selected');
+                    }
+                } );
+            
+                $('#button').click( function () {
+                    table.row('.selected').remove().draw( false );
+                } );
+            } );
+        </script>
+    </style>
+        
+	</style>
+{% endblock %}

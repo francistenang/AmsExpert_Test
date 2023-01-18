@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="wrapper" style="margin-top: calc(0px + 76px);width: 1094px;
+    margin-left: auto;
+    margin-right: auto; ">
+    <div class="row container mx-auto">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <p class="bold" style="margin-top: 12px;font-size: large;text-transform: lowercase; color: #fff; font-family: 'Roboto', sans-serif;">
+                    {{legend}}
+                </p>
+              </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="jumbotron-fluid">
+      {% if legend == "facturation" %} 
+      {% if current_user.is_authenticated %}            
+      <form method="POST">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <div class="row">
+            <div class="form-group col-md-9">
+                <div class="form-group">
+                    {{form.criteria.label(class="form-control-label")}}
+            
+                    {% if form.criteria.errors %}
+                        {{form.criteria(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.username.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{form.criteria(class="form-control form-control-lg")}}
+                    {% endif %}
+                </div>
+            </div> 
+            <div class="col-md-3">
+                <div class="form-group">
+                    {{form.submit(class="btn btn-submit")}}    
+                </div>
+                </div>
+            </div>                
+        </fieldset>
+        </form>
+          <table class="table table-bordered">
+              <thead>
+              <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Facture</th> 
+                  <th scope="col">Date de la mission</th> 
+                  <th scope="col">Country</th>
+                  <th scope="col">Destinataire</th>
+                  <th scope="col">Numero_de_compte</th>
+                  <th scope="col">expéditeur</th>
+                  <th scope="col">Contact</th>
+                  <th scope="col">Montant</th> 
+                  <th scope="col">TVA</th> 
+                  <th scope="col">Total</th> 
+                  <th scope="col">Type</th>
+                  <th scope="col">Proprietaire</th> 
+                  <th scope="col">Locataire</th> 
+                  <th scope="col">Ville</th> 
+                  <th scope="col">Surface</th>
+                  <th scope="col">Tarif</th>
+                  <th scope="col">Appt_Pav</th>
+              </tr>
+              </thead>
+              <tbody>
+              {%for facturation_ in Facturation.items %}
+                  <tr>
+                      <td>{{facturation_.id}}</td>
+                      <td>{{facturation_.Facture_no}}</td>
+                      <td>{{facturation_.Date_}}</td>
+                      <td>{{facturation_.Pays}}</td>
+                      <td>{{facturation_.Destinataire}}</td>
+                      <td>{{facturation_.Numero_de_compte}}</td>
+                      <td>{{facturation_.expéditeur}}</td>
+                      <td>{{facturation_.Contact}}</td>
+                      <td>{{facturation_.Montant}}</td>
+                      <td>{{facturation_.TVA }}</td>
+                      <td>{{facturation_.Total}}</td> 
+                      <td>{{facturation_.Type}}</td> 
+                      <td>{{facturation_.Proprietaire}}</td>
+                      <td>{{facturation_.Locataire}}</td>  
+                      <td>{{facturation_.Ville}}</td>  
+                      <td>{{facturation_.Surface}}</td> 
+                      <td>{{facturation_.Tarif}}</td> 
+                      <td>{{facturation_.Appt_Pav}}</td> 
+                  </tr>
+              {%endfor%}
+              </tbody>
+          </table>
+      {% endif %}
+      {% endif %}
+    </div>
+
+</div>
+
+{% endblock  content %}

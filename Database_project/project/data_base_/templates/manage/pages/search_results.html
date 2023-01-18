@@ -1,0 +1,292 @@
+{% extends 'manage/index.html'%}
+{% block manage_content %}
+ <div style="" class="main-content">
+    {% include 'manage/partials/search.html'%}
+    <div class="display-flex justify-content-space-between" style="margin-top: 20px; margin-bottom: 10px">
+      <h2 class="title" style="color: #112A46;font-weight: 500; font-size: 1.5rem;">{{title}}</h2>
+    </div>
+
+     <section class="tile" style="margin-top: 10px;">
+        <div class="box" style="  width: -webkit-fill-available;">
+          <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <span><i class="fa fa-users"></i></span>
+            <div class="control has-icons-left has-icons-right">
+              
+            </div>
+          </div>
+          <div class="table-container" style="overflow-x: scroll;position: relative;">
+	            	{% if table == 'client' %}
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead class="">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Reference</th>
+                                <th>Siret</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">SOCIETE</th> 
+                                <th scope="col">Nom et prenom</th>
+                                <th scope="col">L'enseigne</th> 
+                                <th scope="col">Email</th>
+                                <th scope="col">Tel</th>
+                                                           
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {%for client_ in clients %}
+                                    <tr>
+                                        <td scope="row">{{client_.id}}</td>
+                                        <td>{{client_.reference}}</td>
+                                        <td>{{client_.siret}}</td>
+                                        <td>{{client_.TYPE}}</td>
+                                        <td>{{client_.societe}}</td>
+                                        <td>{{client_.titre}} {{client_.nom }}</td>
+                                        <td>{{client_.enseigne}}</td>
+                                        <td>{{client_.email }}</td>
+                                        <td>{{client_.numero}}</td> 
+                                        <td>
+                                            <a href="{{url_for('users.edit_client', id=client_.id)}}" title="modifier" class="button is-outlined-black is-small is-fullwidth"><i class="fa fa-pen"></i></a> <!-- &nbsp; -->
+                                            <!-- <a href="/ajoutez/agenda/{{client_.id}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{client_.id}}">créer un agenda</a> -->
+                                        </td>  
+                                        <td> <a href="{{url_for('users.show_client', id=client_.id)}}" title="voir tout les details" class=" is-small is-primary is-fullwidth button"><i class="fa fa-eye"></i></a></td>   
+                                        <td> <a href="{{url_for('users.delete_client', id=client_.id)}}" title="voir tout les details" class=" is-small is-danger is-fullwidth button"><i class="fa fa-trash"></i></a></td>   
+                                    </tr>     
+                                {%endfor%}
+                            </tbody>
+                        </table>
+			        {%endif%}
+                    {% if table == 'prospect' %}
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead class="">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Reference</th>
+                                <th>Siret</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">SOCIETE</th> 
+                                <th scope="col">Nom et prenom</th>
+                                <th scope="col">L'enseigne</th> 
+                                <th scope="col">Email</th>
+                                <th scope="col">Tel</th>
+                                                           
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {%for client_ in prospects %}
+                                    <tr>
+                                        <td scope="row">{{client_.id}}</td>
+                                        <td>{{client_.reference}}</td>
+                                        <td>{{client_.siret}}</td>
+                                        <td>{{client_.TYPE}}</td>
+                                        <td>{{client_.societe}}</td>
+                                        <td>{{client_.titre}} {{client_.nom }}</td>
+                                        <td>{{client_.enseigne}}</td>
+                                        <td>{{client_.email }}</td>
+                                        <td>{{client_.numero}}</td>
+                                        <td>
+                                            <a href="{{url_for('users.edit_prospect', id=client_.id)}}" title="modifier" class="button is-outlined-black is-small is-fullwidth"><i class="fa fa-pen"></i></a> <!-- &nbsp; -->
+                                            <!-- <a href="/ajoutez/agenda/{{client_.id}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{client_.id}}">créer un agenda</a> -->
+                                        </td>  
+                                        <td> <a href="{{url_for('users.show_prospect', id=client_.id)}}" title="voir tout les details" class=" is-small is-primary is-fullwidth button"><i class="fa fa-eye"></i></a></td>   
+                                        <td> <a href="{{url_for('users.delete_prospect', id=client_.id)}}" title="voir tout les details" class=" is-small is-danger is-fullwidth button"><i class="fa fa-trash"></i></a></td>   
+                                    </tr>     
+                                {%endfor%}
+                            </tbody>
+                        </table>
+			        {%endif%}
+			        {% if table == 'tarif'%}
+			        	<table class="table" id="table_id">
+			                <thead>
+			                    <tr>
+			                    <th scope="col">id</th>
+		                        <!-- <th scope="col" title="Details_du_rendezvous">dd-rdv</th> -->
+		                        <th scope="col" title="client">Service offert</th> 
+		                        <th scope="col" title="audit_planner">Type</th>
+		                        <th scope="col" title="Agent_referent_du_client">Prix</th> 
+		                        <th scope="col" title="Validation_par_agent">TVA</th> 
+		                        <th scope="col">Modifier</th>	
+		                        <th>Suprimer</th>			                     
+			                    </tr>
+			                </thead>
+			                <tbody>
+			                {%for tarif in tarifs %}
+			                    <tr>
+                                    <th scope="row">{{tarif.id}}</th>
+                                    <td>{{tarif.reference_client}}</td>
+                                    <td>{{tarif.type_maison}}</td>
+                                    <td>{{tarif.Prix}}</td>
+                                    <td>{{tarif.remise}}</td> 
+                                    <td>
+                                        <a href="{{url_for('users.edit_tarif', id=tarif.id)}}" title="modifier" class="center button is-outlined-black is-small"><i class="fa fa-pen"></i></a> &nbsp;
+                                    </td>   
+                                    <td>
+                                        <a href="{{url_for('users.delete_tarif', id=tarif.id)}}" onclick="return confirm('Voulez vous supprimer?')" title="modifier" class="center button is-danger	 is-small"><i class="fa fa-trash"></i></a> &nbsp;
+                                    </td>    	                        
+			                    </tr>
+			                {%endfor%}
+			                </tbody>
+			            </table>
+			        {% endif %}
+
+			        {% if table == 'expert'%}
+			        	<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th scope="col">id</th> 
+                            <th scope="col">Nom <br/>et prenom</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Email</th>
+                            <th>Email <br/>Perso</th>
+                            <th scope="col">Numero</th>
+                            <th scope="col">Trigramme</th>
+                            <th scope="col">Siret</th>
+                            <th scope="col">Genre</th>
+                            <th>Code TVA</th>
+                            <th>Taux <br/>de TVA</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {%for expert in experts %}
+                                <tr>
+                                    <td scope="row">{{expert.id}}</td>
+                                    <td>{{expert.TITRE}} {{expert.nom}}</td>
+                                    <td>{{expert.TYPE}}</td>
+                                    <td>{{expert.email}}</td>
+                                    <td>{{expert.email_perso}}</td>
+                                    <td>{{expert.numero}}</td>
+                                    <td>{{expert.trigramme}}</td>
+                                    <td>{{expert.siret}}</td>
+                                    <td>{{expert.genre}}</td>
+                                    <td>{{expert.code_tva}}</td>
+                                    <td>{{expert.taux_tva}}</td>
+                                   <td><a href="{{url_for('users.edit_expert', id=expert.id)}}" class="button is-outlined-black is-small is-fullwidth center"><i class="fa fa-pen"></i></a></td>
+                                    <td style="">
+                                        <a href="{{url_for('users.show_expert', id=expert.id)}}" title="voir tout les details" class="button is-small is-primary is-fullwidth" style="text-align: center"><i class="fa fa-eye"></i></a>
+                                        
+                                    </td>
+                                    <!-- <td><a href="#" class="button center is-primary is-small"><i class="fa fa-eye"></i></a></td> -->
+                                    <td> <a href="{{url_for('users.delete_expert', id=expert.id)}}" onclick="return confirm('Voulez vous supprimer?')" title="supprimer" class="center is-small is-danger is-fullwidth button"><i class="fa fa-trash"></i></a></td> 
+                                </tr>
+                            {%endfor%}
+                        </tbody>
+                        </table>
+                    {% endif %}
+                {% if table == 'mission'%}
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Reference BAILLEUR</th>  	 
+                        <th scope="col">ID CONCESS</th>	  
+                        <th scope="col">DATE EDL REALISE</th>  	
+                        <th scope="col">PRIX HT EDL</th>	  	     	
+                        <th scope="col">DATE FACTURE</th>  	  		
+                        <th></th>	
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {%for mission_ in missions %}
+                            <tr>
+                                <td>{{mission_.id}}</td> 
+                                <td>{{mission_.Bailleur__data.reference}}</td>     	   
+                                <td>{{mission_.AS__data.nom}}</td> 	  
+                                <td>
+                                  {% if mission_.DATE_REALISE_EDL != None %}     {{mission_.DATE_REALISE_EDL.strftime('%d. %m. %Y') }}
+                                  {% else %}
+                                  aucune date
+                                  {% endif %}
+                                </td>  	
+                                <td>
+                                  {% if mission_.PRIX_HT_EDL == None %}
+                                    aucune date
+                                  {% else %}
+                                    {{ mission_.PRIX_HT_EDL }}
+                                  {% endif %}               
+                                </td> 	    
+                                <td>
+                                  {% if mission_.DATE_FACTURE == None %}
+                                    aucune date
+                                  {% else %}
+                                    {{ mission_.DATE_FACTURE.strftime('%d. %m. %Y') }}
+                                  {% endif %}                              
+                                </td>   	 	  	  
+                                <td><a href="{{url_for('users.edit_mission', id=mission_.id)}}" class=" is-small is-outlined-black is-fullwidth button"><i class="fa fa-pen"></i></a></td>	 
+                                <td> <a href="{{url_for('users.delete_mission', id=mission_.id)}}" onclick="return confirm('Voulez vous supprimer?')" title="supprimer" class=" is-small is-danger is-fullwidth button"><i class="fa fa-trash"></i></a></td>
+                                <td style="">
+                                    <a href="{{url_for('users.show_mission', id=mission_.id)}}" title="voir tout les details" class="button is-small is-primary is-fullwidth" style="text-align: center"><i class="fa fa-eye"></i></a>
+                                    
+                                </td>   
+                            </tr>
+                        {%endfor%}
+                    </tbody>
+                    </table>
+                {% endif %}
+                {% if table == 'facturation' %}
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">Facture_no</th>
+                            <th scope="col">Date_</th>
+                            <th scope="col">Pays</th> 
+                            <th scope="col">Destinataire</th>
+                            <th scope="col">expéditeur</th> 
+                            <th scope="col">Montant</th>
+                            <th scope="col">TVA</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Type</th> 
+                            <th scope="col">Proprietaire</th> 
+                            <th scope="col">Locataire</th>
+                            <th scope="col">Ville</th> 
+                            <th scope="col">Surface</th>
+                            <th scope="col">Tarif</th>
+                            <th scope="col">Appt_Pav</th>
+                            <th>Modification</th>
+                            <th>Supprimer</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {%for facturation_ in Facturation__ %}
+                            <tr>
+                                    <th scope="row">{{facturation_.id}}</th>
+                                    <td>{{facturation_.Facture_no}}</td>
+                                    <td>{{facturation_.Date_}}</td>
+                                    <td>{{facturation_.Pays}}</td> 
+                                    <td>{{facturation_.Destinataire}}</td>
+                                    <td>{{facturation_.expéditeur}}</td> 
+                                    <td>{{facturation_.Montant}}</td>
+                                    <td>{{facturation_.TVA}}</td>
+                                    <td>{{facturation_.Total}}</td>
+                                    <td>{{facturation_.Type}}</td> 
+                                    <td>{{facturation_.Proprietaire}}</td>
+                                    <td>{{facturation_.Locataire}}</td>
+                                    <td>{{facturation_.Ville}}</td> 
+                                    <td>{{facturation_.Surface}}</td>
+                                    <td>{{facturation_.Tarif}}</td>
+                                    <td>{{facturation_.Appt_Pav}}</td>
+                                    <td>
+                                       <a href="{{url_for('users.edit_facturation', id=facturation_.id)}}" title="modifier" class="center button is-outlined-black is-small"><i class="fa fa-pen"></i></a> 
+                                    </td>   
+                                    <td>
+                                        <a href="{{url_for('users.delete_facturation', id=facturation_.id)}}" onclick="return confirm('Voulez vous supprimer?')" title="modifier" class="center button is-danger	 is-small"><i class="fa fa-trash"></i></a>
+                                    </td>    
+                            </tr>
+                        {%endfor%}
+                    </tbody>
+                    </table>
+                {% endif %}
+	            </div>
+	        </div>
+        </section>
+	</div>
+{%endblock manage_content%}

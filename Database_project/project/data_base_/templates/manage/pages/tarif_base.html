@@ -1,0 +1,114 @@
+{% extends 'manage/index.html'%}
+{% block manage_content %}
+<div style="" class="main-content">
+    <div class="display-flex justify-content-space-between" style="margin-top: 20px;">
+      <h2 class="title" style="color: #112A46;font-weight: 500; font-size: 1.25rem;">Tarifs</h2>
+      <!-- a href="/ajouter/tarifs" title="Ajouter un tarif" class="button is-primary is-small"><i class="fas fa-plus"></i></a-->  
+    </div>
+
+
+    <section class="tile" style="margin-top: 10px;">
+        <div class="box" style="  width: -webkit-fill-available; width: 100%;">
+          <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <span><i class="fas fa-file-invoice"></i></span>
+		  </div>
+		  
+		  <form method="GET" action="{{url_for('users.mission')}}">
+                <div class="columns"> 
+                    <div class="column">
+                      <div class="field">
+
+                            <div class="select is-small" style="padding-left: 500px;">
+                                    <select name="ron" >
+                                      <option selected disabled>---Type(S)---</option>
+                                      <option value="r">Prix_EDL/€</option>
+									  <option value="nr">Pavillon/Appartement</option>
+									  <option value="nr">surface/m<sup>2</sup></option>
+                                    </select>
+                            </div>
+                        </div>
+                  </div>
+                  <div class="column is-one-quarter" style="padding-right: 1000px;">
+                    <div class="are-small">
+                        <button class="button is-small is-success">Filtrer</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+
+
+          <div class="table-container" style="position: relative;">
+            	{% with messages = get_flashed_messages(with_categories=true)%}
+                	{% if messages %}
+                		{%for category,message in messages%}
+		                    <div class="alert alert-{{category}}">
+		                        {{message}}
+		                    </div>
+                		{% endfor %}
+                	{% endif %}
+                {% endwith %}
+                <table class="table is-hoverable is-striped" id="table_id">
+	                <thead>
+	                    <tr>
+	                        <th scope="col">id</th>
+	                        <!-- <th scope="col" title="Details_du_rendezvous">dd-rdv</th> -->
+	                        <th scope="col" >Pavillon/Appartement</th>
+	                        <th scope="col" >Type</th> 
+	                        <th scope="col" >Prix_EDL/€</th> 
+                            <th scope="col" >surface/m<sup>2</sup></th> 
+							<th></th>
+							<!--th></th>	
+							<th></th-->                     
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                {%for tarif in tarifs %}
+	                    <tr>
+	                        <td scope="row">{{tarif.id}}</td>
+	                        <td>{{tarif.pav_appartement}}</td>
+							<td>{{tarif.Type}}</td>
+							<td>{{tarif.Prix_EDL}}</td> 
+                            <td>{{tarif.surface}}</td> 
+							<td>
+                                <a href="{{url_for('users.edit_tarifb', id=tarif.id)}}" title="modifier" class="center button is-outlined-black is-small"><i class="fa fa-pen"></i></a> &nbsp;
+                            </td>   
+                            <!--td>
+                                <a href="{{url_for('users.delete_tarif', id=tarif.id)}}" onclick="return confirm('Voulez vous supprimer?')" title="modifier" class="center button is-danger	 is-small"><i class="fa fa-trash"></i></a> &nbsp;
+							</td>  
+							<td style="">
+                                <a href="{{url_for('users.show_tarif', id=tarif.id)}}" title="voir tout les details" class="button is-small is-primary is-fullwidth" style="text-align: center"><i class="fa fa-eye"></i></a>
+                                
+                            </td-->  	                        
+	                    </tr>
+	                {%endfor%}
+	                </tbody>
+	            </table>
+	            </div>
+	        </div>
+	    </section>
+	    </div>
+		<script type="text/javascript">
+            $(document).ready(function() {
+                var table = $('#table_id').DataTable({
+                	language: {
+                    	url: 'https://cdn.datatables.net/plug-ins/1.11.2/i18n/fr_fr.json'
+                	}
+                });
+            
+                $('#table_id tbody').on( 'click', 'tr', function () {
+                    if ( $(this).hasClass('selected') ) {
+                        $(this).removeClass('selected');
+                    }
+                    else {
+                        table.$('tr.selected').removeClass('selected');
+                        $(this).addClass('selected');
+                    }
+                } );
+            
+                $('#button').click( function () {
+                    table.row('.selected').remove().draw( false );
+                } );
+            } );
+        </script>
+	
+{%endblock manage_content%}

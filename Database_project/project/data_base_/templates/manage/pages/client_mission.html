@@ -1,0 +1,79 @@
+{% extends 'manage/index.html'%}
+{% block manage_content %}
+<div style="" class="main-content">
+    
+    <div class="display-flex justify-content-space-between" style="margin-top: 20px;">
+      <h2 class="title" style="color: #112A46;font-weight: 500; font-size: 1.5rem;">Les missions de {{client.titre}} {{client.nom}}</h2>
+      <a href="{{url_for('users.choose', id=client.id ,Type='client')}}" title="ajouter une facture" class="button is-primary is-small"><span class="is-warning">Ajouter une facturation mensuel</span></a>
+    </div>
+	
+   
+    <section class="tile" style="margin-top: 10px;">
+        <div class="box" style="  width: -webkit-fill-available; width: 100%;">
+          <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <span><i class="fa fa-list"></i></span>
+          </div>
+		     
+          <div class="table-container" style="overflow-x: scroll;position: relative;">
+		  	<form action="{{url_for('users.choosep')}}" method="post" id="form">
+				
+			
+				<table class="table is-striped" id="table_id" style="overflow-x: scroll;min-width: 800px;">
+						<thead class="">
+							<tr>
+								<th></th>
+								<th scope="col">N° Mission</th>
+								<th scope="col">Date de realisation de la mission</th>
+								<th></th>
+								
+							</tr>
+						</thead>
+						
+						<tbody>
+							{%for mission in missions %}
+								<tr>
+									<td><input type="checkbox" value={{mission.id}} class="danger" name='my_checkbox'></td>
+									<td scope="col">{{mission.id}}</td>
+									<td>{{mission.DATE_REALISE_EDL.strftime('%d. %m. %Y')}}</td>
+									<td style="">
+										<a href="{{url_for('users.show_mission', id=mission.id)}}" title="voir tout les details" class="button is-small is-primary is-fullwidth" style="text-align: center"><i class="fa fa-eye"></i></a>
+										
+									</td>
+								
+								</tr>
+							{%endfor%}                             
+						</tbody> 
+								
+					</table>
+				<input type="submit" class="button is-small is-black" value="Facturer vos mission choisis" name="submit">
+			</form>
+	            </div>
+	        </div>
+	    </section>
+	    </div>
+		 <script type="text/javascript">
+            $(document).ready(function() {
+                var table = $('#table_id').DataTable({
+					language: {
+                        url: 'https://cdn.datatables.net/plug-ins/1.11.2/i18n/fr_fr.json'
+                    }
+				});
+            
+                $('#table_id tbody').on( 'click', 'tr', function () {
+                    if ( $(this).hasClass('selected') ) {
+                        $(this).removeClass('selected');
+                    }
+                    else {
+                        table.$('tr.selected').removeClass('selected');
+                        $(this).addClass('selected');
+                    }
+                } );
+            
+                $('#button').click( function () {
+                    table.row('.selected').remove().draw( false );
+                } );
+            } );
+        </script>
+	
+	
+{% endblock %}

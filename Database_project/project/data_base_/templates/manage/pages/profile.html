@@ -1,0 +1,228 @@
+{% extends 'manage/index.html' %}
+{% block manage_content %}
+	<div style="" class="main-content">
+	    
+	    <div class="display-flex justify-content-space-between" style="margin-top: 20px;">
+	        <h2 class="title" style="color: #112A46;font-weight: 700;"> <center><i class='fas fa-user' style='font-size:30px'></i> Profil</center></h2>      
+	    </div>
+
+            <section class="tile" style="margin-top: 30px;">
+                <div class="box" style="  width: -webkit-fill-available;">
+                  <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+                    <span><i class="fa fa-user"></i></span>
+                    <div class="control has-icons-left has-icons-right">
+                      <a onclick="window.history.back()" class="button is-danger is-small">Annuler</a>
+                    </div>
+                  </div>
+                  <div class="tile is-ancestor">
+                    <div class="tile is-parent">
+                          <div class="card tile is-child" style="padding: 0%;">
+                            <header class="card-header"><p class="card-header-title">
+                                <span class="icon"><i class="fas fa-user-circle"></i></span>
+                                <span style="font: small-caption 15px Verdana;">Modifier le profil</span>
+                                </p><!---->
+                            </header>
+                            <div class="card-content">
+                                <form method="POST">
+                                  {{ form.hidden_tag() }}
+                                    <!--<div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                            <label class="label">Avatar</label>
+                                        </div>
+                                        <div class="field-body">
+                                            <div class="field">
+                                                <div class="field file">
+                                                    <label class="upload control">
+                                                        <a class="button is-primary is-small"><span class="icon"><i class="fas fa-upload"></i>
+                                                        </span><span>Choisissez un fichier</span></a>
+                                                        <input type="file">
+                                                    </label>
+                                                </div></div>
+                                            </div></div>
+                                            <hr> -->
+                                        
+
+                                                        <!--Ajout nom-->
+                                                        <div class="field is-horizontal">
+                                                            <div class="field-label is-normal">
+                                                                <label class="label">{{form.nom.label(class="form-control-label")}}</label></div>
+                                                                <div class="field-body"><div class="field"><!---->
+                                                                    <div class="control">
+                                                                      {% if form.nom.errors %}
+                                                                      {{form.nom(class="input is-invalid", value=client.nom) }}
+                                                                      <div class="invalid-feedback">
+                                                                          {% for error in form.nom.errors %}
+                                                                              <span>{{ error }}</span>
+                                                                          {% endfor %}
+                                                                      </div>
+                                                                          {% else %}
+                                                                              {{form.nom(class="input", value=client.nom)}}
+                                                                          {% endif %}</div><p class="help">  Champs obligatoire <!---->
+                                                                        </p>
+                                                                    </div>
+                                                                    </div><!----></div>
+                                                                          <!--Ajout prenom-->
+
+                                                                    <div class="field is-horizontal">
+                                                                        <div class="field-label is-normal">
+                                                                            <label class="label">{{form.prenom.label(class="form-control-label")}}</label></div>
+                                                                            <div class="field-body"><div class="field"><!---->
+                                                                                <div class="control">
+                                                                                  {% if form.prenom.errors %}
+                                                                                  {{form.prenom(class="input is-invalid", value=client.prenom) }}
+                                                                                  <div class="invalid-feedback">
+                                                                                      {% for error in form.prenom.errors %}
+                                                                                          <span>{{ error }}</span>
+                                                                                      {% endfor %}
+                                                                                  </div>
+                                                                                      {% else %}
+                                                                                          {{form.prenom(class="input", value=client.prenom)}}
+                                                                                      {% endif %}</div><p class="help"> Champs obligatoire <!---->
+                                                                                    </p>
+                                                                                </div>
+                                                                                </div><!----></div>
+
+
+
+
+                                                        <div class="field is-horizontal">
+                                                          <div class="field-label is-normal">
+                                                              <label class="label">{{form.login.label(class="form-control-label")}}</label></div>
+                                                              <div class="field-body"><div class="field"><!---->
+                                                                  <div class="control">
+                                                                    {% if form.login.errors %}
+                                                                    {{form.login(class="input is-invalid", value=client.login)}}
+                                                                    <div class="invalid-feedback">
+                                                                        {% for error in form.login.errors %}
+                                                                            <span>{{ error }}</span>
+                                                                        {% endfor %}
+                                                                    </div>
+                                                                        {% else %}
+                                                                            {{form.login(class="input", value=client.login)}}
+                                                                        {% endif %}
+                                                                  </div>
+                                                                  <p class="help"> Champs obligatoire.   <!----></p>
+                                                              </div>
+                                                          </div><!---->
+                                                      </div>
+                                                      <hr>
+                                                        <div class="field is-horizontal">
+                                                            <div class="field-label is-normal">
+                                                                <label class="label">{{form.email.label(class="form-control-label")}}</label></div>
+                                                                <div class="field-body"><div class="field"><!---->
+                                                                    <div class="control">
+                                                                      {% if form.email.errors %}
+                                                                      {{form.email(class="input is-invalid", value=client.email)}}
+                                                                      <div class="invalid-feedback">
+                                                                          {% for error in form.email.errors %}
+                                                                              <span>{{ error }}</span>
+                                                                          {% endfor %}
+                                                                      </div>
+                                                                          {% else %}
+                                                                              {{form.email(class="input", value=client.email)}}
+                                                                          {% endif %}
+                                                                    </div>
+                                                                    <p class="help"> Champs obligatoire.<!----></p>
+                                                                </div>
+                                                            </div><!---->
+                                                        </div>
+                                                        <hr>
+                                                        <div class="field is-horizontal">
+                                                            <div class="field-label is-normal"><!---->
+                                                            </div>
+                                                            <div class="field-body">
+                                                                <div class="field"><!---->
+                                                                    <div class="control">
+                                                                      {{form.submit(class="button is-success is-fullwidth is-small")}}
+                                                                    </div><!---->
+                                                                </div>
+                                                            </div>
+                                                            <!---->
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                    </div>
+                    </div>
+                    <div class="tile is-parent">
+                        <div class="card tile is-child" style="padding: 0px;">
+                            <header class="card-header-title">
+                                <p class="card-header-title">
+                                    <span class="icon"><i class="fa fa-user"></i></span>
+                                    <span style="font: small-caption 15px Verdana;">Profil</span></p>
+                            </header>
+                            <div class="card-header" style="box-shadow: none;">
+                                
+                            </div>
+                                <hr>
+                                <div>
+                                <div class="field"><label class="label" style="font-weight: 100; text-align:center;"><b>Nom et Prénom</b></label>
+                                    <div class="control is-clearfix">
+                                        <p style="font: small-caption 15px Verdana; text-align: center;">{{current_user.nom}}  {{current_user.prenom}}</p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="field"> <label class="label" style="font-weight: 100; text-align:center;"><b>E-mail</b></label>
+                                    <div class="control is-clearfix">
+                                        <p style="font: small-caption 15px Verdana; text-align: center;">{{current_user.email}}</p><!----><!----><!---->
+                                </div><!----></div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="table-container" style="">
+                    <div class="card" style="box-shadow: none; padding: 0px; border: 1px solid #d4d4cc; display: none;">
+                        <header class="card-header" style="border-bottom: 1px solid #d4d4cc; box-shadow:none;"><p class="card-header-title"><span class="icon"><i class="fas fa-lock"></i></span><span>Changer le mot de passe</span></p><!----></header>
+                      <form class="" style="margin-top: 50px; padding: 5px;">
+                        <div class="field is-horizontal">
+                          <div class="field-label is-normal">
+                            <label class="label" style="text-align: left;"><small>Votre mot de passe actuel</small></label></div>
+                            <div class="field-body">
+                              <div class="field"><!---->
+                              <div class="control">
+                                <input type="password" autocomplete="on" name="password_current" required="required" autcomplete="current-password" class="input">
+                                <!----><!----><!----></div>
+                                <p class="help"> Requis. Votre mot de passe actuel 
+                                  <!----></p>
+                                </div>
+                              </div><!---->
+                            </div>
+                            <hr>
+                            <div class="field is-horizontal">
+                              <div class="field-label is-normal">
+                                <label class="label" style="text-align: left;"><small>Nouveau mot de passe</small></label>
+                              </div>
+                              <div class="field-body">
+                                <div class="field"><!---->
+                                  <div class="control">
+                                    <input type="password" autocomplete="new-password" name="password" required="required" class="input">
+                                    <!----><!----><!----></div><p class="help"> Requis. Nouveau mot de passe <!----></p>
+                                  </div>
+                                </div><!---->
+                              </div>
+                              <div class="field is-horizontal">
+                                <div class="field-label is-normal">
+                                  <label class="label" style="text-align: left;"><small>Confirmer le mot de passe</small></label></div>
+                                  <div class="field-body">
+                                    <div class="field"><!---->
+                                      <div class="control">
+                                        <input type="password" autocomplete="new-password" name="password_confirmation" required="required" class="input">
+                                        <!----><!----><!----></div>
+                                        <p class="help"> Requis. Nouveau mot de passe une fois de plus <!----></p>
+                                      </div>
+                                    </div><!---->
+                                  </div><hr>
+                                  <div class="field is-horizontal">
+                                    <div class="field-label is-normal"><!----></div>
+                                        <div class="field-body">
+                                          <div class="field"><!---->
+                                            <div class="control">
+                                              <button type="submit" class="button is-primary is-small"> Modifier </button>
+                                            </div><!---->
+                                          </div>
+                                        </div><!---->
+                      </div></form>
+                    </div>
+                  </div>
+                </div> 
+            </section>
+{%endblock%}

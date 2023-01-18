@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="wrapper" style="margin-top: calc(0px + 76px);width: 1094px;
+    margin-left: auto;
+    margin-right: auto; ">
+    <div class="row container mx-auto">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <p class="bold" style="margin-top: 12px;font-size: large;text-transform: lowercase; color: #fff; font-family: 'Roboto', sans-serif;">
+                    {{legend}}
+                </p>
+              </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="jumbotron-fluid">
+      {% if legend == "client" %} 
+      {% if current_user.is_authenticated %}
+        <form method="POST">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <div class="row">
+            <div class="form-group col-md-6">
+                <div class="form-group">
+                    {{form.criteria.label(class="form-control-label")}}
+            
+                    {% if form.criteria.errors %}
+                        {{form.criteria(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.username.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{form.criteria(class="form-control form-control-lg")}}
+                    {% endif %}
+                </div>
+            </div> 
+            <div class="form-group col-md-3">
+                <div class="form-group">
+                    <select id="options" name="options">
+                        {% for option_ in Option %}
+                            <option value="{{option_}}">{{option_}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    {{form.submit(class="btn btn-submit")}}    
+                </div>
+                </div>
+            </div>                
+        </fieldset>
+        </form>
+
+          <table class="table" style="width:100%">
+              <thead class="thead-dark">
+              <tr>
+                  <th scope="col">id</th>
+                  <th scope="col">Reference</th>
+                  <th scope="col">Type</th>
+                  <!-- <th scope="col">SOCIETE</th> -->
+                  <th scope="col">Genre</th>
+                  <!-- <th scope="col">NOM</th> -->
+                  <th scope="col">EMAIL</th>
+                  <th scope="col">NUMERO</th>
+                  <!-- <th scope="col">ADRESSE2</th> -->
+                  <!-- <th scope="col">CP</th> -->
+                  <!-- <th scope="col">Zone_de_région_du_client</th> -->
+                  <th>Action</th>
+              </tr>
+              </thead>
+              <tbody>
+                  {%for client_ in Client.items %}
+                      <tr>
+                          <th scope="row">{{client_.id}}</th>
+                          <td>{{client_.reference}}</td>
+                          <td>{{client_.TYPE}}</td>
+                          <!-- <td>{{client_.SOCIETE}}</td> -->
+                          <td>{{client_.genre}}</td>
+                          <!-- <td>{{client_.NOM}}</td> -->
+                          <td>{{client_.email}}</td>
+                          <td>{{client_.NUMERO}}</td>
+                          <!-- <td>{{client_.ADRESSE2}}</td> -->
+                          <!-- <td>{{client_.CP}}</td> -->
+                          <!-- <td>{{client_.Zone_de_région_du_client}}</td> -->
+                          <td style="display: flex"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modaledit{{client_.id}}"><i class="fas fa-eye"></i></button><a href="{{ url_for('users.delete',id=client_.id,type1='client' )}}" class="btn btn-danger"><i class="fas fa-trash"></i></a></td>
+                          
+                      </tr>
+                      
+                  {%endfor%}
+                  {% for page_num in Client.iter_pages(left_edge=1,right_edge=1,left_current=1,right_current=2) %}
+                          {% if page_num %}
+                          {% if Client.page == page_num %}
+                          <a class="btn btn-info mb-4" href="{{ url_for('users.client',page=page_num) }}">{{page_num}}</a>
+                          {% else %} 
+                          <a class="btn btn-outline-info mb-4" href="{{ url_for('users.client',page=page_num) }}">{{page_num}}</a>
+                          {% endif %}
+                          {% else %}
+                              ....
+                          {% endif %}
+                  {% endfor %}
+              </tbody>
+          </table>
+      </div>
+{% endif %}
+{% endif %}
+    </div>
+
+</div>
+
+{% endblock  content %}

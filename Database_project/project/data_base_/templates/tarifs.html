@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="wrapper" style="margin-top: calc(0px + 76px);width: 1094px;
+    margin-left: auto;
+    margin-right: auto; ">
+    <div class="row container mx-auto">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <p class="bold" style="margin-top: 12px;font-size: large;text-transform: lowercase; color: #fff; font-family: 'Roboto', sans-serif;">
+                    {{legend}}
+                </p>
+              </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="jumbotron-fluid">
+      {% if legend == "tarifs" %}
+      {% if current_user.is_authenticated %}  
+          <h>tarifs</h>
+          <div class="row">
+              <table class="table table-bordered">
+                  <thead>
+                  <tr>
+                      <th scope="col">id</th>
+                      <th scope="col">Service_offert</th>
+                      <th scope="col">Type</th>
+                      <th scope="col">Prix</th>    
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {%for tarifs_ in Tarifs.items %}
+                      <tr>
+                          <th scope="row">{{tarifs_.id}}</th>
+                          <td>{{tarifs_.Service_offert}}</td>
+                          <td>{{tarifs_.Type}}</td>
+                          <td>{{tarifs_.Prix}}</td>
+                          <td><button type="button" class="btn btn-primary">Modifier</button></td>
+                          <td><button type="button" class="btn btn-danger">Supprimer</button></td>
+                      </tr>
+                  {%endfor%}
+                  </tbody>
+              </table>
+          </div>
+      {% endif %}
+      {% endif %}
+    </div>
+
+</div>
+
+{% endblock  content %}

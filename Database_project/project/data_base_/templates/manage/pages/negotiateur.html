@@ -1,0 +1,76 @@
+
+{% extends 'manage/index.html' %}
+{% block manage_content %}
+<div style="" class="main-content">
+    
+    <div class="display-flex justify-content-space-between" style="margin-top: 20px;">
+      <h2 class="title" style="color: #112A46;font-weight: 500; font-size: 1.5rem;">Négociateur(s) de {{cli.nom}}</h2>
+      <a href="{{url_for('users.ajouter_negotiateur', id=ID)}}" class="button is-primary is-small"><i class="fas fa-user-plus"></i></a>
+    </div>
+
+    <section class="tile" style="margin-top: 10px;">
+        <div class="box" style="  width: -webkit-fill-available;">
+          <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <span><i class="fa fa-users"></i></span>
+           
+          </div>
+          <div class="table-container" style="overflow-x: scroll;position: relative;">
+             {% with messages = get_flashed_messages(with_categories=true)%}
+                {% if messages %}
+                    {%for category,message in messages%}
+                    <div class="alert alert-{{category}} p-1">
+                        {{message}}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <table class="table iis-hoverable is-striped" id="table_id" style="overflow-x: scroll;min-width: 800px;">
+                        <thead class="">
+                        <tr>
+                            <th scope="col">client</th>
+                           
+                            <!-- <th scope="col">SOCIETE</th> -->
+                            <th scope="col">Nom et prenom <br/><small>(Negociateur(s))</small></th>
+                            <!-- <th scope="col">NOM</th> -->
+                            <th scope="col">Email</th>
+                            <th scope="col">Tel</th>
+                            <!--th scope="col">Adresse 1</th-->
+                            <!-- <th scope="col">ADRESSE2</th> -->
+                            <!-- <th scope="col">CP</th> -->
+                            <!--th scope="col">Ville</th-->
+                            <!-- <th scope="col">Zone_de_région_du_client</th> -->
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {%for client_ in Client %}
+                                <tr>
+                                    <td>{{client_.client__nego.nom}}</td>
+                                   
+                                    <!-- <td>{{client_.SOCIETE}}</td> -->
+                                    <td> {{client_.nom | truncate(10, True)}}</td>
+                                    <!-- <td>{{client_.NOM}}</td> -->
+                                    <td>{{client_.email | truncate(10, True)}}</td>
+                                    <td>{{client_.numero}}</td>
+                                    <!--td>{{client_.ADRESSE1|truncate(10, True)}}</td-->
+                                    <!-- <td>{{client_.ADRESSE2}}</td> -->
+                                    <!-- <td>{{client_.CP}}</td> -->
+                                    <!--td>{{client_.VILLE|truncate(5, True)}}</td-->
+                                    <!-- <td>{{client_.Zone_de_région_du_client}}</td> -->
+                                    <td> <a href="{{url_for('users.edit_negotiateur', id=client_.id)}}" title="modifier" class="button is-outlined-black is-small is-fullwidth"><i class="fa fa-pen" style="text-align: center"></i></a> </td>
+                                    <td style="">
+                                        <a href="{{url_for('users.show_negotiateur', id=client_.id)}}" title="voir tous les détails" class="button is-small is-primary is-fullwidth" style="text-align: center"><i class="fa fa-eye"></i></a>
+                                        <!-- <a href="/ajoutez/agenda/{{client_.id}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{client_.id}}">créer un agenda</a> -->
+                                    </td>   
+                                     <td> <a href="{{url_for('users.delete_negotiateur', id=client_.id)}}" onclick="return confirm('Voulez vous supprimer?')" title="Supprimer" class=" is-small is-danger is-fullwidth button"><i class="fa fa-trash"></i></a></td>   
+                                </tr>    
+                            {%endfor%}
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+    </section>
+</div>  
+{% endblock %}

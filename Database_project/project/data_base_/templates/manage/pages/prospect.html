@@ -1,0 +1,233 @@
+{% extends 'manage/index.html' %} {% block manage_content %}
+<div style="" class="main-content">
+
+    <div class="display-flex justify-content-space-between" style="margin-top: 20px;">
+        <h2 class="title" style="color: #112A46;font-weight: 500; font-size: 1.25rem;">Prospect(s)</h2>
+        <a href="/ajouter/prospect" title="Ajouter un propect" class="button is-primary is-small"><i class="fas fa-user-plus"></i></a>
+    </div>
+    <span>Prospect anomalie(s): {{ano}}</span> <br>
+    <span>Professionel(s): {{prospro}}</span> <br>
+    <span>Particulier(s): {{prospart}}</span> <br>
+
+    <div class="tile box" style="width: fit-content; margin: 0 auto;
+    justify-content: space-evenly;
+    min-width: 950px;">
+        <!-- <form method="GET" action="{{url_for('users.mission')}}">
+        <div class="columns"> 
+            <div class="column">
+              <div class="field">
+                <div class="select is-small">
+                        <select name="ron" >
+                          <option selected disabled>---Departement(S)---</option>
+                          <option value="r">Departement x</option>
+                          <option value="nr">Departement y</option>
+                          <option value="nr">Departement z</option>
+                        </select>
+                </div>
+              </div>
+          </div>
+          
+        </div>
+      </form> -->
+
+        <!-- / date -->
+        <form method="GET" action="{{url_for('users.prospect_')}}">
+
+            <div class="columns">
+
+                <!--div class="column">
+                        <div class="field">
+                          <div class="select is-small">
+                                  <select name="ron" >
+                                    <option selected disabled>---Departement(S)---</option>
+                                    <option value="depx">Departement x</option>
+                                    <option value="depy">Departement y</option>
+                                    <option value="depz">Departement z</option>
+                                  </select>
+                          </div>
+                        </div>
+                    </div-->
+
+                <div class="column">
+                    <div class="field">
+                        <div class="select is-small">
+                            <select name="ron">
+                    <option selected disabled>---Etat Prospect(s)---</option>
+                    <option value="r">Actif</option>
+                    <option value="nr">Inactif</option>
+                  </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="field">
+                        <div class="select is-small">
+                            <select name="vis">
+                  <option selected disabled>---Visibilite Prospect(s)---</option>
+                  <option value="r">Actif</option>
+                  <option value="nr">Supprimer</option>
+                </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="field">
+                        <div class="control is-small">
+                            <input type="date" name="date" placeholder="dd-mm-yyyy" class="input is-small">
+                        </div>
+                        <small> <p style="font-size: x-small;"><em>Date de création</em></p> </small>
+                    </div>
+                </div>
+
+                <!--div class="column">
+              <div class="field">
+                  <div class="select is-small">
+                        <select name="ron" >
+                          <option selected disabled>---Statut prospect(S)---</option>
+                          <option value="chaud"> prospect Chaud</option>
+                          <option value="tiede"> prospect Tiède</option>
+                          <option value="froid"> prospect Froid</option>
+                        </select>
+                  </div>
+              </div>
+          </div-->
+
+                <div class="column">
+                    <div class="buttons are-small">
+                        <button class="button is-success">Filtrer</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+
+    </div>
+    <section class="tile" style="margin-top: 10px;">
+
+
+        <div class="box" style="  width: -webkit-fill-available;max-width: -moz-available;width: 100%;">
+
+            <div class="tile box" style=" margin: 0 auto;
+    justify-content: space-evenly;">
+
+                <div class="table-container" style="position: relative;">
+                    {% with messages = get_flashed_messages(with_categories=true)%} {% if messages %} {%for category,message in messages%}
+                    <div class="alert alert-{{category}} p-1">
+                        {{message}}
+                    </div>sosu {% endfor %} {% endif %} {% endwith %}
+                    <table class="table is-hoverable is-striped is-bordered" id="table_id" style="min-width: 800px;">
+                        <thead class="">
+                            <tr>
+
+                                <!-- <th>Reference</th> -->
+                                <!-- <th>Siret</th> -->
+                                <th>Titre</th>
+                                <th>Nom</th>
+                                <th>Prenom</th>
+                                <!-- <th>L'enseigne</th> -->
+                                <th>Societé</th>
+                                <th>Siret</th>
+                                <!--th>Email</th-->
+                                <th>Téléphone</th>
+                                <th>Adresse</th>
+                                <th>Code <br/>Postal</th>
+                                <th>Ville</th>
+                                <th>Anomalie</th>
+                                <!-- <th>Pays</th> -->
+
+                                <!-- <th>Etats Client</th> -->
+                                <!-- <th>Date creation</th> -->
+                                <!-- <th>Login<br/>extranet</th> -->
+                                <!-- <th>Mdp <br/>extranet</th>  -->
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {%for client_,history in Client %}
+                            <tr>
+
+                                {#
+                                <td>{{client_.reference}}</td>#} {#
+                                <td>{{client_.siret}}</td>#}
+                                <td>{{client_.titre}} </td>
+                                <td>{{client_.nom }}</td>
+                                <td>{{client_.prenom}}</td>
+                                {#
+                                <td>{{client_.enseigne}}</td>#}
+                                <td>{{client_.societe}}</td>
+                                <td>{% if (client_.siret == 0) %} {% else %} {{client_.siret}} {% endif %}</td>
+                                <!--td>{{client_.email }}</td-->
+                                <td>{% if (client_.numero == '0') %} {% else %} {{client_.numero}} {% endif %}</td>
+                                <td>{{history.adresse1}}</td>
+                                <td>{{history.cp}}</td>
+
+                                <td>{{history.ville}}</td>
+                                <td>{{client_.reason}}</td>
+                                {#
+                                <td>{{history.pays}}</td>#} {#
+
+                                <td>{{history.etat_client}}</td>#} {#
+                                <td>{% if (client_.date_creation == None) %} {% else %} {{client_.date_creation.strftime('%d/%m/%Y')}} {% endif %}</td>#} {#
+                                <td>{{history.login_extranet}}</td> #} {#
+                                <td>{{history.mdp_extranet}}</td> #}
+                                <td> <a href="{{url_for('users.edit_prospect', id=client_.id)}}" title=" modifier les informations" class="button is-outlined-black is-small is-fullwidth"><i class="fa fa-pen" style="text-align: center"></i></a> </td>
+                                <td style="">
+                                    <a href="{{url_for('users.show_prospect', id=client_.id)}}" title="voir tous les details" class="button is-small is-primary is-fullwidth" style="text-align: center"><i class="fa fa-eye"></i></a>
+                                </td>
+                                <td> <a href="{{url_for('users.delete_prospect', id=client_.id)}}" onclick="return confirm('Voulez vous supprimer?')" title="Supprimez" class=" is-small is-danger is-fullwidth button"><i class="fa fa-trash"></i></a></td>
+                            </tr>
+                            {%endfor%}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Pagination Links-->
+
+            </div>
+    </section>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var table = $('#table_id').DataTable({
+                //'scrollY': '500px',
+                //'scrollX': true, 
+                //'scrollCollapse': true,
+                'paging': true,
+                language: {
+                    url: 'https://cdn.datatables.net/plug-ins/1.11.2/i18n/fr_fr.json'
+                },
+                fixedColumns: {
+                    left: 1,
+                    right: 1
+                }
+            });
+
+            $('#table_id tbody').on('click', 'tr', function() {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                } else {
+                    table.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+            });
+
+            $('#button').click(function() {
+                table.row('.selected').remove().draw(false);
+            });
+        });
+    </script>
+
+    <style>
+        /*th, td { white-space: nowrap; }
+    div.dataTables_wrapper {
+        width: 800px;
+        margin: 0 auto;
+    }*/
+    </style>
+
+    {% endblock %}

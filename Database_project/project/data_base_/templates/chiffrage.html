@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="wrapper" style="margin-top: calc(0px + 76px);width: 1094px;
+    margin-left: auto;
+    margin-right: auto; ">
+    <div class="row container mx-auto">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <p class="bold" style="margin-top: 12px;font-size: large;text-transform: lowercase; color: #fff; font-family: 'Roboto', sans-serif;">
+                    {{legend}}
+                </p>
+              </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="jumbotron-fluid">
+      {% if legend == "chiffrage" %} 
+      {% if current_user.is_authenticated %} 
+          <form>
+              <div class="row">
+                  <div class="form-group col-md-9">
+                    <input id="exampleFormControlInput5" type="email" placeholder="que recherchez-vous ?" class="form-control form-control-underlined">
+                  </div>
+                  <div class="form-group col-md-3">
+                    <button type="submit" class="btn btn-black btn-block btn-sm shadow-sm">recherchez</button>
+                  </div>
+              </div>
+          </form>
+
+          <table class="table">
+              <thead class="thead-dark">
+                  <tr>
+                      <th scope="col">identifiant</th>
+                      <th scope="col">mission</th>
+                      <th scope="col">type d'expert</th>
+                      <th scope="col">gain(%)</th>
+                      <th></th>
+                  </tr>
+              </thead>
+
+              <tbody>
+                  {%for chiffrage_ in Chiffrage.items %}
+                      <tr>
+                          <td scope="col">{{chiffrage_.id}}</td>
+                          <td>{{chiffrage_.Mission}}</td>
+                          <td>{{chiffrage_.Type_expert}}</td>
+                          <td>{{chiffrage_.Pourcentage_gain}}</td>
+                          <td><a href="{{ url_for('users.agenda')}}" class="g-btn g-btn--white has-border u-small">tout afficher</a></td>
+                      </tr>
+                  {%endfor%}                               
+              </tbody>
+          </table>
+                  </div>
+              </div>
+      {% endif %}
+      {% endif %}
+    </div>
+
+</div>
+
+{% endblock  content %}

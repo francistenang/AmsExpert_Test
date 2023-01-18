@@ -1,0 +1,89 @@
+{% extends 'manage/index.html'%}
+{% block manage_content %}
+ <div style="" class="main-content">
+    <div class="display-flex justify-content-space-between" style="margin-top: 20px; margin-bottom: 10px">
+      <h2 class="title" style="color: #112A46;font-weight: 500; font-size: 1.25rem;">Tarifs</h2>
+    </div>
+ 	<section class="tile" style="margin-top: 10px;">
+        <div class="box" style="  width: -webkit-fill-available; width: 100%;">
+          <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <span><i class="fas fa-file-invoice"></i></span>
+            
+          </div>
+          <div class="table-container" style="overflow-x: scroll;position: relative;">
+          	{% with messages = get_flashed_messages(with_categories=true)%}
+                {% if messages %}
+                    {%for category,message in messages%}
+                    <div class="alert alert-{{category}}">
+                        {{message}}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <table class="table is-striped" id="table_id" style="overflow-x: scroll;min-width: 800px;">
+                <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <!-- <th scope="col" title="Details_du_rendezvous">dd-rdv</th> -->
+                        <th scope="col" title="client">client</th> 
+                        <th scope="col" title="audit_planner">Edl Prix Studio/€</th>
+                        <th scope="col" title="Agent_referent_du_client">Edl Appt prix F1/€</th> 
+                        <th scope="col" title="Validation_par_agent">Edl Appt prix F2/€</th> 
+						<th></th>
+						<th></th>	
+						<th></th>                     
+                    </tr>
+                </thead>
+                <tbody>
+                {%for tarif in tarifs %}
+                    <tr>
+                        <th scope="row">{{tarif.id}}</th>
+                        <td>{{tarif.data_client.reference}}</td>
+                        <td>{{tarif.edl_prix_std}}</td>
+						<td>{{tarif.edl_appt_prix_f1}}</td>
+						<td>{{tarif.edl_appt_prix_f2}}</td> 
+                        {% if tarif.id %}
+                            <td>
+                                <a href="{{url_for('users.edit_tarif', id=tarif.id)}}" title="modifier" class="center button is-outlined-black is-small"><i class="fa fa-pen"></i></a> &nbsp;
+                            </td>   
+                            <td>
+                                <a href="{{url_for('users.delete_tarif', id=tarif.id)}}" onclick="return confirm('Voulez vous supprimer?')" title="modifier" class="center button is-danger	 is-small"><i class="fa fa-trash"></i></a> &nbsp;
+                            </td>  
+                            <td style="">
+                                <a href="{{url_for('users.show_tarif', id=tarif.id)}}" title="voir tout les details" class="button is-small is-primary is-fullwidt" style="text-align: center"><i class="fa fa-eye"></i></a>
+                                
+                            </td> 
+                        {%endif%} 	                        
+                    </tr>
+                {%endfor%}
+                </tbody>
+		            </table>
+	            </div>
+	        </div>
+	    </section>
+	</div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var table = $('#table_id').DataTable({
+                language: {
+                    url: 'https://cdn.datatables.net/plug-ins/1.11.2/i18n/fr_fr.json'
+                }
+            });
+        
+            $('#table_id tbody').on( 'click', 'tr', function () {
+                if ( $(this).hasClass('selected') ) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    table.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+            } );
+        
+            $('#button').click( function () {
+                table.row('.selected').remove().draw( false );
+            } );
+        } );
+    </script>
+
+{%endblock manage_content%}

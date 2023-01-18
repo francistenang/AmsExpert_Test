@@ -1,0 +1,111 @@
+{% extends 'manage/index.html' %}
+{% block manage_content %}
+<div style="" class="main-content">
+    
+    <div class="display-flex justify-content-space-between" style="margin-top: 20px;">
+        <h2 class="title" style="color: #112A46;font-weight: 500; font-size: 1.5rem;">Modifier cette Mission</h2>
+        <a href="{{url_for('users.mission')}}" title="Consultez la liste des missions" class="button is-primary is-small"><i class="fas fa-list-ul"></i></a>
+    </div>
+      <div class="table-container" style="">
+        <div class="card" style="box-shadow: none; padding: 0px; border: 1px solid #d4d4cc;">
+            <header class="card-header" style="border-bottom: 1px solid #d4d4cc; box-shadow:none;">
+                <p class="card-header-title"><span class="icon"><i class="fas fa-user"></i></span></p>
+            </header>
+                        <div class="">
+                            {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                            {%for category,message in messages%}
+                            <div class="alert alert-{{category}}">
+                                {{message}}
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                            {% endwith %}
+                            <form method="POST" class="user"  style="padding: 5px">
+                                {{ form.hidden_tag() }}
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.TYPE_LOGEMENT.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.TYPE_LOGEMENT.errors %}
+                                            {{form.TYPE_LOGEMENT(class="input is-invalid", value=mission.TYPE_LOGEMENT) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.TYPE_LOGEMENT.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                                {{form.TYPE_LOGEMENT(class="input", value=mission.TYPE_LOGEMENT)}}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Requis.</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label" style="text-align: left;"><small>{{form.CODE_FACTURATION.label(class="form-control-label")}}</small></label>
+                                    </div>
+                                    <div class="field-body">
+                                      <div class="field"><!---->
+                                          <div class="control">
+                                           {% if form.CODE_FACTURATION.errors %}
+                                            {{form.CODE_FACTURATION(class="input is-invalid", value=mission.CODE_FACTURATION) }}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.CODE_FACTURATION.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                            {% else %}
+                                                {{form.CODE_FACTURATION(class="input", value=mission.CODE_FACTURATION)}}
+                                            {% endif %}
+                                          </div>
+                                            <p class="help">Requis.</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                <hr/>
+                                
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal"></div>
+                                    <div class="field-body">
+                                      <div class="field">
+                                        <div class="control">
+                                          {{form.modifier(class="button is-primary is-small")}}   
+                                        </div>
+                                      </div>
+                                    </div>
+
+
+                                         <div class="field-body">
+                                          <div class="field">
+                                            <div class="control">
+                                                <a onclick="window.history.back()" class="button is-danger is-small">       
+                                                Annuler
+                                                </a>
+                                             
+                                            </div>
+                                          </div>
+                                        </div>
+                                </div>
+
+
+                            
+                            </form>
+                        </div>
+                    </div>
+                </div>
+	        </div>
+	    </div>
+	</div>
+    <!-- Pie Chart --> 
+</div>
+
+    <!-- Content Row -->
+</div>
+    <!-- /.container-fluid -->
+{%endblock%}

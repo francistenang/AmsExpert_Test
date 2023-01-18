@@ -1,0 +1,24 @@
+{% if current_user.TYPE == "Admin" %}
+<div id="search-area">
+  <div class="form-container">
+    <form class="searh-contianer" method="GET" action="/search">
+        <div class="w- h-42">
+          <div class="select h-42 is-small is-fullwidth">
+            <select name="table" class="not h-42 border-rounded">
+              <option value="client">Client</option>
+              <option value="expert">Expert</option>
+              <option value="prospect">Prospect</option>
+              <!--option value="mission">Mission</option--> 
+            </select>
+          </div>
+        </div>
+      <div class="w- h-42">
+          <input type="text" name="keyword" required class="w-100 h-42 input is-small border-rounded" placeholder="mot clé" style="border: 1px solid #ccc;background: #fff;" />
+      </div>
+      <div class="w- h-42">
+          <input type="submit" class="h-42 button is-small is-primary border-rounded" value="RECHERCHER"/>
+      </div>
+    </form>
+  </div>
+</div>
+{% endif %}

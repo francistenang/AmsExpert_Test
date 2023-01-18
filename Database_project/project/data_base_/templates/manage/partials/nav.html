@@ -1,0 +1,96 @@
+{% if current_user.is_authenticated %}
+    <nav class="navbar navbar-expand navbar-light bg-dark topbar mb-4 static-top shadow">
+            <!-- Sidebar Toggle (Topbar) -->
+            <button onclick="window.history.back()" class="btn btn-link d-md-none rounded-circle mr-3">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+
+            <!-- Topbar Search -->
+            <form method="GET" action="{{url_for('users.search')}}" class="d-none d-sm-inline-block form-inline navbar-search" style="width: 550px;">
+                <div class='row'>
+                <div class="form-group col-4">
+                    <select placeholder="" class="form-control bg-light border-0 small" name="table" style="width: 100%;">
+                        <option selected disabled>-- table --</option>
+                        <option value="client" {% if table=="client"%} selected {%endif%}>client</option><!--condition statements are needed to differ between users logged in-->
+                        <option value="expert" {% if table=="expert"%} selected {%endif%}>expert</option>
+                        <option value="mission">mission</option>
+                        <option value="facturation">facturation</option>
+                        <option value="tarif" {% if table=="tarif"%} selected {%endif%}>tarif</option>
+                    </select>
+                </div>
+                <div class="input-group col-8">
+                    <input type="text" class="form-control bg-light border-0 small" name="keyword" placeholder="Rechercher..."
+                        aria-label="Search" aria-describedby="basic-addon2" value="{{search}}">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="sudmit" style="background: #e09929!important; border: 1px solid #e09929!important;">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            </form>
+
+            <!-- Topbar Navbar -->
+            <ul class="navbar-nav ml-auto">
+
+                <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                <li class="nav-item dropdown no-arrow d-sm-none">
+                    <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-search fa-fw"></i>
+                    </a>
+                    <!-- Dropdown - Messages -->
+                    <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                        aria-labelledby="searchDropdown">
+                        <form class="form-inline mr-auto w-100 navbar-search">
+                            <div class="input-group">
+                                <input type="text" class="form-control bg-light border-0 small"
+                                    placeholder="Search for..." aria-label="Search"
+                                    aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+
+                <!-- Nav Item - User Information -->
+                <li class="nav-item dropdown no-arrow">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="mr-2 d-lg-inline text-gray-600 small text-white">ADMIN</span>
+                        <!-- <img class="img-profile rounded-circle" -->
+                            <!-- src="img/undraw_profile.svg"> -->
+                    </a>
+                    <!-- Dropdown - User Information -->
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                        aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Profile
+                        </a>
+                        {% if current_user.TYPE == 'Admin' %}
+                            <!-- a class="dropdown-item" href="{{url_for('users.up')}}">
+                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Import
+                            </a-->
+                        {% endif  %}
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Settings
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Logout
+                        </a>
+                    </div>
+                </li>
+
+            </ul>
+
+        </nav>
+{% endif %}

@@ -1,0 +1,102 @@
+{% extends 'manage/index.html' %}
+{% block manage_content %}
+<div style="" class="main-content">
+    <div class="display-flex justify-content-space-between" style="margin-top: 20px; margin-bottom: 10px">
+      <h2 class="title" style="color: #112A46;font-weight: 500; font-size: 1.5rem;">Suivi de  {{cli.nom}}</h2>
+       {% if legend == "prospect" %}
+            <a href="{{url_for('users.ajouter_suivip', id=ID)}}" title="ajouter un suivi client" class="button is-small is-primary pull-right"><span class="is-warning"><i class="fa fa-user-plus"></i></span></a>
+        {% elif legend == "client" %}
+             <a href="{{url_for('users.ajouter_suivic', id=ID)}}" title="ajouter un suivi client" class="button is-small is-primary pull-right"><span class="is-warning"><i class="fa fa-plus"></i></span></a>
+        {% endif %}
+    </div>
+    <section class="tile" style="margin-top: 10px;">
+        <div class="box" style="  width: -webkit-fill-available; width: 100%;">
+          <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <span><i class="fas fa-file-invoice"></i></span>
+          </div>
+          <div class="table-container" style="overflow-x: scroll;position: relative;">
+                      {% with messages = get_flashed_messages(with_categories=true)%}
+                            {% if messages %}
+                            {%for category,message in messages%}
+                            <div class="alert alert-{{category}} is-small">
+                                {{message}}
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                            {% endwith %}
+	                <table class="table table-bordered" id="table_id" style="width:100%">
+                        <thead class="">
+                        <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">client</th>
+                            <th scope="col">responsable</th>
+                            <th scope="col">commentaire(s)</th>
+                            <th scope="col">date(s) cree(s)</th>
+                            <th scope="col">date(s) Modifiee(s)</th>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {%for  suivi in Suivi %}
+                                <tr>
+                                    <th scope="row">{{suivi.id}}</th>
+                                    <td>{{suivi.suivi__data.nom}}</td>
+                                    <td>{{suivi.responsable__data.nom}}</td>
+                                    <td>{{suivi.commentaire}}</td>
+                                    <td>{{suivi.date_creation.strftime('%d. %m. %Y')}}</td>
+                                    <td> {% if (suivi.date_creation != None) %}          
+                                            {{ suivi.date_creation.strftime('%d. %m. %Y')}}
+                                        {% else %}
+                                            {{ suivi.date_creation}}
+                                        {% endif %}
+                                    </td>
+                                    {% if legend == "client" %}
+                                        <td> <a href="{{url_for('users.edit_suivi', id=suivi.id)}}" title="modifier" class="button is-outlined-black is-small is-fullwidth"><i class="fa fa-pen" style="text-align: center"></i></a> </td>
+                                        <td> <a href="{{url_for('users.delete_suivi', id=suivi.id)}}" onclick="return confirm('Voulez vous supprimer?')" class=" is-small is-danger is-fullwidth button"><i class="fa fa-trash"></i></a></td>
+                                    {% endif %}
+                                    {% if legend == "prospect" %}
+                                        <td> <a href="{{url_for('users.edit_suivip', id=suivi.id)}}" title="modifier" class="button is-outlined-black is-small is-fullwidth"><i class="fa fa-pen" style="text-align: center"></i></a> </td>
+                                        <td> <a href="{{url_for('users.delete_suivip', id=suivi.id)}}" onclick="return confirm('Voulez vous supprimer?')" class=" is-small is-danger is-fullwidth button"><i class="fa fa-trash"></i></a></td>
+                                    {% endif %}
+                                        
+                                </tr>    
+                            {%endfor%}
+                        </tbody>
+                    </table>
+	            </div>
+	        </div>
+        </section>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var table = $('#table_id').DataTable({
+                    language: {
+                        url: 'https://cdn.datatables.net/plug-ins/1.11.2/i18n/fr_fr.json'
+                    }
+                });
+            
+                $('#table_id tbody').on( 'click', 'tr', function () {
+                    if ( $(this).hasClass('selected') ) {
+                        $(this).removeClass('selected');
+                    }
+                    else {
+                        table.$('tr.selected').removeClass('selected');
+                        $(this).addClass('selected');
+                    }
+                } );
+            
+                $('#button').click( function () {
+                    table.row('.selected').remove().draw( false );
+                } );
+            } );
+        </script>
+	
+	
+{% endblock %}
+
+
+
+
+
+

@@ -1,0 +1,84 @@
+{% extends 'manage/index.html'%}
+{% block manage_content %}
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Chiffrage</h1>
+        <h3 class="text-gray-800"><i class="far fa-arrow-alt-circle-left" onclick="history.back(-1)"></i></h3>
+    </div>
+    <!-- Content Row -->
+
+    <div class="row">
+        <!-- Area Chart -->
+        <div class="col-xl-12 col-lg-12">
+            <div class="card shadow mb-4">
+	        <div class="card-header py-1 justify-content-between d-flex align-items-center">
+	            <h6 class="m-0 font-weight-bold">Chiffrage</h6>
+	             <a href="/ajoutez/chiffrage" title="ajouter un chiffrage" class="button is-black is-small pull-right"><span class="is-warning">ajouter un chiffrage</span></a>
+	        </div>
+	        <div class="card-body">
+	            <div class="table-responsive">
+	                <table class="table table-bordered" id="table_id" width="100%" cellspacing="0">
+	                    <thead class="">
+	                	<tr>
+		                    <th scope="col">identifiant</th>
+		                    <th scope="col">mission</th>
+		                    <th scope="col">type d'expert</th>
+		                    <th scope="col">gain(%)</th>
+		                    <th>Modifier</th>
+		                    <th>Suprimer</th>
+
+	                	</tr>
+	            	</thead>
+		            <tbody>
+		                {%for chiffrage_ in Chiffrage %}
+		                    <tr>
+		                        <td scope="col">{{chiffrage_.id}}</td>
+		                        <td>{{chiffrage_.Mission}}</td>
+		                        <td>{{chiffrage_.Type_expert}}</td>
+		                        <td>{{chiffrage_.Pourcentage_gain}}</td>
+		                        <td>
+                                    <a href="{{url_for('users.edit_chiffrage', id=chiffrage_.id)}}" title="modifier" class="center button is-outlined-black is-small"><i class="fa fa-pen"></i></a> &nbsp;
+                                </td>   
+                                <td>
+                                    <a href="{{url_for('users.delete_chiffrage', id=chiffrage_.id)}}" title="Suprimmer" class="center button is-danger	 is-small"><i class="fa fa-trash"></i></a> &nbsp;
+                                </td>
+		                    </tr>
+		                {%endfor%}                               
+		            </tbody>         
+	             </table>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+    <!-- Pie Chart --> 
+</div>
+
+    <!-- Content Row -->
+</div>
+    <!-- /.container-fluid -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var table = $('#table_id').DataTable({
+				language: {
+                        url: 'https://cdn.datatables.net/plug-ins/1.11.2/i18n/fr_fr.json'
+                    }
+			});
+		
+			$('#table_id tbody').on( 'click', 'tr', function () {
+				if ( $(this).hasClass('selected') ) {
+					$(this).removeClass('selected');
+				}
+				else {
+					table.$('tr.selected').removeClass('selected');
+					$(this).addClass('selected');
+				}
+			} );
+		
+			$('#button').click( function () {
+				table.row('.selected').remove().draw( false );
+			} );
+		} );
+	</script>
+
+{% endblock %}

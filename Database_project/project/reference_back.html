@@ -1,0 +1,52 @@
+
+ liste des chemins ou les modifications on été apportées coté front
+
+ NB: Stp lorsque tu finalise avec un point n'oublie pas d'ajouter la mention ok sur la dite ligne(:OK)
+ 
+@users.route('/edit/<int:id>/client', methods=['GET','POST']) : ajout du bouton de suppression
+@users.route('/client', methods=['GET', 'POST']) : filtre (actif ou inactif) sur le client ok
+@users.route('/facture') :
+    1. sur ce tableau jai ajouter un champs Sté Facturée, il reste juste a afficher 
+les données dans ce champs la
+    2.  J'ai ajoutér le composant pour effectuer le filtre sur les factures (generées/non generées)
+        sur les factures (reglées/ non reglées) et sur le montant et sur la date 
+    3. j'ai rajouter le composant pour effectuer la recherche 
+
+@users.route('/mission',methods=['GET','POST']): 
+    1.  Les filtres "Etats Missions" et date ne fonctionnent pas, fonctionnent qu’ensemble remplis. 
+
+    @users.route('/edit/<int:id>/prospect', methods=['GET','POST']) : 
+        le client demande ici d'ajouter un menu deroulant " état du prospect" (prospect chaud, prospect tiede, prospect froid) et 
+        d'ajouter ce champs dans le tableau : tu a definis ces champs dans ta base de données nn?
+
+                                20/09/2022
+
+     @users.route('/edit/<int:id>/mission', methods=['GET','POST']) : 
+            
+         A ce niveau jai ajouter le champs Nom du bailleur dans le form de modification mission
+         et verifier si le nom bailleur que jai ajouter dans le tableau de mission correspond 
+         veritablement au nom du bailleur
+
+
+    @users.route('/edit/<int:id>/prospect', methods=['GET','POST']) :  
+         A ce niveau j'ai disposé juste le champs 'type' en premiere position sauf que Sara demande a ce que 
+         Selon le choix, faire apparaître ou disparaître les champs "Siret"; "Société”
+          
+                                            28/09/2022
+         
+    
+    @users.route('/edit/<int:id>/expert', methods=['GET','POST'])
+        A ce niveau le champs actif parti ne change pas d'etat malgré la modification de son etat;
+        "Suite vérification clic sur modification de l’agent, mise en état “PARTI” enregistrement.
+         Le message apparait et dit bien enregistré mais suite nouvelle recherche le dit agent FOUCHARD 
+         est toujours présent et ACTIF alors que le chois PARTI avait été bien validé"
+
+    @users.route('/client/<int:id>/facture')
+        A ce niveau j'ai rajouter un champs societé facture dans le tableau de facturation client; 
+        regard coté back coent afficher les données dans la colonne societé facturees
+        
+        @users.route('/facture')
+        A ce niveau deux composants du filtre on été disposé a savoir : type facture et etat de facture
+        et ensuite jai la colonne type facture a mon niveau, tu devra verifier si effectivement les données de cette 
+        colone sont bien retourné
+        

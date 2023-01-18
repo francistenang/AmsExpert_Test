@@ -1,0 +1,133 @@
+{% extends 'manage/index.html' %}
+{% block manage_content %}
+ <div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Agenda</h1>
+        <h3 class="text-gray-800"><i class="far fa-arrow-alt-circle-left" onclick="history.back(-1)"></i></h3>
+    </div>
+    <!-- Content Row -->
+
+    <div class="row">
+        <!-- Area Chart -->
+        <div class="col-xl-6 col-lg-6 mx-auto">
+            <div class="card shadow mb-4">
+	        <div class="card-header py-3 py-1 align-items-center d-flex justify-content-between">
+                <h6 class="m-0 font-weight-bold">Ajouter un Agenda</h6>
+                <a href="/" class="button is-small is-black">annuler</a>
+	        </div>
+	        <div class="card-body">
+	            <div class="row">
+                    <div class="col-lg-12 mx-auto">
+                        <div class="p-5">
+                            {% with messages = get_flashed_messages(with_categories=true)%}
+                            {% if messages %}
+                            {%for category,message in messages%}
+                            <div class="alert alert-{{category}}">
+                                {{message}}
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                            {% endwith %}
+                            
+                                <form class="user" action="{{url_for('users.ajout_agenda')}}" method="POST">
+                                    <!-- <div class="form-group">
+                                    <label>id Client:</label>
+                                    <input type="hidden"  name="id" value="">
+                                    <input type="text" class="form-control" name="name" value="">
+                                    </div>
+                                    <div class="form-group">
+                                    <label>id Audit_planner:</label>
+                                    <input type="text" class="form-control" name="Audit_planner" value="">
+                                    </div>
+                                    <div class="form-group">
+                                    <label>id Agent_referent</label>
+                                    <input type="text" class="form-control" name="Agent_referent" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Lieu</label>
+                                        <input type="text" class="form-control" name="Lieu" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Date</label>
+                                        <input type="text" class="form-control" name="Date" value="">
+                                    </div> -->
+                                    <div class="form-group">
+                                        <label>N° Client</label>
+                                        <input type="text" class="input is-small" name="id" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Titre du Rdv</label>
+                                        <input type="text" class="input is-small" name="Titre_du_Rdv" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Adresse1 Rdv</label>
+                                        <input type="text" class="input is-small" name="Adresse1_Rdv" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Adresse2 Rdv</label>
+                                        <input type="text" class="input is-small" name="Adresse2_Rdv" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Code postal Rdv</label>
+                                        <input type="text" class="input is-small" name="Code_postal_Rdv" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Ville du Rdv</label>
+                                        <input type="text" class="input is-small" name="Ville_du_Rdv" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Date Rdv</label>
+                                        <input type="text" class="input is-small" name="Date_Rdv" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Heure début Rdv</label>
+                                        <input type="text" class="input is-small" name="Heure_début_Rdv" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Heure fin Rdv</label>
+                                        <input type="text" class="input is-small" name="Heure_fin_Rdv" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Date Rdv annulév</label>
+                                        <input type="text" class="input is-small" name="Date_Rdv_annulé" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Heure fin Rdv</label>
+                                        <input type="text" class="input is-small" class="input is-small" name="Heure_fin_Rdv" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Informations réservées service planification</label>
+                                        <input type="text" class="input is-small" name="Informations_réservées_service_planification" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Informations générales</label>
+                                        <input type="text" class="input is-small" name="Informations_générales" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Informations de suivi de Rdv</label>
+                                        <input type="text" class="input is-small" name="Informations_de_suivi_de_Rdv" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Chemin de fichier joint</label>
+                                        <input type="text" class="input is-small" name="Chemin_de_fichier_joint" value="">
+                                    </div>
+                                    
+                                    <div class="form-group py-2">
+                                    <button class="button is-success is-small is-fullwidth is-success" type="submit">enregistrer</button>
+                                    </div>
+                                </form>
+                        </div>
+                    </div>
+                </div>
+	        </div>
+	    </div>
+	</div>
+    <!-- Pie Chart --> 
+</div>
+
+    <!-- Content Row -->
+</div>
+    <!-- /.container-fluid -->
+{%endblock%}

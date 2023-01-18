@@ -1,0 +1,332 @@
+{% extends 'manage/index.html' %}
+{% block manage_content %}
+<div style="" class="main-content">
+    
+    <div class="display-flex justify-content-space-between" style="margin-top: 20px; margin-bottom: 10px">
+      <h2 class="title" style="color: #112A46;font-weight: 500; font-size: 1.5rem;">Expert</h2>
+    </div>
+ 	<section class="tile" style="margin-top: 10px;">
+    <div class="box" style="  width: -webkit-fill-available; width: 100%;">
+      <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+     
+        	<span><i class="fas fa-user"></i></span>
+     
+        <div class="control has-icons-left has-icons-right">
+         	AS AC AP: {{expert.TYPE}}
+        </div>
+      </div>
+	  <div class="container">
+		<div class="main-body">		
+			  <div class="columns">
+				<div class="column is-one-quarter mb-3">
+				  <div class="card">
+					<div class="card-body">
+					  <div class="is-flex is-flex-direction-column align-items-center has-text-centered">
+						<i class="fa fa-user x5-px"></i>						
+						<div class="mt-3">
+						  <p class="text-secondary mb-1">{{expert.nom.upper()}}</p>
+						  <small class=''>{{expert.etat_client}}</small>
+						  {#<p class="text-muted font-size-sm">{{history.cp}}, {{history.ville}}, {{history.pays}}</p>#}
+						  <a class='button is-primary is-small' href="{{url_for('users.edit_expert', id=expert.id)}}" id='edit-preferences' style='margin: 5px 0'>	Modifier
+						  </a><a href="{{url_for('users.mes_factures', id=expert.id)}}" title="modifier" style="background: #795a64; color: #fff;" class="button is-outlined-black is-small is-fullwidth">Voir ses Factures</a>
+						  <a href="{{url_for('users.addlogin', id=expert.id)}}" title="modifier" style="background: #7c8252; color: #fff;" class="button is-outlined-black is-small is-fullwidth">Ajouter Identifiant</a>
+						
+						</div>
+					  </div>
+					</div>
+				  </div>
+				 {# <div class="card mt-3">
+					<ul class="list-group list-group-flush">
+					  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+						<h6 class="mb-0">Login Backof</h6>
+						<span class="text-secondary">{{history.login_backof}}</span>
+					  </li>
+					  <li class="list-group-item is-flex is-justify-content-space-between align-items-center flex-wrap">
+						<h6 class="mb-0">Pwd backof</h6>
+						<span class="text-secondary">{{history.pwd_backof}}</span>
+					  </li>
+					  <li class="list-group-item is-flex is-justify-content-space-between align-items-center flex-wrap">
+						<h6 class="mb-0">Login Extranet</h6>
+						<span class="text-secondary">{{history.login_extranet}}</span>
+					  </li>
+					  <li class="list-group-item is-flex is-justify-content-space-between align-items-center flex-wrap">
+						<h6 class="mb-0">MDP Extranet</h6>
+						<span class="text-secondary">{{history.pwd_extranet}}</span>
+					  </li>
+					  <li class="list-group-item is-flex is-justify-content-space-between align-items-center flex-wrap">
+						<h6 class="mb-0">Login Google</h6>
+						<span class="text-secondary">{{history.login_google}}</span>
+					  </li>
+					  <li class="list-group-item is-flex is-justify-content-space-between align-items-center flex-wrap">
+						<h6 class="mb-0">MDP Google</h6>
+						<span class="text-secondary">{{history.pwd_google}}</span>
+					  </li>
+					  <li class="list-group-item is-flex is-justify-content-space-between align-items-center flex-wrap">
+						<h6 class="mb-0">MDP Gsuite</h6>
+						<span class="text-secondary">{{history.pwd_gsuite}}</span>
+					  </li>
+					</ul>
+				  </div> #}
+				</div>
+				<div class="column is-three-quarter">
+					<div class="card mb-3">
+					  <div class="card-body">
+						<div class="columns">
+						  <div class="column is-one-quarter">
+							<h6 class="mb-0">Type</h6>
+						  </div>
+						  <div class="column is-three-quarter text-secondary">
+							{{expert.TYPE}}
+						  </div>
+						</div>
+						<hr>
+						<div class="columns">
+						  <div class="column is-one-quarter">
+							<h6 class="mb-0">Email</h6>
+						  </div>
+						  <div class="column is-three-quarter text-secondary">
+							{{expert.email}}
+						  </div>
+						</div>
+						<hr>
+						<div class="columns">
+						  <div class="column is-one-quarter">
+						  <h6 class="mb-0">Secteur</h6>
+						  </div>
+						  <div class="column is-three-quarter text-secondary">
+							  {{history.secteur.upper()}}
+						  </div>
+						</div>
+						<hr>
+						<div class="columns">
+						  <div class="column is-one-quarter">
+						  <h6 class="mb-0">Email perso</h6>
+						  </div>
+						  <div class="column is-three-quarter text-secondary">
+							{{expert.email_perso}}
+						  </div>
+						</div>
+						<hr>
+						<div class="columns">
+						  <div class="column is-one-quarter">
+						  <h6 class="mb-0">Trigramme</h6>
+						  </div>
+						  <div class="column is-three-quarter text-secondary">
+							{% if expert.trigramme != None %} {{expert.trigramme}} {% endif %}
+						  </div>
+						</div>
+						<hr>
+						<div class="columns">
+							<div class="column is-one-quarter">
+							<h6 class="mb-0">Actif/Parti</h6>
+							</div>
+							<div class="column is-three-quarter text-secondary">
+								{{history.actif_parti}}
+							</div>
+						  </div>
+						  <hr>
+						<div class="columns">
+							<div class="column is-one-quarter">
+							<h6 class="mb-0">Code TVA</h6>
+							</div>
+							<div class="column is-three-quarter text-secondary">
+								{{expert.code_tva}}
+							</div> 
+						  </div>
+						<hr>
+						<div class="columns">
+							<div class="column is-one-quarter">
+							<h6 class="mb-0">Taux TVA</h6>
+							</div>
+							<div class="column is-three-quarter text-secondary">
+								{% if expert.taux_tva != None %} {{expert.taux_tva}} {% endif %}
+							</div>
+						  </div>
+						<hr>
+						<div class="columns">
+							<div class="column is-one-quarter">
+							<h6 class="mb-0">Observations de suivi</h6>
+							</div>
+							<div class="column is-three-quarter text-secondary">
+								{{history.observations_de_suivi}}
+							</div>
+						  </div>
+						<hr>
+						<div class="columns">
+						  <div class="column is-one-quarter">
+						  <h6 class="mb-0">Siret</h6>
+						  </div>
+						  <div class="column is-three-quarter text-secondary">
+							{% if expert.siret != None %} {{expert.siret}} {% endif %}
+						  </div>
+						</div>
+						<hr>
+						<div class="columns">
+						  <div class="column is-one-quarter">
+							<h6 class="mb-0">Société</h6>
+						  </div>
+						  <div class="column is-three-quarter text-secondary">
+							  {{expert.societe}}
+						  </div>
+						</div>
+						<hr>
+						<div class="columns">
+						  <div class="column is-one-quarter">
+							<h6 class="mb-0">Téléphone portable</h6>
+						  </div>
+						  <div class="column is-three-quarter">
+							{% if expert.numero != None %}{{expert.numero}}{% endif %}
+						  </div>
+						</div>
+						<hr>
+
+						<div class="columns">
+						  <div class="column is-one-quarter">
+							<h6 class="mb-0">Date de certification initial</h6>
+						  </div>
+						  <div class="column is-three-quarter">
+							{#{% if history.date_certification_initiale != 'None' %}
+							{% else %}
+								{{history.date_certification_initiale.strftime('%d/%m/%Y')}}
+							{%endif%}#}
+						  </div>
+						</div>
+						<hr>
+						<div class="columns">
+						  <div class="column is-one-quarter">
+							<h6 class="mb-0">Date de recertification</h6>
+						  </div>
+						  <div class="column is-three-quarter">
+							{#{% if history.date_renouv_certification != 'None' %}
+							{% else %}
+								{{history.date_renouv_certification.strftime('%d/%m/%Y')}}
+							{%endif%}#}
+						  </div>
+						</div>
+						<hr>
+						<div class="columns">
+						  <div class="column is-one-quarter">
+							<h6 class="mb-0">Type de certification</h6>
+						  </div>
+						  <div class="column is-three-quarter">
+							{#{{history.type_certification}}#}
+						  </div>
+						</div>
+						{% if legend == "client" %}
+						  {% if tarif != None %}
+							  <hr>
+							  <div class="columns">
+								  <div class="column is-one-quarter">
+								  <h6 class="mb-0">Identifiant du Tarif</h6>
+								  </div>
+								  <div class="column is-three-quarter">
+									  {{tarif.id}}
+								  </div>
+							  </div>
+							  <hr>
+							  <div class="columns">
+								  <div class="column is-one-quarter">
+								  <h6 class="mb-0">AS</h6>
+								  </div>
+								  <div class="column is-three-quarter">
+									  {{tarif.referent__data.nom}}
+								  </div>
+							  </div>
+							{% endif %}
+						{% endif %}
+						<hr>
+						{% if(history.adresse1 != '') %}
+						  <div class="columns">
+							  <div class="column is-one-quarter">
+							  <h6 class="mb-0">Address 1</h6>
+							  </div>
+							  <div class="column is-three-quarter text-secondary">
+								  {{history.adresse1}} {{kj}}{{history.cp}} {{history.ville.upper()}}  {{history.pays | title }}
+							  </div>
+						  </div>
+						{% endif %}
+						<hr>
+						{% if(history.adresse2 != '') %}
+						  <div class="columns">
+							  <div class="column is-one-quarter">
+							  <h6 class="mb-0">Address 2</h6>
+							  </div>
+							  <div class="column is-three-quarter text-secondary">
+								  {{history.adresse2}}
+							  </div>
+						  </div>
+						<hr>
+						{% endif %}
+						<div class="columns">
+						  <div class="column is-one-quarter">
+							<h6 class="mb-0">Date Creation</h6>
+						  </div>
+						  <div class="column is-three-quarter">
+							  
+						  </div>
+						</div>
+						{#<hr>
+						<div class="columns">
+						  <div class="column is-one-quarter">
+							<h6 class="mb-0">Login Extranet</h6>
+						  </div>
+						  <div class="column is-three-quarter">
+							  {{history.login_extranet}}
+						  </div>
+						</div>
+						<hr>
+						<div class="columns">
+						  <div class="column is-one-quarter">
+							<h6 class="mb-0">MDP Extranet</h6>
+						  </div>
+						  <div class="column is-three-quarter">
+							  {{history.mpd_extranet}}
+						  </div>
+						</div>#}
+						<hr>
+  
+						<div class="columns">
+						  <div class="column is-one-quarter">
+							<h6 class="mb-0">Date D'entree</h6>
+						  </div>
+						  <div class="column is-three-quarter">
+						  {% if (expert.date_entree != 'None') %} {{expert.date_entree.strftime('%d/%m/%Y')}} {% endif %}
+						  </div>
+						</div>
+						<hr>
+						<div class="columns">
+						  <div class="column is-one-quarter">
+							<h6 class="mb-0">Date Sortie</h6>
+						  </div>
+						  <div class="column is-three-quarter">
+							{% if history.date_sortie == '' or None %}
+							{{history.date_sortie.strftime('%d/%m/%Y')}}
+							{%endif%}
+						  </div>
+						</div>
+						<hr>
+						<div class="columns">
+						  <div class="column is-one-quarter">
+							<h6 class="mb-0">Historique Date</h6>
+						  </div>
+						  <div class="column is-three-quarter">
+						  {% if (history.date_sortie != 'None') %} {{history.date.strftime('%d/%m/%Y')}} {% endif %}
+						  </div>
+						</div>
+					  </div>
+					</div>	
+				  </div>
+				</div>
+				
+			  </div>
+	
+			</div>
+		</div>
+	</div>
+	
+				
+		</div>
+	</section>
+</div>
+{%endblock%}
+	

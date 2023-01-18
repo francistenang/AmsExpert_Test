@@ -1,0 +1,90 @@
+{% extends 'manage/index.html' %}
+{% block manage_content %}
+<div style="" class="main-content">
+    
+    <div class="display-flex justify-content-space-between" style="margin-top: 20px;">
+      <h2 class="title" style="color: #112A46;font-weight: 500; font-size: 1.5rem;">Facturation(s) de {{client.titre}} {{client.nom}}</h2>
+      <!-- <a href="/ajouter/mission" class="button is-primary is-small">Ajouter une mission</a> -->
+    </div>
+
+    <section class="tile" style="margin-top: 10px;">
+        <div class="box" style="  width: -webkit-fill-available; width: 100%;">
+          <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <span><i class="fa fa-users"></i></span>
+         
+          </div>
+          <div class="table-container" style="overflow-x: scroll;position: relative;">
+            {% with messages = get_flashed_messages(with_categories=true)%}
+                {% if messages %}
+                    {%for category,message in messages%}
+                    <div class="alert alert-{{category}} p-1">
+                        {{message}}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <table class="table" id="table_id" style="overflow-x: scroll;min-width: 800px;"> 
+                        <thead class="">
+                        <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">N° Facture</th>
+                            <th scope="col">Société facturées</th>
+                            <th scope="col">Montant € HT</th>
+                            <th scope="col">Date de creation</th> 
+                            
+                            <th></th> 
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {%for facturation in facturations %}
+                                <tr>
+                                    <th scope="row">{{facturation.id}}</th>
+                                    <td>{{facturation.n_facture}}</td>
+                                    <td>{{facturation.n_facture}}</td>
+                                    <td>{{facturation.Montant_HT}}</td>
+                                    <td>{{facturation.Date_de_creation.strftime('%d. %m. %Y')}}</td> 
+                                      
+                                    <td style="">
+                                        <a href="{{url_for('users.show_fac', id=facturation.id)}}" title="voir tout les details" class="button is-small is-primary is-fullwidth" style="text-align: center"><i class="fa fa-eye"></i></a>
+                                        
+                                    </td>
+                                    <td>
+                                        <a href="{{url_for('users.delete_facturation', id=facturation.id)}}" onclick="return confirm('Voulez vous supprimer?')" title="modifier" class="center button is-danger	is-small is-fullwidth"><i class="fa fa-trash"></i></a> &nbsp;
+                                    </td> 
+                                </tr>
+                               
+                            {%endfor%}
+                        </tbody>
+                    </table>
+	            </div>
+	        </div>
+        </section>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var table = $('#table_id').DataTable({
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.11.2/i18n/fr_fr.json'
+            }
+        });
+    
+        $('#table_id tbody').on( 'click', 'tr', function () {
+            if ( $(this).hasClass('selected') ) {
+                $(this).removeClass('selected');
+            }
+            else {
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        } );
+    
+        $('#button').click( function () {
+            table.row('.selected').remove().draw( false );
+        } );
+    } );
+</script>
+
+
+{% endblock %}

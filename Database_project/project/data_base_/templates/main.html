@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+{% block content %}
+{% if current_user.is_authenticated %} 
+<style type="text/css">
+    .card {
+        box-shadow: 1px 2px 10px rgba(0,0,0,.28);
+    }
+    .fa-calendar-alt:before {
+        font-size: 40px;
+        margin-left: 140px !important;
+        top: 0px;
+    }
+    .fa-users:before {
+        font-size: 40px;
+        margin-left: 140px !important;
+        top: 0px;
+    }
+    .fa-money-bill {
+        font-size: 40px;
+        margin-left: 140px !important;
+        top: 0px;
+    }
+    .fa-money-check {
+        font-size: 40px;
+        margin-left: 140px !important;
+        top: 0px;
+    }
+    .fa-tag {
+        font-size: 40px;
+        margin-left: 140px !important;
+        top: 0px;
+    }
+    .lg-icon {
+        position: absolute;
+        top: 5px;
+    }
+</style>
+<div class="wrapper" style="margin-top: calc(0px + 76px);width: 1094px;
+    margin-left: auto;
+    margin-right: auto; ">
+    <div class="row container mx-auto">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                 <p class="bold" style="margin-top: 12px;font-size: large;text-transform: lowercase; color: #fff; font-family: 'Roboto', sans-serif;">Tableau de bord</p>
+              </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="row container mx-auto" style="height: 70vh;">
+    <div class="col-md-12">
+        <div class="jumbotron-fluid">
+            {% if current_user.TYPE == 'Admin'  %}
+
+            <div class="row m-2">
+                <hr />
+                <div class="col-md-3 col-4 plr-5px">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Agenda</h5>
+                        <i class="fas fa-calendar-alt lg-icon"></i>
+                        <p class="card-text text-underlined text-small">
+                          Consultez la liste d'agenda
+                        </p>
+                        <a href="{{ url_for('users.agenda')}}" class="g-btn g-btn--white has-border u-small">tout afficher</a>
+                        <a href="{{ url_for('users.agenda')}}" class="g-btn g-btn--green has-border u-small">ajouter <i class="fas fa-calendar"></i></a>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-4 plr-5px">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Chiffrage</h5>
+                         <i class="fas fa-money-bill lg-icon"></i>
+                        <p class="card-text text-underlined text-small">
+                          Consultez la liste des chiffrage
+                        </p>
+                        <a href="{{ url_for('users.chiffrage')}}" class="g-btn g-btn--white has-border u-small">tout afficher</a>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-4 plr-5px">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Clients</h5>
+                        <i class="fas fa-users lg-icon"></i>
+                        <p class="card-text text-underlined text-small">
+                          Consultez la liste des clients
+                        </p>
+                        <a href="{{ url_for('users.client')}}" class="g-btn g-btn--white has-border u-small">tout afficher</a>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-4 plr-5px">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Experts</h5>
+                        <p class="card-text text-underlined text-small">
+                          Consultez la liste des experts
+                        </p>
+                         <i class="fas fa-users lg-icon"></i>
+                        <a href="{{ url_for('users.expert')}}" class="g-btn g-btn--white has-border u-small">tout afficher</a>
+                      </div>
+                    </div>
+                </div>
+            </div>  
+            <div class="row m-2">
+               <div class="col-md-3 col-4 plr-5px">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Facturations</h5>
+                        <i class="fas fa-money-check lg-icon"></i>
+                        <p class="card-text text-underlined text-small">
+                          Consultez la liste des Factures
+                        </p>
+                        <a href="{{ url_for('users.facturation')}}" class="g-btn g-btn--white has-border u-small">tout afficher</a>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-4 plr-5px">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Missions</h5>
+                        <p class="card-text text-underlined text-small">
+                          Consultez la liste des Mission
+                        </p>
+                         <i class="fas fa-tag lg-icon"></i>
+                        <a href="{{ url_for('users.mission')}}" class="g-btn g-btn--white has-border u-small">tout afficher</a>
+                      </div>
+                    </div>
+                </div> 
+                <div class="col-md-3 col-4 plr-5px">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Tarifs</h5>
+                        <p class="card-text text-underlined text-small">
+                          Consultez la liste des Tarif
+                          <!--  -->
+                        </p>
+                        <i class="fas fa-money-bill lg-icon"></i>
+                        <a href="{{ url_for('users.tarifs')}}" class="g-btn g-btn--white has-border u-small">tout afficher</a>
+                      </div>
+                    </div>
+                </div>  
+            </div>  
+            {% elif current_user.TYPE == 'CONCESS'  %} 
+                <div class="row m-5">
+                    <div class="col-md-3 col-4 plr-5px">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Chiffrage</h5>
+                                <p class="card-text text-underlined text-small">
+                                    Consultez la liste des chiffrage
+                                </p>
+                                <i class="fas fa-money-bill lg-icon"></i>
+                                <a href="{{ url_for('users.chiffrage')}}" class="btn btn-primary btn-sm btn-block">tout afficher</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-4 plr-5px">
+                        <div class="card">
+                          <div class="card-body">
+                            <h5 class="card-title">Agenda</h5>
+                            <p class="card-text text-underlined text-small">
+                              Consultez la liste d'agenda
+                            </p>
+                             <i class="fas fa-calendar-alt lg-icon"></i>
+                            <a href="{{ url_for('users.agenda')}}" class="g-btn g-btn--white has-border u-small">tout afficher</a>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            {% elif current_user.TYPE == 'Audit'  %}
+                <div class="row m-5">
+                    <div class="col-md-3 col-4 plr-5px">
+                        <div class="card">
+                          <div class="card-body">
+                            <h5 class="card-title">Agenda</h5>
+                             <i class="fas fa-calendar-alt lg-icon"></i>
+                            <p class="card-text text-underlined text-small">
+                              Consultez la liste d'agenda
+                            </p>
+                            <a href="{{ url_for('users.agenda')}}" class="g-btn g-btn--white has-border u-small">tout afficher</a>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %} 
+        </div>
+    </div>
+  </div>    
+</div>
+{% endif %}
+
+{% endblock  content %}

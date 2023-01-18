@@ -1,0 +1,317 @@
+{% extends 'manage/index.html' %}
+{% block manage_content %}
+<div style="" class="main-content">
+
+<div class="display-flex justify-content-space-between" style="margin-top: 20px; align-items: baseline;">
+  <h2 class="title" style="color: #112A46;font-weight: 500; font-size: 1.5rem;">Facture N° <span style="font-size: small;">{{nro}}</span></h2>
+   <div class="buttons">
+        <button class="show-client-infos button"><i class="fa fa-user"></i></button>
+        <button class="show-succes-failed-missions button">Mission(s) échoué(s) {{fld}} </button>
+        <button class="show-succes-missions-with-abnormalies button">Mission(s) avec anomalie(s) {{abd}} </button>
+    </div>
+  <!-- <a href="/ajouter/mission" class="button is-primary is-small">Ajouter une mission</a> -->
+</div>
+					
+    <section class="tile" style="margin-top: 10px;">
+        <div class="box inner-box">
+          <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+           <strong>Mission(s) {{gd}}</strong>
+           
+          </div>
+          <div class="table-container table-shadow" style="overflow-x: scroll;position: relative;">
+            {% with messages = get_flashed_messages(with_categories=true)%}
+                {% if messages %}
+                    {%for category,message in messages%}
+                    <div class="alert alert-{{category}} p-1">
+                        {{message}}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <table class="table inner-shadow" id='table_id' style="overflow-x: scroll;min-width: 800px; height: 400px; overflow: overlay"> 
+                                <thead class="">
+                                <tr>
+                                    <th>No Mission</th>
+                                    <th>DATE REALISE EDL</th>
+                                    <th>Type</th>
+                                    <th>Proprietaire</th>
+                                    <th>Locataire</th>
+                                    <th>ville</th>
+                                    <th>Appt-Pav</th>
+                                    <th>Type</th>
+                                    <th>LOGEMENT MEUBLE</th>
+                                    <th>Surface/m<sup>2</sup></th>
+                                    <th>Tarif ht/€</th>
+                                
+                                    
+                                    
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    {%for fac in facture %}
+                                        <tr>
+                                            <td>{{fac.mission__data_.id}}</td>
+                                            <td>{{fac.mission__data_.DATE_REALISE_EDL.strftime('%d. %m. %Y')}}</td>
+                                            <td>{{fac.mission__data_.TYPE_EDL}}</td>
+                                            <td>{{fac.mission__data_.NOMPROPRIO}}</td>
+                                            <td>{{fac.mission__data_.Reference_LOCATAIRE}}</td>
+                                            <td>{{fac.mission__data_.Ville_Bien}}</td>
+                                            <td>{{fac.mission__data_.TYPE_DE_BIEN}}</td>
+                                            <td>{{fac.mission__data_.TYPE_LOGEMENT}}</td>
+                                            <td>{{fac.mission__data_.LOGEMENT_MEUBLE}}</td>
+                                            <td>{{fac.mission__data_.surface_logement1}}</td>
+                                            <td>{{fac.mission__data_.PRIX_HT_EDL}}</td>   
+                                        
+                                        </tr>    
+                                    {%endfor%}
+                                </tbody>
+                            </table>
+                            <button><a href="{{url_for('users.gestion', id=id,save='false')}}" title="Visualiser" class=" is-small is-outlined-black is-fullwidth button"><i class="fa fa-file"></i></a></button>
+                            <button><a href="{{url_for('users.gestion', id=id,save='true')}}" title="Envoyer au centre de Gestion" class=" is-small is-outlined-black is-fullwidth button"><i class="fa fa-location-arrow"></i></a></button>
+                            
+						</div>
+                    </div>
+                </section>                        
+<div class="modal-box1">
+    <div class="modal-container">
+         <section class="tile modal-section">
+            <div class="modal-inner-box-close">
+                 <span class="fermer">
+                 Fermer</span>   
+            </div>
+        <div class="box modal-inner-box">
+          <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+          Mission Success avec anomalie 
+           
+          </div>
+          <div class="table-container" style="overflow-x: scroll;position: relative;">
+            {% with messages = get_flashed_messages(with_categories=true)%}
+                {% if messages %}
+                    {%for category,message in messages%}
+                    <div class="alert alert-{{category}} p-1">
+                        {{message}}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <table class="table table-bordered" id="table_id" style="width:100%">
+                <thead class="">
+                    <tr>
+                        <th>No Mission</th>
+                        <th>DATE EDL REALISE</th>
+                        <th>Type</th>
+                        <th>Proprietaire</th>
+                        <th>Locataire</th>
+                        <th>ville</th>
+                        <th>Appt-Pav</th>
+                        <th>Logement</th>
+                        <th>Code Facturation</th>
+                        <th>LOGEMENT MEUBLE</th>
+                        <th>Surface/m<sup>2</sup></th>
+                        <th>Tarif/€</th>
+                        <th>Anomalie</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {%for fac in abnormal %}
+                            <tr>
+                                <td>{{fac.mission__data_.id}}</td>
+                                <td>{{fac.mission__data_.DATE_REALISE_EDL.strftime('%d. %m. %Y')}}</td>
+                                <td>{{fac.mission__data_.TYPE_EDL}}</td>
+                                <td>{{fac.mission__data_.NOMPROPRIO}}</td>
+                                <td>{{fac.mission__data_.Reference_LOCATAIRE}}</td>
+                                <td>{{fac.mission__data_.Ville_Bien}}</td>
+                                <td>{{fac.mission__data_.TYPE_DE_BIEN}}</td>
+                                <td>{{fac.mission__data_.TYPE_LOGEMENT}}</td>
+                                <td>{{fac.mission__data_.CODE_FACTURATION}}</td>
+                                <td>{{fac.mission__data_.LOGEMENT_MEUBLE}}</td>
+                                <td>{{fac.mission__data_.surface_logement1}}</td>
+                                <td>{{fac.mission__data_.PRIX_HT_EDL}}</td> 
+                                <td>{{fac.mission__data_.reason}}</td>   
+                            </tr>    
+                        {%endfor%}
+                    </tbody>
+                </table>
+                    
+                </div>
+            </div>
+        </section>  
+    </div>
+</div>
+
+<div class="modal-box2">
+    <div class="modal-container">
+         <section class="tile modal-section">
+            <div class="modal-inner-box-close1">
+                 <span class="fermer">
+                 Fermer</span>   
+            </div>
+        <div class="box modal-inner-box">
+          <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+            Missions échouées
+           
+          </div>
+          <div class="table-container" style="overflow-x: scroll;position: relative;">
+            {% with messages = get_flashed_messages(with_categories=true)%}
+                {% if messages %}
+                    {%for category,message in messages%}
+                    <div class="alert alert-{{category}} p-1">
+                        {{message}}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <table class="table table-bordered" id="" style="width:100%">
+                <thead class="">
+                    <tr>
+                        <th>No Mission</th>
+                        <th>DATE REALISE EDL</th>
+                        <th>Type</th>
+                        <th>Proprietaire</th>
+                        <th>Locataire</th>
+                        <th>ville</th>
+                        <th>Appt-Pav</th>
+                        <th>Type</th>
+                        <th>Code Facturation</th>
+                        <th>LOGEMENT MEUBLE</th>
+                        <th>Anomalie</th>
+                        <th>Rectifier</th>
+                        
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {%for fac in failed %}
+                            <tr>
+                                <td>{{fac.mission__data.id}}</td>
+                                <td>{{fac.mission__data.DATE_REALISE_EDL.strftime('%d. %m. %Y')}}</td>
+                                <td>{{fac.mission__data.TYPE_EDL}}</td>
+                                <td>{{fac.mission__data.NOMPROPRIO}}</td>
+                                <td>{{fac.mission__data.Reference_LOCATAIRE}}</td>
+                                <td>{{fac.mission__data.Ville_Bien}}</td>
+                                <td>{{fac.mission__data.TYPE_DE_BIEN}}</td>
+                                <td>{{fac.mission__data.TYPE_LOGEMENT}}</td>
+                                <td>{{fac.mission__data.CODE_FACTURATION}}</td>
+                                <td>{{fac.mission__data.LOGEMENT_MEUBLE}}</td>
+                                <td>{{fac.mission__data.surface_logement1}}</td>
+                                <td>{{fac.mission__data.reason}}</td>
+                                <td> <a href="{{url_for('users.rectify', id=fac.mission)}}" title="modifier" class="button is-outlined-black is-small is-fullwidth"><i class="fa fa-pen" style="text-align: center"></i></a></td>    
+                            </tr>    
+                        {%endfor%}
+                    </tbody>
+                </table>
+                    
+                </div>
+            </div>
+        </section>  
+    </div>
+</div>
+
+<div class="modal-box3">
+    <div class="modal-container">
+         <section class="tile modal-section">
+            <div class="modal-inner-box-close3">
+                 <span class="fermer">
+                 Fermer</span>   
+            </div>
+        <div class="box modal-inner-box">
+            <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+              Information du concerné   
+            </div>
+            <div class="table-container" style="overflow-x: scroll;position: relative;">
+                <div>
+                    <p>Reference: <strong>{{factura[0].mission__data_.Bailleur__data.reference}}</strong></p>
+                    <p>Societe: <strong>{{factura[0].mission__data_.Bailleur__data.societe}}</strong></p>
+                    <p>Montant_HT: <strong>{{factura[0].facturation_client__data_.Montant_HT}}</strong></p>
+                    <p>Nom : <strong>{{factura[0].mission__data_.Bailleur__data.nom}}</strong></p>
+                    <p>Email: <strong>{{factura[0].mission__data_.Bailleur__data.email}}</strong></p>
+                </div>
+
+                <div>
+                    <p>Date de creation de la Facture: <strong>{{factura[0].facturation_client__data_.Date_de_creation.strftime('%d. %m. %Y')}}</strong></p>
+                    <p>Statut: <strong>{{factura[0].facturation_client__data_.Statut}}</strong></p>
+                </div>
+            </div>
+        </section>  
+    </div>
+</div>
+
+<script type="text/javascript">
+    var closeMsan = document.querySelector('.modal-inner-box-close')
+    closeMsan.addEventListener('click', function () {
+        let innerModalBox = document.querySelector('.modal-box1 .modal-container > section .modal-inner-box')
+        let modal = document.querySelector('.modal-box1')
+        modal.classList.toggle('show-innerModalBox')
+        modal.classList.toggle('show-modalmsan')
+    })
+
+    var openSuccessMissionsWithAbnormalies = document.querySelector('.show-succes-missions-with-abnormalies')
+    openSuccessMissionsWithAbnormalies.addEventListener('click', function () {
+        let innerModalBox = document.querySelector('.modal-box1 .modal-container > section .modal-inner-box')
+        let modal = document.querySelector('.modal-box1')
+        // console.log(modal)
+        modal.classList.toggle('show-modalmsan')
+        modal.classList.toggle('show-innerModalBox')
+
+    })
+
+    var openSuccesFailedMissions = document.querySelector('.show-succes-failed-missions')
+    openSuccesFailedMissions.addEventListener('click', function () {
+        var innerModalBox = document.querySelector('.modal-box2 .modal-container > section .modal-inner-box')
+        var modal = document.querySelector('.modal-box2')
+
+        modal.classList.toggle('show-modalFailed')
+        modal.classList.toggle('show-innerModalBoxFailed')
+    })
+
+    var closeFailedMissions = document.querySelector('.modal-inner-box-close1')
+    closeFailedMissions.addEventListener('click', function () {
+        let innerModalBox = document.querySelector('.modal-box2 .modal-container > section .modal-inner-box')
+        let modal = document.querySelector('.modal-box2')
+        modal.classList.toggle('show-modalFailed')
+        modal.classList.toggle('show-innerModalBoxFailed')
+    })
+
+    var openclientInfos = document.querySelector('.show-client-infos')
+    openclientInfos.addEventListener('click', function () {
+        let innerModalBox = document.querySelector('.modal-box3 .modal-container > section .modal-inner-box')
+        let modal = document.querySelector('.modal-box3')
+        modal.classList.toggle('show-client-information')
+        modal.classList.toggle('show-client-information-inner-box')
+    })
+
+     var closeFailedMissions = document.querySelector('.modal-inner-box-close3')
+    closeFailedMissions.addEventListener('click', function () {
+        let innerModalBox = document.querySelector('.modal-box3 .modal-container > section .modal-inner-box')
+        let modal = document.querySelector('.modal-box3')
+        modal.classList.toggle('show-client-information')
+        modal.classList.toggle('show-client-information-inner-box')
+    })
+    </script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+            var table = $('#table_id').DataTable({
+                'scrollX':true,
+                language: {
+                    url: 'https://cdn.datatables.net/plug-ins/1.11.2/i18n/fr_fr.json'
+                })
+            });
+        
+            $('#table_id tbody').on( 'click', 'tr', function () {
+                if ( $(this).hasClass('selected') ) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    table.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+            } );
+        
+            $('#button').click( function () {
+                table.row('.selected').remove().draw( false );
+            } );
+        } );
+    </script>
+    </script>
+{%endblock%}
