@@ -10,7 +10,7 @@ class Config:
     MAIL_PORT = 587
     MAIL_USE_TLS =True
     BABEL_DEFAULT_LOCALE='fr'
-    MAIL_USERNAME = 'info@resilion.eu'
+    MAIL_USERNAME = ''
     MAIL_PASSWORD = 'Vincent123$'
     RECAPTCHA_PUBLIC_KEY ='6LcghOIZAAAAAE3zgcS-maNClYmtLTqICZtmHvWi'
     RECAPTCHA_PRIVATE_KEY='6LcghOIZAAAAAFiTeOmn_gN6xW_sGIFTDcVdIO0x'
