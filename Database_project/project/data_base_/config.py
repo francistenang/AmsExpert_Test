@@ -11,7 +11,7 @@ class Config:
     MAIL_USE_TLS =True
     BABEL_DEFAULT_LOCALE='fr'
     MAIL_USERNAME = ''
-    MAIL_PASSWORD = 'Vincent123$'
+    MAIL_PASSWORD = ''
     RECAPTCHA_PUBLIC_KEY ='6LcghOIZAAAAAE3zgcS-maNClYmtLTqICZtmHvWi'
     RECAPTCHA_PRIVATE_KEY='6LcghOIZAAAAAFiTeOmn_gN6xW_sGIFTDcVdIO0x'
     SUIV=['Client','Responsable','Commentaire','Date Creation','Date Modification']
